@@ -29,7 +29,7 @@ public class ProjectileAbilityTestingDirectionState : MonoBehaviour
 	void Awake()
 	{
         statesManager = GetComponentInParent<CharacterStatesManager>();
-        direction = new CharacterState(ConstantStrings.DIRECTION, CardinalDirections.Down);
+        direction = new CharacterState(ConstantStrings.CARDINAL_DIRECTION, CardinalDirections.Down);
         statesManager.RegisterCharacterState(direction.name, direction);
 
 	}
