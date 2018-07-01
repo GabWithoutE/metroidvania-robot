@@ -14,7 +14,6 @@ public class BasicProjectileCollisionSender : MonoBehaviour {
 		if (col.gameObject.tag == "Enemy"){
 			col.transform.root.BroadcastMessage("HitBy", transform.root.gameObject);
 			col.gameObject.BroadcastMessage("TakeDamage", spellStats.GetSpellDamage());
-			transform.root.BroadcastMessage("EnemyHit", (bool)col.gameObject.GetComponent<ICharacterStateObserver>().GetCharacterStateValue(ConstantStrings.DEATH_STATE));
 			Destroy(gameObject);
 		}
 	}

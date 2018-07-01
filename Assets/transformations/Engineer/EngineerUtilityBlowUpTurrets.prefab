@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 114341284429244734}
   - component: {fileID: 114308824157163546}
   - component: {fileID: 114293894718433788}
+  - component: {fileID: 114797654534562846}
   m_Layer: 0
   m_Name: EngineerUtilityBlowUpTurrets
   m_TagString: UtilityAbility
@@ -83,3 +84,14 @@ MonoBehaviour:
   projectileSpeed: 0
   spellDamage: 100
   canBeSlowed: 1
+--- !u!114 &114797654534562846
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1819585796439864}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21e90de570bed48db8e01fdcfad0992d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

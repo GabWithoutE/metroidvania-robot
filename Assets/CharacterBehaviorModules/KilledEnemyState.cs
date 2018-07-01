@@ -6,11 +6,11 @@ public class KilledEnemyState : MonoBehaviour {
 	private ICharacterStateManager stateManager;
 	private CharacterState killedEnemyState;
 
-	public void EnemyKilled(GameObject enemy){
-		OnEnemyKilled(enemy);
+	public void EnemyKilledType(string enemyType){
+		OnEnemyKilled();
 	}
 
-	private void OnEnemyKilled(GameObject enemy){
+	private void OnEnemyKilled(){
 		killedEnemyState.SetState(true);
 		killedEnemyState.SetState(false);
 	}

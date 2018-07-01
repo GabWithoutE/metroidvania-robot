@@ -37,8 +37,8 @@ public class TurretExplosionDamageSender : MonoBehaviour {
 	private void OnTriggerEnter2D(Collider2D collision)
 	{
 		if (collision.tag == "Enemy"){
+			collision.gameObject.BroadcastMessage("HitBy", transform.root.gameObject);
 			collision.gameObject.BroadcastMessage("TakeDamage", damageAmount);
-            transform.root.BroadcastMessage("EnemyHit", (bool)collision.gameObject.GetComponent<ICharacterStateObserver>().GetCharacterStateValue(ConstantStrings.DEATH_STATE));
 		}
 
 	}

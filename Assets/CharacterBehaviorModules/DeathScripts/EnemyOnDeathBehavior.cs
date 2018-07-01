@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class EnemyOnDeathBehavior : MonoBehaviour
 {
+	public float scoreAmount;
 	private ICharacterStateObserver stateObserver;
 	private GameObject hitBy;
 	private CharacterState.CharacterStateSubscription onDeadSubscription;
@@ -26,12 +27,18 @@ public class EnemyOnDeathBehavior : MonoBehaviour
 		hitBy = validScoringCharacter;
 	}
 
+	private void OnDeath(object state){
+		OnDeathSendScore(state);
+	}
+    
 	private void OnDeathSendScore(object state)
 	{
 		bool isDead = (bool)state;
 		if (isDead != currentDeathState){
 			currentDeathState = true;
-			hitBy.BroadcastMessage("EnemyKilled", transform.root.gameObject);
+			//print(hitBy);
+			hitBy.BroadcastMessage("EnemyKilledType", "");
+			hitBy.BroadcastMessage("EnemyKilledScore", scoreAmount);
 		}
 	}
 }
