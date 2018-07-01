@@ -16,19 +16,20 @@ public enum CardinalDirections {
 
 }
 
-public class ProjectileAbilityTestingDirectionState : MonoBehaviour
+public class PlayerCardinalDirectionState : MonoBehaviour
 {
 	private float PI_OVER_EIGHT = Mathf.PI / 8;
 	private float THREE_PI_OVER_EIGHT = 3 * Mathf.PI / 8;
 
-    private CharacterStatesManager statesManager;
+	private ICharacterStateManager statesManager;
     private CharacterState direction;
 
 	// Use this for initialization
 
 	void Awake()
 	{
-        statesManager = GetComponentInParent<CharacterStatesManager>();
+		statesManager = GetComponentInParent(typeof(ICharacterStateManager)) as ICharacterStateManager;
+        //statesManager = GetComponentInParent<CharacterStatesManager>();
         direction = new CharacterState(ConstantStrings.CARDINAL_DIRECTION, CardinalDirections.Down);
         statesManager.RegisterCharacterState(direction.name, direction);
 
@@ -80,12 +81,13 @@ public class ProjectileAbilityTestingDirectionState : MonoBehaviour
             direction.SetState(CardinalDirections.Dul);
         }
 
-		float horizontalAxisValue = 
-			CrossPlatformInputManager.GetAxis(ConstantStrings.UI.Input.JOYSTICK_HORIZONTAL);
+		float horizontalAxisValue =
+			((Vector2)statesManager.GetCharacterStateValue(ConstantStrings.VELOCITY)).x;
 
 		float verticalAxisValue =
-			CrossPlatformInputManager.GetAxis(ConstantStrings.UI.Input.JOYSTICK_VERTICAL);
-		if (horizontalAxisValue != 0){
+			((Vector2)statesManager.GetCharacterStateValue(ConstantStrings.VELOCITY)).y;
+
+		if (horizontalAxisValue != 0f){
 			float angle = Mathf.Abs(Mathf.Atan(verticalAxisValue / horizontalAxisValue));
 			// Second QUADRANT
 			if (horizontalAxisValue < 0 && verticalAxisValue > 0){

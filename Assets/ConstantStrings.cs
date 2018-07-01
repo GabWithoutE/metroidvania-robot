@@ -3,8 +3,9 @@ using System.Collections;
 public static class ConstantStrings
 {
     public static readonly string TIME_SCALE = "TimeScale";
-    public static readonly string DIRECTION = "Direction";
+    public static readonly string CARDINAL_DIRECTION = "CardinalDirection";
 	public static readonly string TRANSFORMATION = "Transformation";
+	public static readonly string VELOCITY = "Velocity";
 
     //public static readonly string MOVE_SET = "MoveSet";
     public static readonly string CURRENT_HEALTH = "CurrentHealth";
@@ -21,7 +22,7 @@ public static class ConstantStrings
 	public static readonly string KILLED_ENEMY = "KilledEnemy";
 
 	public static readonly string SCORE = "Score";
-
+    
 	public static class PlayerAnimatorStates{
 		public static readonly string IDLE_HORIZONTAL = "IdleHorizontal";
 		public static readonly string IDLE_VERTICAL = "IdleVertical";
