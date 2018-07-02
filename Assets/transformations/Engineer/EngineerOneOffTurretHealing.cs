@@ -46,7 +46,6 @@ public class EngineerOneOffTurretHealing : MonoBehaviour {
 			totalHeals += amountPerHeal;
 		} else {
 			currentTime -= Time.deltaTime;
-			collider2D.enabled = false;
 		}
 	}
 
@@ -66,5 +65,6 @@ public class EngineerOneOffTurretHealing : MonoBehaviour {
         {
             collision.BroadcastMessage("RestoreHealthBy", amountPerHeal);
         }
+		collider2D.enabled = false;
     }
 }
