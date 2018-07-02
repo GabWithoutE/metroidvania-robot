@@ -30,7 +30,7 @@ public abstract class AbstractAbilityCastingBehaviour : MonoBehaviour {
 		heavyAttack = moveSet.GetHeavyAttack();
 		utilityAbility = moveSet.GetUtilityAbility();
         // initial default spawnlocation is down.
-		abilitySpawnLocation = new Vector2(0f, -1f);
+		abilitySpawnLocation = new Vector2(transform.root.position.x, transform.root.position.y);
 	}
 
 	// Use this for initialization

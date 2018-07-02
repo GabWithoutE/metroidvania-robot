@@ -84,4 +84,5 @@ MonoBehaviour:
     type: 2}
   utilityAbility: {fileID: 1819585796439864, guid: 4fe329ffb0f864d36adb567568020e9d,
     type: 2}
-  oneOffAbility: {fileID: 0}
+  oneOffAbility: {fileID: 1221730411232716, guid: 0167e8483717442449e4e3eae2bb2acd,
+    type: 2}
