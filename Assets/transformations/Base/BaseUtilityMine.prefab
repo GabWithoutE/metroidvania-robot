@@ -20,10 +20,11 @@ GameObject:
   m_Component:
   - component: {fileID: 4301977930708280}
   - component: {fileID: 114789090589149030}
-  - component: {fileID: 114356363151548584}
   - component: {fileID: 114552456797597330}
   - component: {fileID: 114672630374159524}
   - component: {fileID: 212088078316718282}
+  - component: {fileID: 114101712846797572}
+  - component: {fileID: 58854179636942634}
   m_Layer: 0
   m_Name: BaseUtilityMine
   m_TagString: UtilityAbility
@@ -44,7 +45,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &114356363151548584
+--- !u!58 &58854179636942634
+CircleCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1786242834418252}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.64
+--- !u!114 &114101712846797572
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -52,10 +68,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1786242834418252}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b7aaac92db7be4e7dbf7d28de6f599b0, type: 3}
+  m_Script: {fileID: 11500000, guid: b280b6b8e8a66df40ab8de8806e79643, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  turretExplosions: {fileID: 1405894364119852, guid: 5ddaddcaa040348aca42e6c99e6bd4de,
+  explosion: {fileID: 1405894364119852, guid: e5a4b58be46ccc842a464acb6bd09367, type: 2}
+  enemyExplosion: {fileID: 1728392691470536, guid: 1d69a23dfa2697741a45bec00f3b37b0,
     type: 2}
 --- !u!114 &114552456797597330
 MonoBehaviour:
