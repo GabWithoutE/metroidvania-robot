@@ -23,6 +23,7 @@ GameObject:
   - component: {fileID: 58831658302780076}
   - component: {fileID: 114672919391031114}
   - component: {fileID: 114830710296834836}
+  - component: {fileID: 114835439781435216}
   m_Layer: 0
   m_Name: EngineerTurret
   m_TagString: Untagged
@@ -90,6 +91,17 @@ MonoBehaviour:
     type: 2}
   turretProjectileLarge: {fileID: 1435141601404148, guid: a5ed7a682f98c4b7ea80ce4fa61b05c3,
     type: 2}
+--- !u!114 &114835439781435216
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1559591575660626}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4e9bd8b6896541baa5c751b821f4bbe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!212 &212784537602269564
 SpriteRenderer:
   m_ObjectHideFlags: 1

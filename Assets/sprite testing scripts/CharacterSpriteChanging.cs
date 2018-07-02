@@ -31,7 +31,7 @@ public class CharacterSpriteChanging : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if (!registered) {
-            directionSubscription = statesManager.GetCharacterStateSubscription(ConstantStrings.DIRECTION);
+            directionSubscription = statesManager.GetCharacterStateSubscription(ConstantStrings.CARDINAL_DIRECTION);
             directionSubscription.OnStateChanged += ChangeSpriteDirection;
 			registered = true;
 		}

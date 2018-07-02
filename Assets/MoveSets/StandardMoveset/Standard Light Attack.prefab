@@ -29,6 +29,7 @@ GameObject:
   - component: {fileID: 114717195543956002}
   - component: {fileID: 114845139512746380}
   - component: {fileID: 114224111339655880}
+  - component: {fileID: 114127450613322772}
   m_Layer: 0
   m_Name: Standard Light Attack
   m_TagString: LightAttack
@@ -90,6 +91,17 @@ MonoBehaviour:
   projectileSpeed: 0.1
   spellDamage: 100
   canBeSlowed: 1
+--- !u!114 &114127450613322772
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1771911025722994}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4e9bd8b6896541baa5c751b821f4bbe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114151930927619996
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -166,7 +178,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1771911025722994}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f737db3794587425d9ce0f5db6cb4f14, type: 3}
   m_Name: 

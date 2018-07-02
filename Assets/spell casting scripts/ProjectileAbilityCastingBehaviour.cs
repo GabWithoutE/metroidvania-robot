@@ -183,7 +183,7 @@ public class ProjectileAbilityCastingBehaviour : MonoBehaviour {
             return;
         }
         CardinalDirections direction = 
-            (CardinalDirections)statesManager.GetCharacterStateValue(ConstantStrings.DIRECTION);
+            (CardinalDirections)statesManager.GetCharacterStateValue(ConstantStrings.CARDINAL_DIRECTION);
 		Vector2 spawnLocation = new Vector2 (0, 0);
 		switch (direction) {
             case (CardinalDirections.Up):
@@ -227,7 +227,7 @@ public class ProjectileAbilityCastingBehaviour : MonoBehaviour {
 			return;
 		}
         CardinalDirections direction =
-            (CardinalDirections)statesManager.GetCharacterStateValue(ConstantStrings.DIRECTION);
+            (CardinalDirections)statesManager.GetCharacterStateValue(ConstantStrings.CARDINAL_DIRECTION);
         Vector2 spawnLocation = new Vector2 (0, 0);
 		switch (direction) {
             case (CardinalDirections.Up):
@@ -271,7 +271,7 @@ public class ProjectileAbilityCastingBehaviour : MonoBehaviour {
             return;
         }
         CardinalDirections direction =
-            (CardinalDirections)statesManager.GetCharacterStateValue(ConstantStrings.DIRECTION);
+            (CardinalDirections)statesManager.GetCharacterStateValue(ConstantStrings.CARDINAL_DIRECTION);
 		Vector2 spawnLocation = new Vector2 (0, 0);
 		switch (direction) {
             case (CardinalDirections.Up):
