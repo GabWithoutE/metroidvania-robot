@@ -8,11 +8,13 @@ public class ControlsUIScaling : MonoBehaviour {
 	public GameObject joystickPanel;
 	public GameObject attackButtonPanel;
 	public GameObject scorePanel;
+	public GameObject transformationButtonPanel;
 	private RectTransform profilePicPanelRectTransform;
 	private RectTransform healthPanelRectTransform;
 	private RectTransform joystickPanelRectTransform;
 	private RectTransform attackButtonPanelRectTransform;
 	private RectTransform scorePanelRectTransform;
+	private RectTransform transformationButtonPanelRectTransform;
 
 	// Use this for initialization
 	void Awake () {
@@ -21,6 +23,7 @@ public class ControlsUIScaling : MonoBehaviour {
 		joystickPanelRectTransform = joystickPanel.GetComponent<RectTransform>();
     	attackButtonPanelRectTransform = attackButtonPanel.GetComponent<RectTransform>();
 		scorePanelRectTransform = scorePanel.GetComponent<RectTransform>();
+		transformationButtonPanelRectTransform = transformationButtonPanel.GetComponent<RectTransform>();
 
 		UIScalingFunctions
 			.ScaleXAnchorsToYAnchorsOuterEdge(
@@ -62,6 +65,17 @@ public class ControlsUIScaling : MonoBehaviour {
 			.ScaleXAnchorsToYAnchorsInnerEdge(
                 UIScalingFunctions.Screen_Corners.TOP_RIGHT,
                 scorePanelRectTransform);
+
+		UIScalingFunctions
+			.ScaleXAnchorsToYAnchorsInnerEdge(
+				UIScalingFunctions.Screen_Corners.TOP_RIGHT,
+				transformationButtonPanelRectTransform
+			);
+		UIScalingFunctions
+            .ScaleXAnchorsToYAnchorsOuterEdge(
+                UIScalingFunctions.Screen_Corners.TOP_RIGHT,
+                transformationButtonPanelRectTransform
+            );
 
 		float profilePicPanelMaxX = profilePicPanelRectTransform.anchorMax.x;
 		float profilePicPanelMinX = profilePicPanelRectTransform.anchorMin.x;

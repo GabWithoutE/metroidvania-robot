@@ -48,6 +48,7 @@ public static class ConstantStrings
             public static readonly string BUTTON_LIGHT_ATTACK = "ButtonLightAttack";
             public static readonly string BUTTON_HEAVY_ATTACK = "ButtonHeavyAttack";
             public static readonly string BUTTON_UTILITY = "ButtonUtility";
+			public static readonly string BUTTON_TRANSFORM = "ButtonTransform";
         }
 
         public static class HUD

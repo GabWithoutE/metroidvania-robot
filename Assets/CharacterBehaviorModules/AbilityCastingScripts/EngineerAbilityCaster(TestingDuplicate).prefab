@@ -64,6 +64,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e176c9b4bc1d485aa525ac3917cb8f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  turretLimit: 2
+  currentTurretNumber: 0
 --- !u!114 &114842611080786226
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -78,8 +80,9 @@ MonoBehaviour:
   moveSetName: 0
   lightAttack: {fileID: 1771911025722994, guid: f463162b56081446594b54e23f9d0814,
     type: 2}
-  heavyAttack: {fileID: 1435141601404148, guid: d9f709b14e25b426c9c0a446c4106949,
+  heavyAttack: {fileID: 1559591575660626, guid: 56091524482fa4b878f9092ab2335335,
     type: 2}
-  utilityAbility: {fileID: 1519116921358280, guid: e40c4574b90b7450d98aa79943ec5197,
+  utilityAbility: {fileID: 1819585796439864, guid: 4fe329ffb0f864d36adb567568020e9d,
     type: 2}
-  oneOffAbility: {fileID: 0}
+  oneOffAbility: {fileID: 1221730411232716, guid: 0167e8483717442449e4e3eae2bb2acd,
+    type: 2}
