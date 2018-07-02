@@ -80,6 +80,6 @@ MonoBehaviour:
     type: 2}
   heavyAttack: {fileID: 1559591575660626, guid: 56091524482fa4b878f9092ab2335335,
     type: 2}
-  utilityAbility: {fileID: 1559591575660626, guid: 24ab84fa222d9404faee24223330af46,
+  utilityAbility: {fileID: 1786242834418252, guid: 24ab84fa222d9404faee24223330af46,
     type: 2}
   oneOffAbility: {fileID: 0}
