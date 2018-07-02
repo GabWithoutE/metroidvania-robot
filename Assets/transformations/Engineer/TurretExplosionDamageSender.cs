@@ -37,7 +37,7 @@ public class TurretExplosionDamageSender : MonoBehaviour {
 	private void OnTriggerEnter2D(Collider2D collision)
 	{
 		if (collision.tag == "Enemy"){
-			collision.gameObject.BroadcastMessage("HitBy", transform.root.gameObject);
+			collision.gameObject.BroadcastMessage("HitBy", GetComponentInParent<CasterReference>().GetCaster());
 			collision.gameObject.BroadcastMessage("TakeDamage", damageAmount);
 		}
 

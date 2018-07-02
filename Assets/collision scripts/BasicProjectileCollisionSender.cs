@@ -12,7 +12,7 @@ public class BasicProjectileCollisionSender : MonoBehaviour {
 
 	void OnTriggerEnter2D(Collider2D col){
 		if (col.gameObject.tag == "Enemy"){
-			col.transform.root.BroadcastMessage("HitBy", transform.root.gameObject);
+			col.transform.root.BroadcastMessage("HitBy", GetComponentInParent<CasterReference>().GetCaster());
 			col.gameObject.BroadcastMessage("TakeDamage", spellStats.GetSpellDamage());
 			Destroy(gameObject);
 		}

@@ -42,7 +42,7 @@ public class EngineerAbilityCastingBehaviour : AbstractAbilityCastingBehaviour {
 
 		GameObject turret = Instantiate(heavyAttack, abilitySpawnLocation, Quaternion.identity);
 		gameObject.transform.root.gameObject.BroadcastMessage("AbilityCasted", turret);
-		turret.GetComponent<RelayCollisionEventsToCaster>().SetCaster(transform.root.gameObject);
+		turret.GetComponent<CasterReference>().SetCaster(transform.root.gameObject);
 		turretQueue.Enqueue(turret);
 		currentTurretNumber++;
 
@@ -59,7 +59,7 @@ public class EngineerAbilityCastingBehaviour : AbstractAbilityCastingBehaviour {
 
 		GameObject explosionTrigger = Instantiate(utilityAbility, transform.localPosition, Quaternion.identity);
 		gameObject.transform.root.BroadcastMessage("AbilityCasted", explosionTrigger);
-		explosionTrigger.GetComponent<RelayCollisionEventsToCaster>().SetCaster(transform.root.gameObject);
+		explosionTrigger.GetComponent<CasterReference>().SetCaster(transform.root.gameObject);
 		explosionTrigger.GetComponent<BlowUpTurretsForDamage>().BlowTurretsUpForDamage(turretQueue);
 		currentTurretNumber = 0;
 
