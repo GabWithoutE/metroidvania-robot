@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 4786563050258304}
   - component: {fileID: 114831165173150386}
   - component: {fileID: 114842611080786226}
+  - component: {fileID: 114489940357391486}
   - component: {fileID: 114196353688053542}
   m_Layer: 0
   m_Name: EngineerAbilityCaster
@@ -53,6 +54,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3f6321a624044054b2a332b87dd23df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114489940357391486
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1338642306180368}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 592e4b6160158440593d3b5955351d89, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveSet: {fileID: 0}
 --- !u!114 &114831165173150386
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -84,4 +97,5 @@ MonoBehaviour:
     type: 2}
   utilityAbility: {fileID: 1819585796439864, guid: 4fe329ffb0f864d36adb567568020e9d,
     type: 2}
-  oneOffAbility: {fileID: 0}
+  oneOffAbility: {fileID: 1221730411232716, guid: 0167e8483717442449e4e3eae2bb2acd,
+    type: 2}

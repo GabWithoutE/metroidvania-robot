@@ -12,6 +12,7 @@ public class EngineerAbilityCastingBehaviour : AbstractAbilityCastingBehaviour {
 		base.Awake();
 		currentTurretNumber = 0;
 		turretQueue = new Queue<GameObject>();
+		Instantiate(moveSet.GetOneOffAbility(), abilitySpawnLocation, Quaternion.identity);
 	}
 
 	/*
