@@ -10,6 +10,7 @@ public class EngineerOneOffTurretHealing : MonoBehaviour {
 	public float timeBetweenHeals = 0.1f;
 	private float currentTime = 0;
 	public float totalHeals = 0;
+	public float delayBeforeStart = 0.5f;
 
 	private float totalHealingAmount;
 	private float healingTurretRange;
@@ -30,6 +31,10 @@ public class EngineerOneOffTurretHealing : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		if (delayBeforeStart >= 0){
+			delayBeforeStart -= Time.deltaTime;
+			return;
+		}
 		if (totalHealingAmount <= 0)
         {
             Destroy(transform.root.gameObject);
