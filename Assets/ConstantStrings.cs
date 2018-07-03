@@ -6,6 +6,7 @@ public static class ConstantStrings
     public static readonly string CARDINAL_DIRECTION = "CardinalDirection";
 	public static readonly string TRANSFORMATION = "Transformation";
 	public static readonly string VELOCITY = "Velocity";
+	public static readonly string SPEED_SCALE = "SpeedScale";
 
     //public static readonly string MOVE_SET = "MoveSet";
     public static readonly string CURRENT_HEALTH = "CurrentHealth";
