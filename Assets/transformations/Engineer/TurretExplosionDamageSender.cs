@@ -22,7 +22,7 @@ public class TurretExplosionDamageSender : MonoBehaviour {
 	{
 		explosionExistanceTime += Time.deltaTime;
 		if (explosionExistanceTime >= explosionPersistanceTime){
-			Destroy(gameObject);
+			Destroy(transform.root.gameObject);
 		}
 	}
 
