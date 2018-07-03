@@ -101,7 +101,7 @@ public abstract class AbstractAbilityCastingBehaviour : MonoBehaviour {
         {
             return;
         }
-		GameObject spell = Instantiate(lightAttack, abilitySpawnLocation, Quaternion.identity);
+		GameObject spell = Instantiate(heavyAttack, abilitySpawnLocation, Quaternion.identity);
 		spell.GetComponent<CasterReference>().SetCaster(transform.root.gameObject);
 		spell.GetComponent<ProjectileStraightMovement>().SetDirection(abilitySpawnDirection);
 		gameObject.transform.root.gameObject.BroadcastMessage("AbilityCasted", spell);
@@ -116,7 +116,7 @@ public abstract class AbstractAbilityCastingBehaviour : MonoBehaviour {
         {
             return;
         }
-		GameObject spell = Instantiate(lightAttack, abilitySpawnLocation, Quaternion.identity);
+		GameObject spell = Instantiate(utilityAbility, abilitySpawnLocation, Quaternion.identity);
 		spell.GetComponent<CasterReference>().SetCaster(transform.root.gameObject);
 		spell.GetComponent<ProjectileStraightMovement>().SetDirection(abilitySpawnDirection);
 		gameObject.transform.root.gameObject.BroadcastMessage("AbilityCasted", spell);

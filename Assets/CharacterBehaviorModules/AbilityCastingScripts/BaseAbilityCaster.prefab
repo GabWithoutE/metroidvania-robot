@@ -78,7 +78,7 @@ MonoBehaviour:
   moveSetName: 0
   lightAttack: {fileID: 1302398565935150, guid: 4dc9566c8203d3a4ea937708047647fb,
     type: 2}
-  heavyAttack: {fileID: 1077131425382168, guid: 79dffff602116634b9c16edf7936aa9d,
+  heavyAttack: {fileID: 1819610914241614, guid: 79dffff602116634b9c16edf7936aa9d,
     type: 2}
   utilityAbility: {fileID: 1786242834418252, guid: 24ab84fa222d9404faee24223330af46,
     type: 2}
