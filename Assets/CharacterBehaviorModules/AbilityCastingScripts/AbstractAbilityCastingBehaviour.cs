@@ -29,6 +29,7 @@ public abstract class AbstractAbilityCastingBehaviour : MonoBehaviour {
 		lightAttack = moveSet.GetLightAttack();
 		heavyAttack = moveSet.GetHeavyAttack();
 		utilityAbility = moveSet.GetUtilityAbility();
+		abilitySpawnDirection = new Vector2(0, -1);
         // initial default spawnlocation is down.
 		abilitySpawnLocation = new Vector2(transform.root.position.x, transform.root.position.y);
 	}
