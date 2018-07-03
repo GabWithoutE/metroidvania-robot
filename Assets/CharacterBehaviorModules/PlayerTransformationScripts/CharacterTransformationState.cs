@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityStandardAssets.CrossPlatformInput;
+
 
 public class CharacterTransformationState : MonoBehaviour {
 	public GameObject transformation1;
@@ -26,6 +28,9 @@ public class CharacterTransformationState : MonoBehaviour {
 		} 
 		else if (Input.GetKeyDown("2")){
 			transformationState.SetState(transformation2);		
+		}
+		if (CrossPlatformInputManager.GetButtonDown(ConstantStrings.UI.Input.BUTTON_TRANSFORM)){
+			transformationState.SetState(transformation2);
 		}
 	}
 }
