@@ -23,6 +23,7 @@ public class AbstractCharacterMovementBehavior : MonoBehaviour {
 		Vector2 velocity = (Vector2)stateObserver.GetCharacterStateValue(ConstantStrings.VELOCITY);
 		transform.root.transform.position += 
 			new Vector3(velocity.x, velocity.y, transform.root.transform.position.z)
-            * Time.deltaTime;
+            * Time.deltaTime
+			* (float)stateObserver.GetCharacterStateValue(ConstantStrings.SPEED_SCALE);
 	}
 }

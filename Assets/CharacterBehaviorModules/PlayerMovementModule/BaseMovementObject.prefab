@@ -9,47 +9,58 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 1855433924733162}
+  m_RootGameObject: {fileID: 1239924278480140}
   m_IsPrefabParent: 1
---- !u!1 &1855433924733162
+--- !u!1 &1239924278480140
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 5
   m_Component:
-  - component: {fileID: 4606289971579002}
-  - component: {fileID: 114546572636752302}
+  - component: {fileID: 4976832875532988}
+  - component: {fileID: 114037785518145040}
+  - component: {fileID: 114662363839362152}
   m_Layer: 0
-  m_Name: EngineerTransformationBundle
+  m_Name: BaseMovementObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4606289971579002
+--- !u!4 &4976832875532988
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1855433924733162}
+  m_GameObject: {fileID: 1239924278480140}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.1052006, y: 2.6173205, z: 9.845742}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &114546572636752302
+--- !u!114 &114037785518145040
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1855433924733162}
+  m_GameObject: {fileID: 1239924278480140}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a26f01f8b8cb44d149f2d70787026130, type: 3}
+  m_Script: {fileID: 11500000, guid: 3390d73adfe674c3a8793b8bf3ec5a8b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  caster: {fileID: 1338642306180368, guid: 26221719ae93a4c18b616555e3487c9f, type: 2}
-  movement: {fileID: 1239924278480140, guid: 5b068e43e8a974d53b7d613233b37987, type: 2}
+  speedScale: 3
+--- !u!114 &114662363839362152
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1239924278480140}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8fd7000408b4846089081bc487239ebd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
