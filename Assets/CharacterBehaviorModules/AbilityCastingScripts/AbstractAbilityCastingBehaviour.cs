@@ -59,9 +59,9 @@ public abstract class AbstractAbilityCastingBehaviour : MonoBehaviour {
 		Vector2 joystickDirection = new Vector2(GetHorizontalJoystickValue(), GetVerticalJoystickValue());
 		if (joystickDirection != Vector2.zero){
 			abilitySpawnLocation = 
-				joystickDirection + new Vector2 (transform.root.position.x, transform.root.position.y);
+				joystickDirection.normalized + new Vector2 (transform.root.position.x, transform.root.position.y);
 			abilitySpawnDirection =
-				joystickDirection;
+				joystickDirection.normalized;
 		}
 	}
 
