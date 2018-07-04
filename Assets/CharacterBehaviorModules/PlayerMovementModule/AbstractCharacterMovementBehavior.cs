@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class AbstractCharacterMovementBehavior : MonoBehaviour {
 	protected ICharacterStateObserver stateObserver;
-	//protected Rigidbody2D characterRigidbody;
+	protected Rigidbody2D characterRigidbody;
 	private void Awake()
 	{
 		stateObserver = GetComponentInParent(typeof(ICharacterStateObserver)) as ICharacterStateObserver;
-		//characterRigidbody = GetComponentInParent<Rigidbody2D>();
+		characterRigidbody = GetComponentInParent<Rigidbody2D>();
 	}
 	// Use this for initialization
 	void Start () {
@@ -21,9 +21,11 @@ public class AbstractCharacterMovementBehavior : MonoBehaviour {
 		//(Vector2)stateObserver.GetCharacterStateValue(ConstantStrings.VELOCITY)
 		//* Time.deltaTime;
 		Vector2 velocity = (Vector2)stateObserver.GetCharacterStateValue(ConstantStrings.VELOCITY);
-		transform.root.transform.position += 
-			new Vector3(velocity.x, velocity.y, transform.root.transform.position.z)
-            * Time.deltaTime
-			* (float)stateObserver.GetCharacterStateValue(ConstantStrings.SPEED_SCALE);
+		//transform.root.transform.position += 
+		//new Vector3(velocity.x, velocity.y, transform.root.transform.position.z)
+		//         * Time.deltaTime
+		//* (float)stateObserver.GetCharacterStateValue(ConstantStrings.SPEED_SCALE);
+		characterRigidbody.position +=
+			                  new Vector2(velocity.x, velocity.y) * Time.deltaTime * (float) stateObserver.GetCharacterStateValue(ConstantStrings.SPEED_SCALE);
 	}
 }
