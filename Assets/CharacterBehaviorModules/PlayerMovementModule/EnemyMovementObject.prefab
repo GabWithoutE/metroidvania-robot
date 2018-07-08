@@ -1,0 +1,74 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &100100000
+Prefab:
+  m_ObjectHideFlags: 1
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications: []
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 0}
+  m_RootGameObject: {fileID: 1026471535794412}
+  m_IsPrefabParent: 1
+--- !u!1 &1026471535794412
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4343974173530500}
+  - component: {fileID: 114596431089367274}
+  - component: {fileID: 114889656164922506}
+  m_Layer: 0
+  m_Name: EnemyMovementObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4343974173530500
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1026471535794412}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 2.874364, y: 0.68763864, z: -0.041992188}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114596431089367274
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1026471535794412}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3390d73adfe674c3a8793b8bf3ec5a8b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speedScale: 1
+--- !u!114 &114889656164922506
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1026471535794412}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80e7d52dd82fc8942abf91bfcda0b30d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyDetectStart: {fileID: 4730854530235566, guid: 8041cc8934ba3e0459f3d679a089e705,
+    type: 2}
+  enemyDetectEnd: {fileID: 4458357877080302, guid: 1efddcc65d8a5d343b7941eb8a5a0305,
+    type: 2}
+  detectRange: 3
+  chaseSpeed: 1
+  detected: 0
+  playerDirection: {x: 0, y: 0}
