@@ -7,9 +7,7 @@ public class EnemyAggro : MonoBehaviour {
     public float chaseTime;
     private float originalChaseTime;
     public bool initiated;
-    private bool prevInitiated;
     public bool dropped;
-    private bool prevDropped;
     public bool detected = false;
     public Vector2 playerDirection;
     private bool timerRunning = false;
@@ -28,9 +26,6 @@ public class EnemyAggro : MonoBehaviour {
         initiated = false;
         dropped = false;
         originalChaseTime = chaseTime;
-        //Set previous to opposite of starting states
-        prevInitiated = !initiated;
-        prevDropped = !dropped;
     }
 
     // Update is called once per frame
@@ -89,8 +84,6 @@ public class EnemyAggro : MonoBehaviour {
             initScript.initiated = false;
             //Set detected to false
             detected = false;
-            //Enemy goes back to normal routine
-
         }
     }
 
