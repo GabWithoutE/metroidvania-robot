@@ -44,8 +44,8 @@ public static class ConstantStrings
     {
         public static class Input
         {
-            public static readonly string JOYSTICK_HORIZONTAL = "JoyStickHorizontal";
-            public static readonly string JOYSTICK_VERTICAL = "JoyStickVertical";
+            public static readonly string INPUT_HORIZONTAL = "InputHorizontal";
+			public static readonly string INPUT_VERTICAL = "InputVertical";
             public static readonly string BUTTON_LIGHT_ATTACK = "ButtonLightAttack";
             public static readonly string BUTTON_HEAVY_ATTACK = "ButtonHeavyAttack";
             public static readonly string BUTTON_UTILITY = "ButtonUtility";
