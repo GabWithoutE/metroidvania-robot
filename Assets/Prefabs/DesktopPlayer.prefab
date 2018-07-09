@@ -129,6 +129,7 @@ GameObject:
   m_Component:
   - component: {fileID: 224337623978258594}
   - component: {fileID: 222644990925127096}
+  - component: {fileID: 114496259248159972}
   m_Layer: 5
   m_Name: Transformation
   m_TagString: Untagged
@@ -390,6 +391,21 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 0
+--- !u!1 &1636360420521974
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4499068359538596}
+  m_Layer: 0
+  m_Name: KeyboardControls
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1642736591585574
 GameObject:
   m_ObjectHideFlags: 1
@@ -408,7 +424,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1648706203973196
 GameObject:
   m_ObjectHideFlags: 1
@@ -623,6 +639,19 @@ Transform:
   m_Father: {fileID: 4809158528287752}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4499068359538596
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1636360420521974}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4809158528287752}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4536191462321264
 Transform:
   m_ObjectHideFlags: 1
@@ -674,6 +703,7 @@ Transform:
   m_Children:
   - {fileID: 4204855571011670}
   - {fileID: 224295500065800226}
+  - {fileID: 4499068359538596}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -697,7 +727,7 @@ Rigidbody2D:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1124706263072946}
-  m_BodyType: 1
+  m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 1
   m_UseAutoMass: 0
@@ -719,7 +749,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -824,8 +854,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   abilityCastingStateName: 0
-  firekey: j
-  buttonName: ButtonLightAttack
+  inputName: InputLightAttack
 --- !u!114 &114047348942394530
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1039,8 +1068,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   abilityCastingStateName: 2
-  firekey: l
-  buttonName: ButtonUtility
+  inputName: InputUtility
 --- !u!114 &114493833960252510
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1053,8 +1081,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   abilityCastingStateName: 1
-  firekey: k
-  buttonName: ButtonHeavyAttack
+  inputName: InputHeavyAttack
+--- !u!114 &114496259248159972
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1144808631178416}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71398ce7fbc3a5b4fa50b50bd54317a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114551171575136786
 MonoBehaviour:
   m_ObjectHideFlags: 1

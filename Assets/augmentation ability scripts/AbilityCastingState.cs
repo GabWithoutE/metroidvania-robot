@@ -16,8 +16,8 @@ public class AbilityCastingState : MonoBehaviour {
     private CharacterState abilityCastingState;
 
     public CharacterAbilityCastingStates abilityCastingStateName;
-	public string firekey;
-	public string buttonName;
+	//public string firekey;
+	public string inputName;
 
 	private void Awake()
 	{
@@ -29,13 +29,13 @@ public class AbilityCastingState : MonoBehaviour {
 	private void Update()
 	{
     
-		if (Input.GetKeyDown(firekey))
-		{
-			abilityCastingState.SetState(true);
-			abilityCastingState.SetState(false);
-		}
+		//if (Input.GetKeyDown(firekey))
+		//{
+		//	abilityCastingState.SetState(true);
+		//	abilityCastingState.SetState(false);
+		//}
 		//print(CrossPlatformInputManager.GetButton(buttonName));
-		if (CrossPlatformInputManager.GetButtonDown(buttonName)){
+		if (CrossPlatformInputManager.GetButtonDown(inputName)){
 			abilityCastingState.SetState(true);
 			abilityCastingState.SetState(false);
 		}

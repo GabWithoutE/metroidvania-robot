@@ -29,7 +29,7 @@ public class CharacterTransformationState : MonoBehaviour {
 		else if (Input.GetKeyDown("2")){
 			transformationState.SetState(transformation2);		
 		}
-		if (CrossPlatformInputManager.GetButtonDown(ConstantStrings.UI.Input.BUTTON_TRANSFORM)){
+		if (CrossPlatformInputManager.GetButtonDown(ConstantStrings.UI.Input.INPUT_TRANSFORM)){
 			transformationState.SetState(transformation2);
 		}
 	}
