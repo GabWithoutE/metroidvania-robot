@@ -2,8 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BaseMovementBehavior : AbstractCharacterMovementBehavior {
-
+public class BaseMovementBehavior : AbstractPlayerMovementBehavior {
     /*
      * Use Defaults
      * 

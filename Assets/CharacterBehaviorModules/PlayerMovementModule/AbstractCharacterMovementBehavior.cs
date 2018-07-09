@@ -17,15 +17,12 @@ public class AbstractCharacterMovementBehavior : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		//characterRigidbody.position +=
-		//(Vector2)stateObserver.GetCharacterStateValue(ConstantStrings.VELOCITY)
-		//* Time.deltaTime;
-		Vector2 velocity = (Vector2)stateObserver.GetCharacterStateValue(ConstantStrings.VELOCITY);
-		//transform.root.transform.position += 
-		//new Vector3(velocity.x, velocity.y, transform.root.transform.position.z)
-		//         * Time.deltaTime
-		//* (float)stateObserver.GetCharacterStateValue(ConstantStrings.SPEED_SCALE);
+
+		float[] velocity = (float[])stateObserver.GetCharacterStateValue(ConstantStrings.VELOCITY);
+		float[] speedScaleValues = (float[])stateObserver.GetCharacterStateValue(ConstantStrings.SPEED_SCALE);
+		float runSpeedScaleValue = speedScaleValues[0];
+
 		characterRigidbody.position +=
-			                  new Vector2(velocity.x, velocity.y) * Time.deltaTime * (float) stateObserver.GetCharacterStateValue(ConstantStrings.SPEED_SCALE);
+			                  new Vector2(velocity[0] * runSpeedScaleValue, 0) * Time.deltaTime;
 	}
 }
