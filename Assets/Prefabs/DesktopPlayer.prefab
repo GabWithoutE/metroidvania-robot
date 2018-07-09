@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 4868575642453090}
   - component: {fileID: 114551171575136786}
   - component: {fileID: 114332595448084486}
+  - component: {fileID: 114996870467889572}
   m_Layer: 0
   m_Name: PlayerMovementModule
   m_TagString: Untagged
@@ -39,7 +40,7 @@ GameObject:
   - component: {fileID: 222502839966020772}
   - component: {fileID: 114371587001353782}
   - component: {fileID: 114357472817358244}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: LoadingRing
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -75,7 +76,7 @@ GameObject:
   - component: {fileID: 222509310334950634}
   - component: {fileID: 114557876798576392}
   - component: {fileID: 114027365331415820}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: LoadingRing
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -113,7 +114,7 @@ GameObject:
   - component: {fileID: 222124549112273890}
   - component: {fileID: 114301515348499436}
   - component: {fileID: 114018866095856496}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: HealthDisplay
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -130,7 +131,7 @@ GameObject:
   - component: {fileID: 224337623978258594}
   - component: {fileID: 222644990925127096}
   - component: {fileID: 114496259248159972}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Transformation
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -185,7 +186,7 @@ GameObject:
   m_Component:
   - component: {fileID: 224609380819546024}
   - component: {fileID: 222765249919591072}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: TemporaryScorePanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -200,7 +201,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 224705210238486844}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Utility
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -218,7 +219,7 @@ GameObject:
   - component: {fileID: 114711782836520806}
   - component: {fileID: 222963898061638122}
   - component: {fileID: 114306942722361566}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Controls UI Panel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -235,7 +236,7 @@ GameObject:
   - component: {fileID: 224839801708088254}
   - component: {fileID: 114633104456718536}
   - component: {fileID: 222110387044468576}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: AttackButtons
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -250,7 +251,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 224583383073706732}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: ProfilePanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -284,7 +285,7 @@ GameObject:
   - component: {fileID: 114961338967727484}
   - component: {fileID: 114962160231710112}
   - component: {fileID: 114858302973123686}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: HeavyAttack
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -300,7 +301,7 @@ GameObject:
   m_Component:
   - component: {fileID: 224999361999221196}
   - component: {fileID: 222078966268601134}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Attack Buttons Space Panel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -316,7 +317,7 @@ GameObject:
   m_Component:
   - component: {fileID: 224479432644218512}
   - component: {fileID: 222940873779327562}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: JoyStick Space Panel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -334,7 +335,7 @@ GameObject:
   - component: {fileID: 222550869082515942}
   - component: {fileID: 114657004428342416}
   - component: {fileID: 114718357583201592}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: MobileJoystick
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -384,7 +385,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 224639121195422036}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: LightAttack
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -399,6 +400,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4499068359538596}
+  - component: {fileID: 114446848636784482}
   m_Layer: 0
   m_Name: KeyboardControls
   m_TagString: Untagged
@@ -418,7 +420,7 @@ GameObject:
   - component: {fileID: 114815796086929720}
   - component: {fileID: 114175721622555702}
   - component: {fileID: 114202244685343638}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Transformation Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -437,7 +439,7 @@ GameObject:
   - component: {fileID: 114883956126250560}
   - component: {fileID: 114670946076412504}
   - component: {fileID: 114553105699813086}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Utility
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -452,7 +454,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 224609110027265792}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: HUD Panel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -486,7 +488,7 @@ GameObject:
   - component: {fileID: 222899822701351550}
   - component: {fileID: 114784514346592074}
   - component: {fileID: 114727307646645916}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: ScoreDisplay
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -504,7 +506,7 @@ GameObject:
   - component: {fileID: 222385506824935058}
   - component: {fileID: 114634055237260570}
   - component: {fileID: 114006454038468298}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: LoadingRing
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -520,7 +522,7 @@ GameObject:
   m_Component:
   - component: {fileID: 224462206156954382}
   - component: {fileID: 222509174495633668}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Transformation Button Space Panel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -537,7 +539,7 @@ GameObject:
   - component: {fileID: 224868196012693672}
   - component: {fileID: 222101748770565862}
   - component: {fileID: 114658067072405242}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: JoyStick
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -552,7 +554,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 224678903797962174}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: HeavyAttack
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -568,7 +570,7 @@ GameObject:
   m_Component:
   - component: {fileID: 224599014331102504}
   - component: {fileID: 222026491342015404}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: HealthPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -587,7 +589,7 @@ GameObject:
   - component: {fileID: 114569709332063902}
   - component: {fileID: 114570097823324958}
   - component: {fileID: 114844907320695404}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: LightAttackButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -731,10 +733,10 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 1
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 0.0001
   m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_AngularDrag: 0
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 0
@@ -1069,6 +1071,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   abilityCastingStateName: 2
   inputName: InputUtility
+--- !u!114 &114446848636784482
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1636360420521974}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10b5a7eacc7604371af195076724b07d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114493833960252510
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1104,6 +1117,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c792c95f471644eeda0136b491756b5a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  jumpMaxTime: 0.5
+  currentJumpTime: 0
 --- !u!114 &114553105699813086
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1613,7 +1628,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1621357435020228}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1c50ada974c32428ab93e6c89cc57bb4, type: 3}
   m_Name: 
@@ -1798,6 +1813,20 @@ MonoBehaviour:
           m_CallState: 1
       m_TypeName: UnityEngine.EventSystems.EventTrigger+TriggerEvent, UnityEngine.UI,
         Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+--- !u!114 &114996870467889572
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1051948766864196}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da9578cd3128b42b0836e850fced16cc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lengthOfRays: 0.1
+  numberOfRaysPerSide: 3
+  displayState: 
 --- !u!212 &212665273888481648
 SpriteRenderer:
   m_ObjectHideFlags: 1
