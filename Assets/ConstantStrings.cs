@@ -50,6 +50,7 @@ public static class ConstantStrings
 			public static readonly string INPUT_HEAVY_ATTACK = "InputHeavyAttack";
 			public static readonly string INPUT_UTILITY = "InputUtility";
 			public static readonly string INPUT_TRANSFORM = "InputTransform";
+			public static readonly string INPUT_JUMP = "InputJump";
         }
 
         public static class HUD
