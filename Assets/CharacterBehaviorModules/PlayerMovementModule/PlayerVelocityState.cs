@@ -65,14 +65,7 @@ public class PlayerVelocityState : AbstractCharacterDirectionState {
 			jumpButtonAvailability = true;
 		}
 	}
-
-	//private void AllowJumpOnGrounded(object groundedState){
-	//	//bool isGrounded = ((bool[])groundedState)[1];
-	//	//if (isGrounded){
-	//	//	currentJumpTime = 0;
-	//	//}
-
-	//}
+    
 
 	private void StopJumpOnHeadHit(object groundedState){
 		bool isHitGroundOnHead = ((bool[])groundedState)[0];
