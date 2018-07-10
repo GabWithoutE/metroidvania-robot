@@ -52,6 +52,7 @@ public class CharacterState
     public string name { get; private set; }
     private object state;
     private CharacterStateSubscription subscription;
+	private object previousState;
     public CharacterState(string stateName, object stateObject)
     {
         name = stateName;

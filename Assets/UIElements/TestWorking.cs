@@ -13,6 +13,6 @@ public class TestWorking : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		//print (CrossPlatformInputManager.GetAxis(ConstantStrings.UI.Input.JOYSTICK_HORIZONTAL));
-		print(CrossPlatformInputManager.GetButton(ConstantStrings.UI.Input.BUTTON_LIGHT_ATTACK));
+		print(CrossPlatformInputManager.GetButton(ConstantStrings.UI.Input.INPUT_LIGHT_ATTACK));
 	}
 }

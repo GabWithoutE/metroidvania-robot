@@ -23,6 +23,9 @@ public static class ConstantStrings
 	public static readonly string KILLED_ENEMY = "KilledEnemy";
 
 	public static readonly string SCORE = "Score";
+
+	public static readonly string JUMPING = "Jumping";
+	public static readonly string GROUNDED = "Grounded";
     
 	public static class PlayerAnimatorStates{
 		public static readonly string IDLE_HORIZONTAL = "IdleHorizontal";
@@ -44,12 +47,13 @@ public static class ConstantStrings
     {
         public static class Input
         {
-            public static readonly string JOYSTICK_HORIZONTAL = "JoyStickHorizontal";
-            public static readonly string JOYSTICK_VERTICAL = "JoyStickVertical";
-            public static readonly string BUTTON_LIGHT_ATTACK = "ButtonLightAttack";
-            public static readonly string BUTTON_HEAVY_ATTACK = "ButtonHeavyAttack";
-            public static readonly string BUTTON_UTILITY = "ButtonUtility";
-			public static readonly string BUTTON_TRANSFORM = "ButtonTransform";
+            public static readonly string INPUT_HORIZONTAL = "InputHorizontal";
+			public static readonly string INPUT_VERTICAL = "InputVertical";
+            public static readonly string INPUT_LIGHT_ATTACK = "InputLightAttack";
+			public static readonly string INPUT_HEAVY_ATTACK = "InputHeavyAttack";
+			public static readonly string INPUT_UTILITY = "InputUtility";
+			public static readonly string INPUT_TRANSFORM = "InputTransform";
+			public static readonly string INPUT_JUMP = "InputJump";
         }
 
         public static class HUD

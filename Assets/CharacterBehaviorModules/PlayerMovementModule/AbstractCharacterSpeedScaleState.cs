@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AbstractCharacterSpeedScaleState : MonoBehaviour {
+public abstract class AbstractCharacterSpeedScaleState : MonoBehaviour {
 	protected ICharacterStateManager stateManager;
 	protected CharacterState speedScaleState;
 
-	public float speedScale = 1;
+	public float runSpeedScale = 1;
+	public float jumpSpeedScale = 1;
+	public float fallSpeedScale = 1;
 
 	private void Awake()
 	{
@@ -14,21 +16,25 @@ public class AbstractCharacterSpeedScaleState : MonoBehaviour {
 
 		if (stateManager.ExistsState(ConstantStrings.SPEED_SCALE)){
 			speedScaleState = stateManager.GetExistingCharacterState(ConstantStrings.SPEED_SCALE);
-			speedScaleState.SetState(speedScale);
+			speedScaleState.SetState(new float[] {runSpeedScale, jumpSpeedScale, fallSpeedScale});
 		}else {
-			speedScaleState = new CharacterState(ConstantStrings.SPEED_SCALE, speedScale);
+			speedScaleState = new CharacterState(ConstantStrings.SPEED_SCALE, new float[] { runSpeedScale, jumpSpeedScale, fallSpeedScale });
 
 			stateManager.RegisterCharacterState(speedScaleState.name, speedScaleState);
 		}
 	}
 
 	public void IncreaseSpeedByFactorOfForTime(float factor, float time){
-		speedScaleState.SetState(speedScale * factor);
+		float[] speedScaleStateValue = (float[])speedScaleState.GetStateValue();
+		speedScaleStateValue[0] = runSpeedScale * factor;
+		speedScaleState.SetState(speedScaleStateValue);
+		StartCoroutine(DescreaseSpeedScaleAfterTime(time, speedScaleStateValue));
 	}
 
-	IEnumerator DescreaseSpeedScaleAfterTime(float time){
+	IEnumerator DescreaseSpeedScaleAfterTime(float time, float[] speedScaleValues){
 		yield return new WaitForSeconds(time);
 		print("speed returned to normal");
-		speedScaleState.SetState(speedScale);
+		speedScaleValues[0] = runSpeedScale;
+		speedScaleState.SetState(speedScaleValues);
 	}
 }

@@ -66,11 +66,11 @@ public abstract class AbstractAbilityCastingBehaviour : MonoBehaviour {
 	}
 
 	protected float GetHorizontalJoystickValue(){
-		return CrossPlatformInputManager.GetAxis(ConstantStrings.UI.Input.JOYSTICK_HORIZONTAL);
+		return CrossPlatformInputManager.GetAxis(ConstantStrings.UI.Input.INPUT_HORIZONTAL);
 	}
 
 	protected float GetVerticalJoystickValue(){
-		return CrossPlatformInputManager.GetAxis(ConstantStrings.UI.Input.JOYSTICK_VERTICAL);
+		return CrossPlatformInputManager.GetAxis(ConstantStrings.UI.Input.INPUT_VERTICAL);
 	}
 
     /*
