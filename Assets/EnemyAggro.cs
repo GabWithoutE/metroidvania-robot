@@ -38,9 +38,8 @@ public class EnemyAggro : MonoBehaviour {
         initScript = aggroInit.GetComponent<AggroInit>();
         dropScript = aggroDrop.GetComponent<AggroDrop>();        
         //Update initiated and dropped variables
-        initiated = initScript.initiated;
-        dropped = dropScript.dropped;
-        Debug.Log(initiated);
+        initiated = initScript.getInitiated();
+        dropped = dropScript.getDropped();
         //Debug.Log(dropped);
         //If both initiated and dropped are true, player is no longer spotted but enemy still chases player
         if (initiated && dropped)
@@ -61,7 +60,7 @@ public class EnemyAggro : MonoBehaviour {
                     //Once timer runs out, player is no longer detected                    
                     detected = false;
                     initiated = false;
-                    initScript.initiated = false;
+                    initScript.setInitiated(false);
                     timerRunning = false;
                 }
             }
@@ -81,7 +80,7 @@ public class EnemyAggro : MonoBehaviour {
             chaseTime = originalChaseTime;
             //Set initiated to false
             initiated = false;
-            initScript.initiated = false;
+            initScript.setInitiated(false);
             //Set detected to false
             detected = false;
         }

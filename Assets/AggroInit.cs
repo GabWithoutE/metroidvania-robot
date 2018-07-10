@@ -14,6 +14,16 @@ public class AggroInit : MonoBehaviour {
 		
 	}
 
+    public bool getInitiated()
+    {
+        return initiated;
+    }
+
+    public void setInitiated(bool initInput)
+    {
+        initiated = initInput;
+    }
+
     void OnTriggerEnter2D(Collider2D col)
     {
         if(col.gameObject.name == "Player")

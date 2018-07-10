@@ -14,6 +14,11 @@ public class AggroDrop : MonoBehaviour {
         
 	}
 
+    public bool getDropped()
+    {
+        return dropped;
+    }
+
     void OnTriggerEnter2D(Collider2D col)
     {
         if (col.gameObject.name == "Player")
