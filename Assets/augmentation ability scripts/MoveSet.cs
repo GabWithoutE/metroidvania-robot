@@ -4,17 +4,39 @@ using UnityEngine;
 
 public class MoveSet: MonoBehaviour {
     public MoveSetNames moveSetName;
-	public GameObject lightAttack;
-	public GameObject heavyAttack;
+	public GameObject lightAttackHorizontalRight;
+	public GameObject lightAttackUpRight;
+	public GameObject lightAttackDownRight;
+
+	public GameObject heavyAttackHorizontalRight;
+	public GameObject heavyAttackUpRight;
+	public GameObject heavyAttackDownRight;
+
     public GameObject utilityAbility;
 	public GameObject oneOffAbility;
 
-	public GameObject GetLightAttack(){
-		return lightAttack;
+	public GameObject GetLightAttackHorizontalRight(){
+		return lightAttackHorizontalRight;
 	}
 
-	public GameObject GetHeavyAttack(){
-		return heavyAttack;
+	public GameObject GetLightAttackUpRight(){
+		return lightAttackUpRight;
+	}
+    
+	public GameObject GetLightAttackDownRight(){
+		return lightAttackDownRight;
+	}
+
+	public GameObject GetHeavyAttackHorizontalRight(){
+		return heavyAttackHorizontalRight;
+	}
+
+	public GameObject GetHeavyAttackUpRight(){
+		return heavyAttackUpRight;
+	}
+
+	public GameObject GetHeavyAttackDownRight(){
+		return heavyAttackDownRight;
 	}
 
 	public GameObject GetUtilityAbility(){

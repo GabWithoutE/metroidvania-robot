@@ -88,8 +88,8 @@ public class ProjectileAbilityCastingBehaviour : MonoBehaviour {
 
 
 	private void SetAllMoveSetObjects(){
-        lightAttack = moveSet.GetLightAttack();
-        heavyAttack = moveSet.GetHeavyAttack();
+        lightAttack = moveSet.GetLightAttackHorizontalRight();
+        heavyAttack = moveSet.GetHeavyAttackHorizontalRight();
         utilityAbility = moveSet.GetUtilityAbility ();
 	}
 

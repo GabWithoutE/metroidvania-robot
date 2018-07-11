@@ -3,11 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityStandardAssets.CrossPlatformInput;
 
-public class PlayerVelocityState : AbstractCharacterDirectionState {
+public class PlayerVelocityState : AbstractCharacterVelocityState {
 
 	public float jumpMaxTime = 1;
 	public float currentJumpTime;
-	private bool jumpButtonAvailability = true;
 
 	private void Awake()
 	{
@@ -17,14 +16,9 @@ public class PlayerVelocityState : AbstractCharacterDirectionState {
 		//groundedSubscription.OnStateChanged += AllowJumpOnGrounded;
 		groundedSubscription.OnStateChanged += StopJumpOnHeadHit;
 	}
-	/*
-	 * TODO:
-	 * Write jump to alter the vertical velocity
-	 */
+
 	// Update is called once per frame
 	void Update () {
-		UpdateJumpButtonAvailabitiy();
-
 		float horizontalAxisValue = CrossPlatformInputManager.GetAxisRaw(
 			ConstantStrings.UI.Input.INPUT_HORIZONTAL);
         
@@ -59,12 +53,7 @@ public class PlayerVelocityState : AbstractCharacterDirectionState {
 		directionState.SetState(new float[] { horizontalAxisValue, verticalValues });
 
 	}
-
-	private void UpdateJumpButtonAvailabitiy(){
-		if (CrossPlatformInputManager.GetButtonUp(ConstantStrings.UI.Input.INPUT_JUMP)){
-			jumpButtonAvailability = true;
-		}
-	}
+    
     
 
 	private void StopJumpOnHeadHit(object groundedState){

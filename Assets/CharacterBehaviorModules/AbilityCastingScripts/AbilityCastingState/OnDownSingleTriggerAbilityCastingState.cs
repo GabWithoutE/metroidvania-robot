@@ -10,23 +10,15 @@ public enum CharacterAbilityCastingStates
     UtilityCastingState
 }
 
-public class AbilityCastingState : MonoBehaviour {
-
-    private CharacterStatesManager statesManager;
-    private CharacterState abilityCastingState;
-
-    public CharacterAbilityCastingStates abilityCastingStateName;
-	//public string firekey;
-	public string inputName;
+public class OnDownSingleTriggerAbilityCastingState : AbstractAbilityCastingState {
 
 	private void Awake()
 	{
-        statesManager = GetComponentInParent<CharacterStatesManager>();
-        abilityCastingState = new CharacterState(abilityCastingStateName.ToString(), false);
-        statesManager.RegisterCharacterState(abilityCastingState.name, abilityCastingState);
-    }
+		base.Awake();
+	}
 
-	private void Update()
+
+	protected override void Update()
 	{
     
 		//if (Input.GetKeyDown(firekey))

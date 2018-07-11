@@ -26,14 +26,14 @@ public abstract class AbstractCooldownState : MonoBehaviour, IAbilityCasted
 		statesManager = GetComponentInParent(typeof(ICharacterStateManager)) as ICharacterStateManager;
 		moveSet = GetComponent<MoveSet>();
 
-		lightAttackGO = moveSet.GetLightAttack();
-		heavyAttackGO = moveSet.GetHeavyAttack();
+		lightAttackGO = moveSet.GetLightAttackHorizontalRight();
+		heavyAttackGO = moveSet.GetHeavyAttackHorizontalRight();
 		utilityAbilityGO = moveSet.GetUtilityAbility();
 
 
-		float lightAttackCooldownTime = lightAttackGO.GetComponent<SpellStats>().GetCooldownTime();
-		float heavyAttackCooldownTime = heavyAttackGO.GetComponent<SpellStats>().GetCooldownTime();
-		float utilityAbilityCooldownTime = utilityAbilityGO.GetComponent<SpellStats>().GetCooldownTime();
+		float lightAttackCooldownTime = lightAttackGO.GetComponent<MeleeAbilityStats>().GetCooldownTime();
+		float heavyAttackCooldownTime = heavyAttackGO.GetComponent<MeleeAbilityStats>().GetCooldownTime();
+		float utilityAbilityCooldownTime = utilityAbilityGO.GetComponent<MeleeAbilityStats>().GetCooldownTime();
 
         // If this is a new CooldownState after a transformation, then pickup the old cooldown states and just change the values
         // Otherwise just make new ones. 
