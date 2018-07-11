@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657868, g: 0.49641263, b: 0.57481706, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -733,7 +733,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4809158528287752, guid: a654b42a7a08747c2bb534c154ee60a5, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -2.65
       objectReference: {fileID: 0}
     - target: {fileID: 4809158528287752, guid: a654b42a7a08747c2bb534c154ee60a5, type: 2}
       propertyPath: m_LocalPosition.y
@@ -767,6 +767,10 @@ Prefab:
         type: 2}
       propertyPath: m_Constraints
       value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1124706263072946, guid: a654b42a7a08747c2bb534c154ee60a5, type: 2}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a654b42a7a08747c2bb534c154ee60a5, type: 2}
@@ -849,41 +853,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1245793812 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1226452229508598, guid: 543bf0b3dfe4b2942995ffa1a453a69a,
-    type: 2}
-  m_PrefabInternal: {fileID: 1684821056}
 --- !u!4 &1245793813 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4962056339412666, guid: 543bf0b3dfe4b2942995ffa1a453a69a,
     type: 2}
   m_PrefabInternal: {fileID: 1684821056}
---- !u!61 &1245793816
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1245793812}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1}
-  m_EdgeRadius: 0
 --- !u!1 &1385049901
 GameObject:
   m_ObjectHideFlags: 0
@@ -1129,10 +1103,15 @@ Prefab:
       propertyPath: m_Name
       value: EnemyMovementModule
       objectReference: {fileID: 0}
-    - target: {fileID: 114170034334651250, guid: 543bf0b3dfe4b2942995ffa1a453a69a,
+    - target: {fileID: 114404137277921740, guid: 543bf0b3dfe4b2942995ffa1a453a69a,
         type: 2}
-      propertyPath: freezeDuration
-      value: 0.2
+      propertyPath: numberOfRaysPerSide
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 114404137277921740, guid: 543bf0b3dfe4b2942995ffa1a453a69a,
+        type: 2}
+      propertyPath: lengthOfRays
+      value: 0.1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 543bf0b3dfe4b2942995ffa1a453a69a, type: 2}

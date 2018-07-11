@@ -36,7 +36,7 @@ public class EnemyVelocityState : AbstractCharacterDirectionState
         if (isGrounded)
         {
             verticalValues = 0;
-        }
+		} else
         //If enemy is not standing on the ground, turn on gravity
         if (!isGrounded)
         {
