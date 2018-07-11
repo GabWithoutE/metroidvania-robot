@@ -1103,16 +1103,6 @@ Prefab:
       propertyPath: m_Name
       value: EnemyMovementModule
       objectReference: {fileID: 0}
-    - target: {fileID: 114404137277921740, guid: 543bf0b3dfe4b2942995ffa1a453a69a,
-        type: 2}
-      propertyPath: numberOfRaysPerSide
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 114404137277921740, guid: 543bf0b3dfe4b2942995ffa1a453a69a,
-        type: 2}
-      propertyPath: lengthOfRays
-      value: 0.1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 543bf0b3dfe4b2942995ffa1a453a69a, type: 2}
   m_IsPrefabParent: 0
