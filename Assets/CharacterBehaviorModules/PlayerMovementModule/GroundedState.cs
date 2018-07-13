@@ -23,18 +23,30 @@ public class GroundedState : MonoBehaviour {
 		groundMask = LayerMask.GetMask("Ground");
 		stateManager = GetComponentInParent(typeof(ICharacterStateManager)) as ICharacterStateManager;
 
-		minX = transform.root.GetComponent<BoxCollider2D>().bounds.min.x;
-		maxX = transform.root.GetComponent<BoxCollider2D>().bounds.max.x;
-		minY = transform.root.GetComponent<BoxCollider2D>().bounds.min.y;
-		maxY = transform.root.GetComponent<BoxCollider2D>().bounds.max.y;
-        // first is hit ground, second is grounded
+		//Vector3 colliderWorldCoordinates = transform.TransformPoint(transform.root.GetComponent<BoxCollider2D>().size/2);
+
+		BoxCollider2D rootBoxCollider = transform.root.GetComponent<BoxCollider2D>();
+		//minX = colliderWorldCoordinates.x;
+		//maxX = colliderWorldCoordinates.x;
+		//minY = colliderWorldCoordinates.y;
+		//maxY = colliderWorldCoordinates.y;
+		minX = -transform.root.position.x + rootBoxCollider.bounds.min.x ;
+		maxX = -transform.root.position.x + rootBoxCollider.bounds.max.x;
+		minY = -transform.root.position.y + rootBoxCollider.bounds.min.y;
+		maxY = -transform.root.position.y + rootBoxCollider.bounds.max.y;
+        // first is hit head on ground, second is grounded
 		hitGroundTopAndGrounded = new bool[] { false, false };
+
+        
+		print(rootBoxCollider.bounds.min.x);
+        print(transform.position.x);
 
 		distanceBetweenRays = (maxX - minX) / (numberOfRaysPerSide - 1);
 		if (numberOfRaysPerSide == 1){
 			distanceBetweenRays = 0;
 		}
 
+		print(distanceBetweenRays);
 
 		groundedState = new CharacterState(ConstantStrings.GROUNDED, hitGroundTopAndGrounded);
 		stateManager.RegisterCharacterState(groundedState.name, groundedState);
@@ -48,7 +60,7 @@ public class GroundedState : MonoBehaviour {
 	}
 
 	private void IsCollidingWithGroundVertically(){
-		// cast rays up
+
 		if (CastRays(minX, maxY, Vector2.up, lengthOfRays, distanceBetweenRays)){
 			hitGroundTopAndGrounded[0] = true;
 		} else {
@@ -65,8 +77,10 @@ public class GroundedState : MonoBehaviour {
 	private bool CastRays(float startX, float yPos, Vector2 direction, float rayLength, float spaceBetween){
 		for (int i = 0; i < numberOfRaysPerSide; i++)
         {
+			//Vector2 startingPosition = new Vector2(startX + transform.position.x + (spaceBetween * i), yPos + transform.position.y);
 			Vector2 startingPosition = new Vector2(startX + transform.position.x + (spaceBetween * i), yPos + transform.position.y);
-			Debug.DrawRay(startingPosition, direction * rayLength, Color.yellow);
+
+			Debug.DrawRay(startingPosition, direction * rayLength, Color.red);
 			hitInfo = Physics2D.Raycast(startingPosition, direction, rayLength, groundMask);
             if (hitInfo)
             {

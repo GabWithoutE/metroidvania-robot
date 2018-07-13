@@ -12,8 +12,9 @@ public static class ConstantStrings
     public static readonly string CURRENT_HEALTH = "CurrentHealth";
     public static readonly string MAX_HEALTH = "MaxHealth";
     public static readonly string DEATH_STATE = "DeathState";
+    public static readonly string HIT_STATE = "HitState";
 
-	public static readonly string LIGHT_ATTACK_COOLDOWN = "LightAttackCooldown";
+    public static readonly string LIGHT_ATTACK_COOLDOWN = "LightAttackCooldown";
 	public static readonly string HEAVY_ATTACK_COOLDOWN = "HeavyAttackCooldown";
 	public static readonly string UTILITY_COOLDOWN = "UtilityCooldown";
 
