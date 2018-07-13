@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class AbstractCharacterDirectionState : MonoBehaviour {
+public abstract class AbstractCharacterVelocityState : MonoBehaviour {
 	protected ICharacterStateManager statesManager;
 	protected CharacterState directionState;
 

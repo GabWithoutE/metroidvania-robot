@@ -4,19 +4,15 @@ using UnityEngine;
 
 public class SpellStats : MonoBehaviour
 {
-    [SerializeField]
-    private float cooldownTime;
-    [SerializeField]
-    private float range;
-    [SerializeField]
-    private float projectileSpeed;
-    [SerializeField]
-    private float spellDamage;
-    private float originalProjectileSpeed;
+    public float cooldownTime;
+	public float range;
+	public float projectileSpeed;
+	public float spellDamage;
+	private float originalProjectileSpeed;
 
     public bool canBeSlowed = true;
 
-	void Start()
+	void Awake()
 	{
         originalProjectileSpeed = projectileSpeed;
 	}

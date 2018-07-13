@@ -18,7 +18,7 @@ public abstract class AbstractAbilityCastingBehaviour : MonoBehaviour {
 	protected Vector2 abilitySpawnDirection;
 
 	protected MoveSet moveSet;
-	/*
+   	/*
      *  Need a new script that observes the moveset state and determines which ability casting module to spawn in the player
      */
 
@@ -26,8 +26,8 @@ public abstract class AbstractAbilityCastingBehaviour : MonoBehaviour {
 	{
 		stateObserver = GetComponentInParent(typeof(ICharacterStateObserver)) as ICharacterStateObserver;
 		moveSet = GetComponent<MoveSet>();
-		lightAttack = moveSet.GetLightAttack();
-		heavyAttack = moveSet.GetHeavyAttack();
+		lightAttack = moveSet.GetLightAttackHorizontalRight();
+		heavyAttack = moveSet.GetHeavyAttackHorizontalRight();
 		utilityAbility = moveSet.GetUtilityAbility();
 		abilitySpawnDirection = new Vector2(0, -1);
         // initial default spawnlocation is down.
@@ -37,11 +37,11 @@ public abstract class AbstractAbilityCastingBehaviour : MonoBehaviour {
 	// Use this for initialization
 	protected void Start () {
 		lightAttackStateSubscription = stateObserver.GetCharacterStateSubscription(
-            CharacterAbilityCastingStates.LightAttackCastingState.ToString());
+			ConstantStrings.UI.Input.INPUT_LIGHT_ATTACK);
 		heavyAttackStateSubscription = stateObserver.GetCharacterStateSubscription(
-			CharacterAbilityCastingStates.HeavyAttackCastingState.ToString());
+			ConstantStrings.UI.Input.INPUT_HEAVY_ATTACK);
 		utilityAbilityStateSubscription = stateObserver.GetCharacterStateSubscription(
-			CharacterAbilityCastingStates.UtilityCastingState.ToString());
+			ConstantStrings.UI.Input.INPUT_UTILITY);
 
 		lightAttackStateSubscription.OnStateChanged += CastLightAttack;
 		heavyAttackStateSubscription.OnStateChanged += CastHeavyAttack;
@@ -63,6 +63,10 @@ public abstract class AbstractAbilityCastingBehaviour : MonoBehaviour {
 			abilitySpawnDirection =
 				joystickDirection.normalized;
 		}
+	}
+
+	protected bool isCasting(object castState){
+		return (bool)castState;
 	}
 
 	protected float GetHorizontalJoystickValue(){
@@ -128,11 +132,11 @@ public abstract class AbstractAbilityCastingBehaviour : MonoBehaviour {
 	protected abstract void CastUtilityAbility(object castState);
     
 
-	protected void OnDestroy()
-	{
-		lightAttackStateSubscription.OnStateChanged -= CastLightAttack;
-        heavyAttackStateSubscription.OnStateChanged -= CastHeavyAttack;
-        utilityAbilityStateSubscription.OnStateChanged -= CastUtilityAbility;
-	}
+	//protected void OnDestroy()
+	//{
+	//	lightAttackStateSubscription.OnStateChanged -= CastLightAttack;
+ //       heavyAttackStateSubscription.OnStateChanged -= CastHeavyAttack;
+ //       utilityAbilityStateSubscription.OnStateChanged -= CastUtilityAbility;
+	//}
 
 }

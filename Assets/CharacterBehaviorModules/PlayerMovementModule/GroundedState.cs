@@ -38,15 +38,15 @@ public class GroundedState : MonoBehaviour {
 		hitGroundTopAndGrounded = new bool[] { false, false };
 
         
-		print(rootBoxCollider.bounds.min.x);
-        print(transform.position.x);
+		//print(rootBoxCollider.bounds.min.x);
+        //print(transform.position.x);
 
 		distanceBetweenRays = (maxX - minX) / (numberOfRaysPerSide - 1);
 		if (numberOfRaysPerSide == 1){
 			distanceBetweenRays = 0;
 		}
 
-		print(distanceBetweenRays);
+		//print(distanceBetweenRays);
 
 		groundedState = new CharacterState(ConstantStrings.GROUNDED, hitGroundTopAndGrounded);
 		stateManager.RegisterCharacterState(groundedState.name, groundedState);
