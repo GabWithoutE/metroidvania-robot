@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyVelocityState : AbstractCharacterDirectionState
+public class EnemyVelocityState : AbstractCharacterVelocityState
 {
     public float margin;
     private float horizontalAxisValue;
