@@ -11,7 +11,7 @@ TagManager:
   - TransitionalUIDisplayer
   - TransitionalUIElement
   - Enemy
-  - PatrolBound
+  - PatrolPause
   layers:
   - Default
   - TransparentFX
