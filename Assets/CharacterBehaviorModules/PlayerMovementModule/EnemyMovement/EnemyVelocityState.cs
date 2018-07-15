@@ -15,6 +15,9 @@ public class EnemyVelocityState : AbstractCharacterVelocityState
     private float maxX;
     private RaycastHit2D hitInfo;
     private LayerMask groundMask;
+    public float patrolPauseDuration;
+    public float patrolTime;
+    public float walkTimer;    //Times how long enemy has been walking
 
     private void Awake()
     {
@@ -30,14 +33,15 @@ public class EnemyVelocityState : AbstractCharacterVelocityState
         prevHealth = statesManager.GetCharacterStateValue(ConstantStrings.CURRENT_HEALTH);
         CharacterState.CharacterStateSubscription healthStateSubscription = statesManager.GetCharacterStateSubscription(ConstantStrings.CURRENT_HEALTH);
         healthStateSubscription.OnStateChanged += CheckHit;
-        horizontalAxisValue = 1;        
+        horizontalAxisValue = 1;
+        walkTimer = 0;
     }
 	
 	// Update is called once per frame
 	void Update () {        
         float verticalValues = 0;        
         bool isGrounded = ((bool[])statesManager.GetCharacterStateValue(ConstantStrings.GROUNDED))[1];
-        hit = (bool)statesManager.GetCharacterStateValue(ConstantStrings.HIT_STATE);
+        hit = (bool)statesManager.GetCharacterStateValue(ConstantStrings.HIT_STATE);               
         //If enemy is standing on the ground, turn off gravity
         if (isGrounded)
         {
@@ -52,7 +56,7 @@ public class EnemyVelocityState : AbstractCharacterVelocityState
         //If enemy has reached left bound of floor collider
         if(transform.root.position.x <= minX + margin)
         {
-            horizontalAxisValue = 1;            
+            horizontalAxisValue = 1;
         }
         //If enemy has reached right bound of floor collider
         else if (transform.root.position.x >= maxX - margin)
@@ -63,7 +67,18 @@ public class EnemyVelocityState : AbstractCharacterVelocityState
         {
             FreezeStart(freezeDuration);
         }
-        directionState.SetState(new float[] { horizontalAxisValue, verticalValues });
+        //Only add to timer if enemy isn't resting
+        if (horizontalAxisValue != 0)
+        {
+            walkTimer += Time.deltaTime;
+        }
+        //If enemy has been walking for x seconds, freeze for 1 second        
+        if (walkTimer >= patrolTime)
+        {
+            FreezeStart(patrolPauseDuration);
+            walkTimer = 0;
+        }
+        directionState.SetState(new float[] { horizontalAxisValue, verticalValues });        
     }
 
     private void CheckHit(object currentHealth)

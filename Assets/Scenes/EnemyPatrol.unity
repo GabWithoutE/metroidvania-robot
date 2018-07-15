@@ -830,7 +830,7 @@ BoxCollider2D:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1245793812}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
@@ -1102,7 +1102,17 @@ Prefab:
     - target: {fileID: 114170034334651250, guid: 543bf0b3dfe4b2942995ffa1a453a69a,
         type: 2}
       propertyPath: margin
-      value: 0
+      value: 0.03
+      objectReference: {fileID: 0}
+    - target: {fileID: 114170034334651250, guid: 543bf0b3dfe4b2942995ffa1a453a69a,
+        type: 2}
+      propertyPath: patrolTime
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114170034334651250, guid: 543bf0b3dfe4b2942995ffa1a453a69a,
+        type: 2}
+      propertyPath: patrolPauseDuration
+      value: 1.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 543bf0b3dfe4b2942995ffa1a453a69a, type: 2}
