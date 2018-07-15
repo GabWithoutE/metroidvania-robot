@@ -29,6 +29,10 @@ public static class ConstantStrings
 	public static readonly string GROUNDED = "Grounded";
 
 	public static readonly string DIRECTION = "Direction";
+
+	public static readonly string LIGHT_ATTACK_LOCK = "LightAttackLock";
+	public static readonly string HEAVY_ATTACK_LOCK = "HeavyAttackLock";
+
     
 	public static class PlayerAnimatorStates{
 		public static readonly string IDLE_HORIZONTAL = "IdleHorizontal";

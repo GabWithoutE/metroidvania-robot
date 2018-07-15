@@ -28,6 +28,8 @@ public class BasePlayerAbilityCastingBehavior : AbstractAbilityCastingBehaviour 
 	private LightMeleeAttackTrigger lightAttackInstanceUpRightTrigger;
 	private LightMeleeAttackTrigger lightAttackInstanceDownRightTrigger;
 
+	private float lightAttackDuration;
+	private CharacterState lightAttackLock;
 
 	private GameObject heavyAttackInstanceRight;
 	private GameObject heavyAttackInstanceLeft;
@@ -39,6 +41,9 @@ public class BasePlayerAbilityCastingBehavior : AbstractAbilityCastingBehaviour 
 	private HeavyAttackTrigger heavyAttackInstanceUpRightTrigger;
 	private HeavyAttackTrigger heavyAttackInstanceDownRightTrigger;
 
+	private float heavyAttackDuration;
+	private CharacterState heavyAttackLock;
+
 	private bool previousHeavyAttackCastState;
 	private float[] currentHeavyAttackChargeDirection;
         
@@ -48,7 +53,7 @@ public class BasePlayerAbilityCastingBehavior : AbstractAbilityCastingBehaviour 
      */ 
 	private void Awake()
 	{
-		stateObserver = GetComponentInParent(typeof(ICharacterStateObserver)) as ICharacterStateObserver;
+		stateManager = GetComponentInParent(typeof(ICharacterStateManager)) as ICharacterStateManager;
 		moveSet = GetComponent<MoveSet>();
 		GetAttackPrefabs();
 
@@ -66,16 +71,45 @@ public class BasePlayerAbilityCastingBehavior : AbstractAbilityCastingBehaviour 
 		heavyAttackInstanceUpRight = Instantiate(heavyAttackUpRight, transform.position, Quaternion.identity, transform);
 		heavyAttackInstanceDownRight = Instantiate(heavyAttackDownRight, transform.position, Quaternion.identity, transform);
 
+		RegisterAttackLocks();
 		SetTriggers();
+		SetAttackDurations();
+	}
 
-        
+	private void RegisterAttackLocks(){
+		if (stateManager.ExistsState(ConstantStrings.LIGHT_ATTACK_LOCK)){
+			lightAttackLock = 
+				stateManager.GetExistingCharacterState(ConstantStrings.LIGHT_ATTACK_LOCK);
+			lightAttackLock.SetState(false);
+		} else {
+			lightAttackLock = new CharacterState(ConstantStrings.LIGHT_ATTACK_LOCK, false);
+			stateManager.RegisterCharacterState(lightAttackLock.name, lightAttackLock);
+		}
+		if (stateManager.ExistsState(ConstantStrings.HEAVY_ATTACK_LOCK))
+        {
+			heavyAttackLock =
+				stateManager.GetExistingCharacterState(ConstantStrings.HEAVY_ATTACK_LOCK);
+			heavyAttackLock.SetState(false);
+        }
+        else
+        {
+			heavyAttackLock = new CharacterState(ConstantStrings.HEAVY_ATTACK_LOCK, false);
+			stateManager.RegisterCharacterState(heavyAttackLock.name, heavyAttackLock);
+        }
 	}
 
 	private void Start()
 	{
-		previousHeavyAttackCastState = (bool) stateObserver.GetCharacterStateValue(ConstantStrings.UI.Input.INPUT_HEAVY_ATTACK);
+		previousHeavyAttackCastState = (bool) stateManager.GetCharacterStateValue(ConstantStrings.UI.Input.INPUT_HEAVY_ATTACK);
 		base.Start();
 
+	}
+
+	private void SetAttackDurations(){
+		lightAttackDuration = 
+			lightAttackHorizontalRight.GetComponent<MeleeAbilityStats>().GetAbilityDuration();
+		heavyAttackDuration =
+			heavyAttackHorizontalRight.GetComponent<HeavyMeleeAbilityStats>().GetAbilityDuration();
 	}
 
 	private void SetTriggers(){
@@ -110,33 +144,48 @@ public class BasePlayerAbilityCastingBehavior : AbstractAbilityCastingBehaviour 
 		if (!isCasting(castState)){
 			return;
 		}
-		if (((float[])stateObserver.GetCharacterStateValue(ConstantStrings.LIGHT_ATTACK_COOLDOWN))[1] > 0)
+		if (((float[])stateManager.GetCharacterStateValue(ConstantStrings.LIGHT_ATTACK_COOLDOWN))[1] > 0)
 		{
 			return;
 		}
 		float[] playerDirection = GetPlayerDirectionFromManager();
-        
-        /*
-         * do less checks by mixing some of these together
-         */ 
 
-        // Facing right and attacking up
-		if (playerDirection[1] > 0){
-			lightAttackInstanceUpRightTrigger.TriggerAttack();
-		} 
-		else if (playerDirection[1] < 0){
-			lightAttackInstanceDownRightTrigger.TriggerAttack();
-		} 
-		else if (playerDirection[0] > 0 && playerDirection[1] == 0){
-			lightAttackInstanceRightTrigger.TriggerAttack();
-		} 
-		else if (playerDirection[0] < 0 && playerDirection[1] == 0){
-			lightAttackInstanceLeftTrigger.TriggerAttack();
-    	}
+		/*
+         * do less checks by mixing some of these together
+         */
+		bool casted = false;
+		// Facing right and attacking up
+		if (!(bool)lightAttackLock.GetStateValue()){
+            if (playerDirection[1] > 0)
+            {
+                lightAttackInstanceUpRightTrigger.TriggerAttack();
+				casted = true;
+            }
+            else if (playerDirection[1] < 0)
+            {
+                lightAttackInstanceDownRightTrigger.TriggerAttack();
+                casted = true;
+            }
+            else if (playerDirection[0] > 0 && playerDirection[1] == 0)
+            {
+                lightAttackInstanceRightTrigger.TriggerAttack();
+                casted = true;
+            }
+            else if (playerDirection[0] < 0 && playerDirection[1] == 0)
+            {
+                lightAttackInstanceLeftTrigger.TriggerAttack();
+                casted = true;
+            }
+		}
+
+		if (casted && !(bool)lightAttackLock.GetStateValue()){
+			lightAttackLock.SetState(true);
+			StartCoroutine(GetAttackLock(lightAttackLock, lightAttackDuration));
+		}
 	}
 
 	protected override void CastHeavyAttack(object castState){
-		if (((float[])stateObserver.GetCharacterStateValue(ConstantStrings.HEAVY_ATTACK_COOLDOWN))[1] > 0)
+		if (((float[])stateManager.GetCharacterStateValue(ConstantStrings.HEAVY_ATTACK_COOLDOWN))[1] > 0)
         {
             return;
         }
@@ -183,6 +232,7 @@ public class BasePlayerAbilityCastingBehavior : AbstractAbilityCastingBehaviour 
             {
                 heavyAttackInstanceLeftTrigger.ScaleHeavyAttackByHolding(Time.deltaTime);
             }
+			heavyAttackLock.SetState(true);
 		}
 
 		if (!isCasting(castState) && previousHeavyAttackCastState)
@@ -203,6 +253,7 @@ public class BasePlayerAbilityCastingBehavior : AbstractAbilityCastingBehaviour 
             {
                 heavyAttackInstanceLeftTrigger.TriggerAttack();
             }
+			heavyAttackLock.SetState(false);
         }
 
 
@@ -216,13 +267,18 @@ public class BasePlayerAbilityCastingBehavior : AbstractAbilityCastingBehaviour 
 	}
 
 	private float[] GetPlayerDirectionFromManager(){
-		return ((float[])stateObserver.GetCharacterStateValue(ConstantStrings.DIRECTION));
+		return ((float[])stateManager.GetCharacterStateValue(ConstantStrings.DIRECTION));
 	}
 
 	private void Update(){
 		/*
 		 * override to do nothing.
 		 */
+	}
+
+	IEnumerator GetAttackLock(CharacterState attackLock, float duration){
+		yield return new WaitForSeconds(duration);
+		attackLock.SetState(false);
 	}
     
 }

@@ -37,7 +37,7 @@ public class EngineerAbilityCastingBehaviour : AbstractAbilityCastingBehaviour {
 		if (!(bool) castState){
 			return;
 		}
-		if (((float[]) stateObserver.GetCharacterStateValue(ConstantStrings.HEAVY_ATTACK_COOLDOWN))[1] >0 ){
+		if (((float[]) stateManager.GetCharacterStateValue(ConstantStrings.HEAVY_ATTACK_COOLDOWN))[1] >0 ){
 			return;
 		}
 
@@ -53,7 +53,7 @@ public class EngineerAbilityCastingBehaviour : AbstractAbilityCastingBehaviour {
 		if (!(bool) castState){
 			return;
 		}
-		if (((float[])stateObserver.GetCharacterStateValue(ConstantStrings.UTILITY_COOLDOWN))[1] > 0)
+		if (((float[])stateManager.GetCharacterStateValue(ConstantStrings.UTILITY_COOLDOWN))[1] > 0)
 		{
 			return;
 		}

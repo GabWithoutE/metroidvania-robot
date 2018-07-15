@@ -5,7 +5,7 @@ using UnityStandardAssets.CrossPlatformInput;
 
 public abstract class AbstractAbilityCastingBehaviour : MonoBehaviour {
 
-	protected ICharacterStateObserver stateObserver;
+	protected ICharacterStateManager stateManager;
 	protected GameObject lightAttack;
 	protected GameObject heavyAttack;
 	protected GameObject utilityAbility;
@@ -24,7 +24,7 @@ public abstract class AbstractAbilityCastingBehaviour : MonoBehaviour {
 
 	protected void Awake()
 	{
-		stateObserver = GetComponentInParent(typeof(ICharacterStateObserver)) as ICharacterStateObserver;
+		stateManager = GetComponentInParent(typeof(ICharacterStateManager)) as ICharacterStateManager;
 		moveSet = GetComponent<MoveSet>();
 		lightAttack = moveSet.GetLightAttackHorizontalRight();
 		heavyAttack = moveSet.GetHeavyAttackHorizontalRight();
@@ -36,11 +36,11 @@ public abstract class AbstractAbilityCastingBehaviour : MonoBehaviour {
 
 	// Use this for initialization
 	protected void Start () {
-		lightAttackStateSubscription = stateObserver.GetCharacterStateSubscription(
+		lightAttackStateSubscription = stateManager.GetCharacterStateSubscription(
 			ConstantStrings.UI.Input.INPUT_LIGHT_ATTACK);
-		heavyAttackStateSubscription = stateObserver.GetCharacterStateSubscription(
+		heavyAttackStateSubscription = stateManager.GetCharacterStateSubscription(
 			ConstantStrings.UI.Input.INPUT_HEAVY_ATTACK);
-		utilityAbilityStateSubscription = stateObserver.GetCharacterStateSubscription(
+		utilityAbilityStateSubscription = stateManager.GetCharacterStateSubscription(
 			ConstantStrings.UI.Input.INPUT_UTILITY);
 
 		lightAttackStateSubscription.OnStateChanged += CastLightAttack;
@@ -86,7 +86,7 @@ public abstract class AbstractAbilityCastingBehaviour : MonoBehaviour {
 		if (!(bool) castState){
 			return;
 		}      
-		if (((float[])stateObserver.GetCharacterStateValue(ConstantStrings.LIGHT_ATTACK_COOLDOWN))[1] > 0)
+		if (((float[])stateManager.GetCharacterStateValue(ConstantStrings.LIGHT_ATTACK_COOLDOWN))[1] > 0)
         {
             return;
         }
@@ -102,7 +102,7 @@ public abstract class AbstractAbilityCastingBehaviour : MonoBehaviour {
         {
             return;
         }
-		if (((float[])stateObserver.GetCharacterStateValue(ConstantStrings.HEAVY_ATTACK_COOLDOWN))[1] > 0)
+		if (((float[])stateManager.GetCharacterStateValue(ConstantStrings.HEAVY_ATTACK_COOLDOWN))[1] > 0)
         {
             return;
         }
@@ -117,7 +117,7 @@ public abstract class AbstractAbilityCastingBehaviour : MonoBehaviour {
 		if (!(bool) castState){
 			return;
 		}
-		if (((float[])stateObserver.GetCharacterStateValue(ConstantStrings.UTILITY_COOLDOWN))[1] > 0)
+		if (((float[])stateManager.GetCharacterStateValue(ConstantStrings.UTILITY_COOLDOWN))[1] > 0)
         {
             return;
         }
