@@ -13,8 +13,12 @@ public class EnemyVelocityState : AbstractCharacterVelocityState
     private object prevHealth;
     private float minX;
     private float maxX;
-    private RaycastHit2D hitInfo;
+    private RaycastHit2D hitInfoDown;
+    private RaycastHit2D hitInfoSide;
     private LayerMask groundMask;
+    public float patrolPauseDuration;
+    public float patrolTime;
+    public float walkTimer;    //Times how long enemy has been walking
 
     private void Awake()
     {
@@ -30,29 +34,31 @@ public class EnemyVelocityState : AbstractCharacterVelocityState
         prevHealth = statesManager.GetCharacterStateValue(ConstantStrings.CURRENT_HEALTH);
         CharacterState.CharacterStateSubscription healthStateSubscription = statesManager.GetCharacterStateSubscription(ConstantStrings.CURRENT_HEALTH);
         healthStateSubscription.OnStateChanged += CheckHit;
-        horizontalAxisValue = 1;        
+        horizontalAxisValue = 1;
+        walkTimer = 0;
     }
 	
 	// Update is called once per frame
 	void Update () {        
         float verticalValues = 0;        
         bool isGrounded = ((bool[])statesManager.GetCharacterStateValue(ConstantStrings.GROUNDED))[1];
-        hit = (bool)statesManager.GetCharacterStateValue(ConstantStrings.HIT_STATE);
+        hit = (bool)statesManager.GetCharacterStateValue(ConstantStrings.HIT_STATE);               
         //If enemy is standing on the ground, turn off gravity
         if (isGrounded)
         {
             verticalValues = 0;
+            CastRaySide();
 		} else
         //If enemy is not standing on the ground, turn on gravity and find out bounds of floor under it
         if (!isGrounded)
         {
             verticalValues = -1;
-            CastRay();
+            CastRayDown();
         }
         //If enemy has reached left bound of floor collider
         if(transform.root.position.x <= minX + margin)
         {
-            horizontalAxisValue = 1;            
+            horizontalAxisValue = 1;
         }
         //If enemy has reached right bound of floor collider
         else if (transform.root.position.x >= maxX - margin)
@@ -63,7 +69,18 @@ public class EnemyVelocityState : AbstractCharacterVelocityState
         {
             FreezeStart(freezeDuration);
         }
-        directionState.SetState(new float[] { horizontalAxisValue, verticalValues });
+        //Only add to timer if enemy isn't resting
+        if (horizontalAxisValue != 0)
+        {
+            walkTimer += Time.deltaTime;
+        }
+        //If enemy has been walking for x seconds, freeze for 1 second        
+        if (walkTimer >= patrolTime)
+        {
+            FreezeStart(patrolPauseDuration);
+            walkTimer = 0;
+        }
+        directionState.SetState(new float[] { horizontalAxisValue, verticalValues });        
     }
 
     private void CheckHit(object currentHealth)
@@ -91,13 +108,29 @@ public class EnemyVelocityState : AbstractCharacterVelocityState
     }
 
     //Cast a ray from enemy directly downwards to get the bounds of the floor it is standing on
-    private void CastRay()
+    private void CastRayDown()
     {
         Vector2 startingPosition = new Vector2(transform.position.x, transform.position.y);
         Vector2 direction = new Vector2(0,-1);
         float rayLength = 10;   //Arbitrary ray length, can possibly be shorter
-        hitInfo = Physics2D.Raycast(startingPosition, direction, rayLength, groundMask);
-        minX = hitInfo.collider.bounds.min.x;
-        maxX = hitInfo.collider.bounds.max.x;
+        hitInfoDown = Physics2D.Raycast(startingPosition, direction, rayLength, groundMask);
+        if(hitInfoDown)
+        {
+            minX = hitInfoDown.collider.bounds.min.x;
+            maxX = hitInfoDown.collider.bounds.max.x;
+        }        
+    }
+
+    //Cast a ray in direction of enemy travel to see if there is anything in front of it, if so turn back
+    private void CastRaySide()
+    {
+        Vector2 startingPosition = new Vector2(transform.position.x, transform.position.y);
+        Vector2 direction = new Vector2(horizontalAxisValue, 0);
+        float rayLength = 1;
+        hitInfoSide = Physics2D.Raycast(startingPosition, direction, rayLength, groundMask);
+        if(hitInfoSide)
+        {
+            horizontalAxisValue *= -1;
+        }
     }
 }
