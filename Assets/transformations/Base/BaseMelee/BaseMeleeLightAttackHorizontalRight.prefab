@@ -91,4 +91,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 0
   cooldownTime: 0
-  abilityDuration: 1
+  abilityDuration: 0.5

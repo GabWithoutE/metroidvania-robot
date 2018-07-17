@@ -19,7 +19,7 @@ public class BaseAbilityCastingBehaviour : AbstractAbilityCastingBehaviour {
 		if (!(bool) castState){
 			return;
 		}
-		if (((float[]) stateObserver.GetCharacterStateValue(ConstantStrings.UTILITY_COOLDOWN))[1] > 0){
+		if (((float[]) stateManager.GetCharacterStateValue(ConstantStrings.UTILITY_COOLDOWN))[1] > 0){
 			return;
 		}
         GameObject mine = Instantiate(utilityAbility, abilitySpawnLocation, Quaternion.identity);
