@@ -12,6 +12,8 @@ TagManager:
   - TransitionalUIElement
   - Enemy
   - PatrolPause
+  - ExitTile
+  - MapDmg
   layers:
   - Default
   - TransparentFX
