@@ -32,7 +32,7 @@ public class BasePlayerAbilityCastingBehavior : MonoBehaviour {
 	private LightMeleeAttackTrigger lightAttackInstanceDownRightTrigger;
 
 	private float lightAttackDuration;
-	private CharacterState lightAttackLock;
+	private CharacterState lightAttackCastState;
 
 	private GameObject heavyAttackInstanceRight;
 	private GameObject heavyAttackInstanceLeft;
@@ -47,9 +47,10 @@ public class BasePlayerAbilityCastingBehavior : MonoBehaviour {
 	private GameObject utilityAbility;
 	private GameObject utilityAbilityInstance;
 	private UtilityStunGrenadeTrigger utilityStunGrenadeTrigger;
+	private CharacterState utilityAbilityCastState;
 
 	private float heavyAttackDuration;
-	private CharacterState heavyAttackLock;
+	private CharacterState heavyAttackCastState;
 
 	private bool previousHeavyAttackCastState;
 	private float[] currentHeavyAttackChargeDirection;
@@ -94,24 +95,33 @@ public class BasePlayerAbilityCastingBehavior : MonoBehaviour {
 
 	private void RegisterAttackLocks(){
 		if (stateManager.ExistsState(ConstantStrings.LIGHT_ATTACK_CAST)){
-			lightAttackLock = 
+			lightAttackCastState = 
 				stateManager.GetExistingCharacterState(ConstantStrings.LIGHT_ATTACK_CAST);
-			lightAttackLock.SetState(false);
+			lightAttackCastState.SetState(false);
 		} else {
-			lightAttackLock = new CharacterState(ConstantStrings.LIGHT_ATTACK_CAST, false);
-			stateManager.RegisterCharacterState(lightAttackLock.name, lightAttackLock);
+			lightAttackCastState = new CharacterState(ConstantStrings.LIGHT_ATTACK_CAST, false);
+			stateManager.RegisterCharacterState(lightAttackCastState.name, lightAttackCastState);
 		}
 		if (stateManager.ExistsState(ConstantStrings.HEAVY_ATTACK_CAST))
         {
-			heavyAttackLock =
+			heavyAttackCastState =
 				stateManager.GetExistingCharacterState(ConstantStrings.HEAVY_ATTACK_CAST);
-			heavyAttackLock.SetState(false);
+			heavyAttackCastState.SetState(false);
         }
         else
         {
-			heavyAttackLock = new CharacterState(ConstantStrings.HEAVY_ATTACK_CAST, false);
-			stateManager.RegisterCharacterState(heavyAttackLock.name, heavyAttackLock);
+			heavyAttackCastState = new CharacterState(ConstantStrings.HEAVY_ATTACK_CAST, false);
+			stateManager.RegisterCharacterState(heavyAttackCastState.name, heavyAttackCastState);
         }
+
+		if(stateManager.ExistsState(ConstantStrings.UTILITY_ABILITY_CAST)){
+			utilityAbilityCastState =
+				stateManager.GetExistingCharacterState(ConstantStrings.UTILITY_ABILITY_CAST);
+			utilityAbilityCastState.SetState(false);
+		} else {
+			utilityAbilityCastState = new CharacterState(ConstantStrings.UTILITY_ABILITY_CAST, false);
+			stateManager.RegisterCharacterState(utilityAbilityCastState.name, utilityAbilityCastState);
+		}
 	}
 
 	private void Start()
@@ -188,31 +198,31 @@ public class BasePlayerAbilityCastingBehavior : MonoBehaviour {
          * do less checks by mixing some of these together
          */
 		// Facing right and attacking up
-		if (!(bool)lightAttackLock.GetStateValue()){
+		if (!(bool)lightAttackCastState.GetStateValue()){
             if (playerDirection[1] > 0)
             {
                 lightAttackInstanceUpRightTrigger.TriggerAttack();
-				lightAttackLock.SetState(true);
-				lightAttackLock.SetState(false);
+				lightAttackCastState.SetState(true);
+				lightAttackCastState.SetState(false);
                 
             }
             else if (playerDirection[1] < 0)
             {
                 lightAttackInstanceDownRightTrigger.TriggerAttack();
-				lightAttackLock.SetState(true);
-                lightAttackLock.SetState(false);
+				lightAttackCastState.SetState(true);
+                lightAttackCastState.SetState(false);
             }
             else if (playerDirection[0] > 0 && playerDirection[1] == 0)
             {
                 lightAttackInstanceRightTrigger.TriggerAttack();
-				lightAttackLock.SetState(true);
-                lightAttackLock.SetState(false);
+				lightAttackCastState.SetState(true);
+                lightAttackCastState.SetState(false);
             }
             else if (playerDirection[0] < 0 && playerDirection[1] == 0)
             {
                 lightAttackInstanceLeftTrigger.TriggerAttack();
-				lightAttackLock.SetState(true);
-                lightAttackLock.SetState(false);
+				lightAttackCastState.SetState(true);
+                lightAttackCastState.SetState(false);
             }
 			abilityCastingLock = false;
 		}
@@ -274,7 +284,7 @@ public class BasePlayerAbilityCastingBehavior : MonoBehaviour {
             {
                 heavyAttackInstanceLeftTrigger.ScaleHeavyAttackByHolding(Time.deltaTime);
             }
-			heavyAttackLock.SetState(true);
+			heavyAttackCastState.SetState(true);
 		}
 
 		if (!isCasting(castState) && previousHeavyAttackCastState)
@@ -295,7 +305,7 @@ public class BasePlayerAbilityCastingBehavior : MonoBehaviour {
             {
                 heavyAttackInstanceLeftTrigger.TriggerAttack();
             }
-			heavyAttackLock.SetState(false);
+			heavyAttackCastState.SetState(false);
 			abilityCastingLock = false;
         }      
 
@@ -308,6 +318,8 @@ public class BasePlayerAbilityCastingBehavior : MonoBehaviour {
 		}
 		if ((float) stateManager.GetCharacterStateValue(ConstantStrings.UTILITY_RESOURCE_STATE) == 1){
 			utilityStunGrenadeTrigger.TriggerAttack();
+			utilityAbilityCastState.SetState(true);
+			utilityAbilityCastState.SetState(false);
 		}
 		//Instantiate(utilityAbility, transform);
 	}

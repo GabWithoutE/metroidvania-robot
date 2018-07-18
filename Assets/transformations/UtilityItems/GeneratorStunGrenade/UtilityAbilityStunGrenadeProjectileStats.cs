@@ -7,6 +7,7 @@ public class UtilityAbilityStunGrenadeProjectileStats : AbstractAbilityStats {
 	public float range;
 	public float stunTime;
 	public float projectileSpeed;
+	public float explosionPersistTime;
 
 	public float GetRange(){
 		return range;
@@ -18,5 +19,9 @@ public class UtilityAbilityStunGrenadeProjectileStats : AbstractAbilityStats {
 
 	public float GetProjectileSpeed(){
 		return projectileSpeed;
+	}
+
+	public float GetExplosionPersistTime(){
+		return explosionPersistTime;
 	}
 }

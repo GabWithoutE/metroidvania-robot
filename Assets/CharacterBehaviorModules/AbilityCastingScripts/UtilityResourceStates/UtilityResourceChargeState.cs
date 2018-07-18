@@ -33,6 +33,11 @@ public class UtilityResourceChargeState : MonoBehaviour {
       
 	}
 
+	private void Start()
+	{
+		stateManager.GetCharacterStateSubscription(ConstantStrings.UTILITY_ABILITY_CAST).OnStateChanged += UtilityCasted;
+	}
+
 	// Update is called once per frame
 	void Update () {
 		      
@@ -46,5 +51,13 @@ public class UtilityResourceChargeState : MonoBehaviour {
 
 		resourceChargeState.SetState(resourceAmount);
 		displayResourceAmount = resourceAmount;
+	}
+
+	private void UtilityCasted(object casted){
+		if ((bool) casted){
+			resourceAmount = 0;
+            resourceChargeState.SetState(resourceAmount);
+		}
+
 	}
 }

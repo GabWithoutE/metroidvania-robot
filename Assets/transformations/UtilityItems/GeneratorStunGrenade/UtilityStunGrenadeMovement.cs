@@ -5,9 +5,11 @@ using UnityEngine;
 public class UtilityStunGrenadeMovement : MonoBehaviour {
 	private UtilityAbilityStunGrenadeProjectileStats stats;
 	private Vector3 projectileDirection;
-
+	private Vector3 initialPosition;
 	private void Awake()
 	{
+		initialPosition = transform.position;
+
 		stats = GetComponent<UtilityAbilityStunGrenadeProjectileStats>();
 	}
 
@@ -17,6 +19,9 @@ public class UtilityStunGrenadeMovement : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		transform.position = transform.position + projectileDirection * stats.GetProjectileSpeed() * Time.deltaTime;
+		float distance = Mathf.Abs(Vector3.Distance(transform.position, initialPosition));
+		if (distance < stats.GetRange()){
+			transform.position = transform.position + projectileDirection * stats.GetProjectileSpeed() * Time.deltaTime;
+		}
 	}
 }
