@@ -93,7 +93,7 @@ MonoBehaviour:
     type: 2}
   heavyAttackDownRight: {fileID: 1383608433031726, guid: cf1adfccce51243fcb39de2722087dec,
     type: 2}
-  utilityAbility: {fileID: 1786242834418252, guid: 24ab84fa222d9404faee24223330af46,
+  utilityAbility: {fileID: 1497370931035874, guid: 061ff70d8db1f45d5bdd751cb328fbb4,
     type: 2}
   oneOffAbility: {fileID: 0}
 --- !u!114 &114659099654584112

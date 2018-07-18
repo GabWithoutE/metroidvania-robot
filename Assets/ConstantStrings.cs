@@ -30,8 +30,11 @@ public static class ConstantStrings
 
 	public static readonly string DIRECTION = "Direction";
 
-	public static readonly string LIGHT_ATTACK_LOCK = "LightAttackLock";
-	public static readonly string HEAVY_ATTACK_LOCK = "HeavyAttackLock";
+	public static readonly string LIGHT_ATTACK_CAST = "LightAttackCast";
+	public static readonly string HEAVY_ATTACK_CAST = "HeavyAttackCast";
+	public static readonly string UTILITY_ABILITY_CAST = "UtilityAbilityCast";
+
+	public static readonly string UTILITY_RESOURCE_STATE = "UtilityResourceState";
 
     
 	public static class PlayerAnimatorStates{
