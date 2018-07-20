@@ -11,7 +11,6 @@ public class LightMeleeAttackTrigger : AbstractMeleeAttackTrigger
 		base.Awake();
 		meleeAbilityStats = GetComponent<MeleeAbilityStats>();
 		meleeEffectCollider.enabled = false;
-
 	}
 
 	public override void TriggerAttack()

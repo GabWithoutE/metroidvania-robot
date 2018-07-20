@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerAnimatorParameters : MonoBehaviour {
+public class PlayerAnimatorParameters : MonoBehaviour
+{
 	private Animator playerAnimator;
 	private ICharacterStateObserver stateObserver;
 	private int runningHash;
@@ -21,39 +22,60 @@ public class PlayerAnimatorParameters : MonoBehaviour {
 		jumpingHash = Animator.StringToHash("Jumping");
 		heavyAttackHash = Animator.StringToHash("HeavyAttack");
 	}
-    
+
+	private void Start()
+	{
+		CharacterState.CharacterStateSubscription lightAttackLockSub =
+			stateObserver.GetCharacterStateSubscription(ConstantStrings.LIGHT_ATTACK_CAST);
+		lightAttackLockSub.OnStateChanged += OnLightAttackLockSetTrigger;
+	}
+
 
 
 	// Update is called once per frame
-	void Update () {
+	void Update()
+	{
 		float[] playerVelocity = (float[])stateObserver.GetCharacterStateValue(ConstantStrings.VELOCITY);
 		float playerXVelocity = playerVelocity[0];
 		float playerYVelocity = playerVelocity[1];
 
-		if (playerXVelocity != 0){
+		if (playerXVelocity != 0)
+		{
 			playerAnimator.SetBool(runningHash, true);
-		} else {
+		}
+		else
+		{
 			playerAnimator.SetBool(runningHash, false);
 		}
-		if (playerYVelocity < 0){
+		if (playerYVelocity < 0)
+		{
 			playerAnimator.SetBool(fallingHash, true);
-		} else {
+		}
+		else
+		{
 			playerAnimator.SetBool(fallingHash, false);
 		}
-		if (playerYVelocity > 0){
+		if (playerYVelocity > 0)
+		{
 			playerAnimator.SetBool(jumpingHash, true);
-		} else {
+		}
+		else
+		{
 			playerAnimator.SetBool(jumpingHash, false);
 		}
-        
 
-		playerAnimator.SetBool(lightAttackHash,
-							   (bool)stateObserver.GetCharacterStateValue(ConstantStrings.LIGHT_ATTACK_LOCK));
 
 		playerAnimator.SetBool(heavyAttackHash,
-							   (bool)stateObserver.GetCharacterStateValue(ConstantStrings.HEAVY_ATTACK_LOCK));
-      
+							   (bool)stateObserver.GetCharacterStateValue(ConstantStrings.HEAVY_ATTACK_CAST));
+
 	}
 
+	private void OnLightAttackLockSetTrigger(object lockState)
+	{
+		if ((bool)lockState)
+		{
+			playerAnimator.SetTrigger(lightAttackHash);
+		}
 
+	}
 }
