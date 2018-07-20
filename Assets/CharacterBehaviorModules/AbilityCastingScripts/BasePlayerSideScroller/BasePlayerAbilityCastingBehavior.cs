@@ -321,7 +321,6 @@ public class BasePlayerAbilityCastingBehavior : MonoBehaviour {
 			utilityAbilityCastState.SetState(true);
 			utilityAbilityCastState.SetState(false);
 		}
-		//Instantiate(utilityAbility, transform);
 	}
 
 	private float[] GetPlayerDirectionFromManager(){

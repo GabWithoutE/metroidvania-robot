@@ -69,7 +69,7 @@ MonoBehaviour:
   damage: 0
   cooldownTime: 0
   resourceDechargeRateInRatio: 0.05
-  resourceChargeRateInRatio: 0.1
+  resourceChargeRateInRatio: 0.3
   resourceChargePerHitInRatio: 0.3
 --- !u!114 &114934569055955138
 MonoBehaviour:
