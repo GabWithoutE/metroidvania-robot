@@ -237,11 +237,13 @@ public class BasePlayerAbilityCastingBehavior : MonoBehaviour {
 		if (!abilityCastingLock){
 			abilityCastingLock = true;
 		}
-		//if (((float[])stateManager.GetCharacterStateValue(ConstantStrings.HEAVY_ATTACK_COOLDOWN))[1] > 0)
-        //{
-        //    return;
-        //}
+
 		float[] playerDirection = GetPlayerDirectionFromManager();
+
+		if (playerDirection[0] == 0 && playerDirection[1] == 0)
+        {
+			return;
+        }
 
 		if (isCasting(castState) && !previousHeavyAttackCastState){
             if (playerDirection[1] > 0)
@@ -262,7 +264,7 @@ public class BasePlayerAbilityCastingBehavior : MonoBehaviour {
             else if (playerDirection[0] < 0 && playerDirection[1] == 0)
             {
 				currentHeavyAttackChargeDirection = new float[] { -1, 0 };
-            }
+			} 
 		}
 
 		if (isCasting(castState) && previousHeavyAttackCastState){
@@ -276,8 +278,6 @@ public class BasePlayerAbilityCastingBehavior : MonoBehaviour {
             }
 			else if (currentHeavyAttackChargeDirection[0] > 0 && currentHeavyAttackChargeDirection[1] == 0)
             {
-                //print("hello");
-                //print(Time.deltaTime);
                 heavyAttackInstanceRightTrigger.ScaleHeavyAttackByHolding(Time.deltaTime);
             }
 			else if (currentHeavyAttackChargeDirection[0] < 0 && currentHeavyAttackChargeDirection[1] == 0)
