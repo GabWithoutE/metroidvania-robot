@@ -23,7 +23,7 @@ public class EnemyVelocityState : AbstractCharacterVelocityState
     private void Awake()
     {
         base.Awake();
-        CharacterState.CharacterStateSubscription groundedSubscription = statesManager.GetCharacterStateSubscription(ConstantStrings.GROUNDED);
+        
         statesManager = GetComponentInParent<ICharacterStateManager>();
         hitState = new CharacterState(ConstantStrings.HIT_STATE, hit);
         statesManager.RegisterCharacterState(hitState.name, hitState);
@@ -31,6 +31,7 @@ public class EnemyVelocityState : AbstractCharacterVelocityState
     }
 	// Use this for initialization
 	void Start () {
+        CharacterState.CharacterStateSubscription groundedSubscription = statesManager.GetCharacterStateSubscription(ConstantStrings.GROUNDED);
         prevHealth = statesManager.GetCharacterStateValue(ConstantStrings.CURRENT_HEALTH);
         CharacterState.CharacterStateSubscription healthStateSubscription = statesManager.GetCharacterStateSubscription(ConstantStrings.CURRENT_HEALTH);
         healthStateSubscription.OnStateChanged += CheckHit;
@@ -42,7 +43,8 @@ public class EnemyVelocityState : AbstractCharacterVelocityState
 	void Update () {        
         float verticalValues = 0;        
         bool isGrounded = ((bool[])statesManager.GetCharacterStateValue(ConstantStrings.GROUNDED))[1];
-        hit = (bool)statesManager.GetCharacterStateValue(ConstantStrings.HIT_STATE);               
+        hit = (bool)statesManager.GetCharacterStateValue(ConstantStrings.HIT_STATE);
+        Debug.Log(isGrounded);
         //If enemy is standing on the ground, turn off gravity
         if (isGrounded)
         {

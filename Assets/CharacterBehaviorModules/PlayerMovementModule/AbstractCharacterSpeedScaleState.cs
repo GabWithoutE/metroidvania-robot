@@ -10,7 +10,9 @@ public abstract class AbstractCharacterSpeedScaleState : MonoBehaviour {
 	public float jumpSpeedScale = 1;
 	public float fallSpeedScale = 1;
 
-	private void Awake()
+    public float[] scaleStateValue;
+
+    private void Awake()
 	{
 		stateManager = GetComponentInParent(typeof(ICharacterStateManager)) as ICharacterStateManager;
 
@@ -24,8 +26,11 @@ public abstract class AbstractCharacterSpeedScaleState : MonoBehaviour {
 		}
 	}
 
-
-
+    void Update()
+    {
+        scaleStateValue = (float[])speedScaleState.GetStateValue();
+    }
+    
 	public void IncreaseSpeedByFactorOfForTime(float factor, float time){
 		float[] speedScaleStateValue = (float[])speedScaleState.GetStateValue();
 		speedScaleStateValue[0] = runSpeedScale * factor;
@@ -33,10 +38,28 @@ public abstract class AbstractCharacterSpeedScaleState : MonoBehaviour {
 		StartCoroutine(DescreaseSpeedScaleAfterTime(time, speedScaleStateValue));
 	}
 
-	IEnumerator DescreaseSpeedScaleAfterTime(float time, float[] speedScaleValues){
+    public void IncreaseJumpByFactorOfForTime(float factor, float time)
+    {
+        float[] speedScaleStateValue = (float[])speedScaleState.GetStateValue();
+        speedScaleStateValue[0] = runSpeedScale * factor;
+        speedScaleStateValue[1] = jumpSpeedScale * factor;
+        speedScaleState.SetState(speedScaleStateValue);
+        StartCoroutine(DescreaseJumpScaleAfterTime(time, speedScaleStateValue));
+    }
+
+    IEnumerator DescreaseSpeedScaleAfterTime(float time, float[] speedScaleValues){
 		yield return new WaitForSeconds(time);
 		//print("speed returned to normal");
 		speedScaleValues[0] = runSpeedScale;
 		speedScaleState.SetState(speedScaleValues);
 	}
+
+    IEnumerator DescreaseJumpScaleAfterTime(float time, float[] speedScaleValues)
+    {
+        yield return new WaitForSeconds(time);
+        //print("speed returned to normal");
+        speedScaleValues[0] = runSpeedScale;
+        speedScaleValues[1] = jumpSpeedScale;
+        speedScaleState.SetState(speedScaleValues);
+    }
 }
