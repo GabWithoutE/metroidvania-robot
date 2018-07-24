@@ -137,7 +137,7 @@ Grid:
   m_GameObject: {fileID: 146281098}
   m_Enabled: 1
   m_CellSize: {x: 1, y: 1, z: 0}
-  m_CellGap: {x: 0, y: 0, z: 0}
+  m_CellGap: {x: 0.3, y: 0.3, z: 0}
   m_CellLayout: 0
   m_CellSwizzle: 0
 --- !u!4 &146281100
@@ -693,10 +693,62 @@ CompositeCollider2D:
   m_ColliderPaths: []
   m_CompositePaths:
     m_Paths:
-    - - {x: 6.86, y: -2.8600001}
-      - {x: -6.86, y: -2.8600001}
-      - {x: -6.86, y: -4.14}
-      - {x: 6.86, y: -4.14}
+    - - {x: -7.959999, y: -4.06}
+      - {x: -9.24, y: -4.06}
+      - {x: -9.24, y: -5.3399997}
+      - {x: -7.959999, y: -5.3399997}
+    - - {x: -6.66, y: -4.06}
+      - {x: -7.939999, y: -4.06}
+      - {x: -7.939999, y: -5.3399997}
+      - {x: -6.66, y: -5.3399997}
+    - - {x: -5.36, y: -4.06}
+      - {x: -6.64, y: -4.06}
+      - {x: -6.64, y: -5.3399997}
+      - {x: -5.36, y: -5.3399997}
+    - - {x: -4.06, y: -4.06}
+      - {x: -5.3399997, y: -4.06}
+      - {x: -5.3399997, y: -5.3399997}
+      - {x: -4.06, y: -5.3399997}
+    - - {x: -2.7599998, y: -4.06}
+      - {x: -4.04, y: -4.06}
+      - {x: -4.04, y: -5.3399997}
+      - {x: -2.7599998, y: -5.3399997}
+    - - {x: -1.4599999, y: -4.06}
+      - {x: -2.7399998, y: -4.06}
+      - {x: -2.7399998, y: -5.3399997}
+      - {x: -1.4599999, y: -5.3399997}
+    - - {x: -0.1599999, y: -4.06}
+      - {x: -1.4399999, y: -4.06}
+      - {x: -1.4399999, y: -5.3399997}
+      - {x: -0.1599999, y: -5.3399997}
+    - - {x: 1.14, y: -4.06}
+      - {x: -0.1399999, y: -4.06}
+      - {x: -0.1399999, y: -5.3399997}
+      - {x: 1.14, y: -5.3399997}
+    - - {x: 2.44, y: -4.06}
+      - {x: 1.16, y: -4.06}
+      - {x: 1.16, y: -5.3399997}
+      - {x: 2.44, y: -5.3399997}
+    - - {x: 3.7399995, y: -4.06}
+      - {x: 2.46, y: -4.06}
+      - {x: 2.46, y: -5.3399997}
+      - {x: 3.7399995, y: -5.3399997}
+    - - {x: 5.04, y: -4.06}
+      - {x: 3.7599998, y: -4.06}
+      - {x: 3.7599998, y: -5.3399997}
+      - {x: 5.04, y: -5.3399997}
+    - - {x: 6.3399997, y: -4.06}
+      - {x: 5.06, y: -4.06}
+      - {x: 5.06, y: -5.3399997}
+      - {x: 6.3399997, y: -5.3399997}
+    - - {x: 7.64, y: -4.06}
+      - {x: 6.36, y: -4.06}
+      - {x: 6.36, y: -5.3399997}
+      - {x: 7.64, y: -5.3399997}
+    - - {x: 8.94, y: -4.06}
+      - {x: 7.6600003, y: -4.06}
+      - {x: 7.6600003, y: -5.3399997}
+      - {x: 8.94, y: -5.3399997}
   m_VertexDistance: 0.0005
 --- !u!50 &1186667581
 Rigidbody2D:
@@ -929,6 +981,7 @@ GameObject:
   - component: {fileID: 1785170804}
   - component: {fileID: 1785170807}
   - component: {fileID: 1785170805}
+  - component: {fileID: 1785170808}
   - component: {fileID: 1785170806}
   m_Layer: 0
   m_Name: AbilityCastingModule
@@ -963,7 +1016,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   abilityCastingStateName: 0
-  inputName: thrownHammerPosition
+  inputName: ThrownHammerPosition
 --- !u!114 &1785170806
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -995,6 +1048,19 @@ MonoBehaviour:
   attack1Chance: 0
   attack2Chance: 1
   attack3Chance: 0
+--- !u!114 &1785170808
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1785170803}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e1182477404d4a2bb6900733d3f0fbf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  abilityCastingStateName: 0
+  inputName: HammerThrown
 --- !u!1 &1813883550
 GameObject:
   m_ObjectHideFlags: 0

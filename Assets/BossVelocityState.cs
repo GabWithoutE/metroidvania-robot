@@ -6,20 +6,20 @@ public class BossVelocityState : AbstractCharacterVelocityState
 {
     public float margin;
     public float jumpDuration;
-    public float jumpTimer;    
-    private RaycastHit2D hitInfoDown;
-    private RaycastHit2D hitInfoSide;
-    private LayerMask groundMask;
+    public float jumpTimer;
     private float minX;
     private float maxX;
+    private float verticalValues;
+    private float horizontalAxisValue;
+    private RaycastHit2D hitInfoDown;
+    private RaycastHit2D hitInfoSide;
+    private LayerMask groundMask;    
     private CharacterState thrownHammerPosition;
     private CharacterState hammerThrown;
     private Vector2 playerDirection;
-    private bool isJumping;
-    private float verticalValues;
-    private float horizontalAxisValue;
-    private bool firstTime;
-
+    private bool currentlyJumpingUp;
+    private bool currentlyFallingDown;
+    private bool hammerOnGround;
     private BaseSpeedScaleState speedScale;
 
     private void Awake()
@@ -27,7 +27,7 @@ public class BossVelocityState : AbstractCharacterVelocityState
         base.Awake();
         statesManager = GetComponentInParent(typeof(ICharacterStateManager)) as ICharacterStateManager;
         groundMask = LayerMask.GetMask("Ground");
-        jumpTimer = jumpDuration;
+        //jumpTimer = jumpDuration;
     }
 
     // Use this for initialization
@@ -35,12 +35,18 @@ public class BossVelocityState : AbstractCharacterVelocityState
         CharacterState.CharacterStateSubscription groundedSubscription = statesManager.GetCharacterStateSubscription(ConstantStrings.GROUNDED);
         CharacterState.CharacterStateSubscription jumpStateSubscription = statesManager.GetCharacterStateSubscription("jumpState");
         //jumpStateSubscription.OnStateChanged += CheckJumpState;
-        thrownHammerPosition = statesManager.GetExistingCharacterState("thrownHammerPosition");
-        hammerThrown = statesManager.GetExistingCharacterState("hammerThrown");
+        CharacterState.CharacterStateSubscription hammerHitGroundSubscription = statesManager.GetCharacterStateSubscription(ConstantStrings.Enemy.HammerBoss.HAMMER_HITS_GROUND);
+        hammerHitGroundSubscription.OnStateChanged += CheckHammerHitGround;
+        
+        thrownHammerPosition = statesManager.GetExistingCharacterState(ConstantStrings.Enemy.HammerBoss.THROWN_HAMMER_POSITION);
+        hammerThrown = statesManager.GetExistingCharacterState(ConstantStrings.Enemy.HammerBoss.HAMMER_THROWN);
         speedScale = transform.parent.GetComponentInChildren<BaseSpeedScaleState>();
         horizontalAxisValue = -1;
         verticalValues = 0;
-        firstTime = true;
+        currentlyJumpingUp = false;
+        currentlyFallingDown = false;
+        hammerOnGround = false;
+        //firstTime = true;
     }
 	
 	// Update is called once per frame
@@ -48,121 +54,97 @@ public class BossVelocityState : AbstractCharacterVelocityState
         bool isGrounded = ((bool[])statesManager.GetCharacterStateValue(ConstantStrings.GROUNDED))[1];
         GameObject player = GameObject.FindGameObjectWithTag("Player");
         playerDirection = player.transform.position - transform.root.position;
-        //Disable all motion when throwing hammer and before hammer hits the ground
-        if((bool)statesManager.GetCharacterStateValue("hammerThrown") && !(bool)statesManager.GetCharacterStateValue("hammerHitsGround"))
+        //If boss is currently jumping up, don't change anything
+        if(!currentlyJumpingUp)
         {
-            //Stand still
-            horizontalAxisValue = 0;
-            verticalValues = 0;
-        }
-        else
-        {
-            //If boss is grounded
-            if (isGrounded)
+            //Disable all motion when throwing hammer and before hammer hits the ground
+            if ((bool)statesManager.GetCharacterStateValue(ConstantStrings.Enemy.HammerBoss.HAMMER_THROWN) && !hammerOnGround)
             {
-                jumpTimer = 0;
+                //Stand still
+                horizontalAxisValue = 0;
                 verticalValues = 0;
-                //If player is on the right
-                if (playerDirection.x > 0)
-                {
-                    horizontalAxisValue = 1;
-                }
-                //If player is on the left
-                else if (playerDirection.x < 0)
-                {
-                    horizontalAxisValue = -1;
-                }
-                //Otherwise stay
-                else
-                {
-                    horizontalAxisValue = 0;
-                }
-                CastRaySide();
             }
-            //If boss is not grounded
             else
             {
-                //Turn on gravity for boss
-                verticalValues = -1;
-                CastRayDown();
-            }
-
-            //If enemy has reached left bound of floor collider, stop
-            if (transform.root.position.x <= minX + margin)
-            {
-                //If player is on the right
-                if (playerDirection.x > 0)
+                //If boss is grounded
+                if (isGrounded)
                 {
-                    horizontalAxisValue = 1;
-                }
-                else
-                {
-                    horizontalAxisValue = 0;
-                }
-            }
-            //If enemy has reached right bound of floor collider, stop
-            else if (transform.root.position.x >= maxX - margin)
-            {
-                //If player is on the left
-                if (playerDirection.x > 0)
-                {
-                    horizontalAxisValue = -1;
-                }
-                else
-                {
-                    horizontalAxisValue = 0;
-                }
-            }
-
-            //If hammer was thrown, jump to hammer
-            if ((bool)hammerThrown.GetStateValue())
-            {
-                horizontalAxisValue = 0;
-                Vector2 hammerPosition = (Vector2)statesManager.GetCharacterStateValue("thrownHammerPosition");
-                if (firstTime)
-                {
-                    //Debug.Log(Mathf.Abs(transform.root.position.x - hammerPosition.x));
-                    speedScale.IncreaseSpeedByFactorOfForTime(Mathf.Abs(transform.root.position.x - hammerPosition.x) / jumpDuration, jumpDuration);
-                    firstTime = false;
-                }
-                if (jumpTimer < jumpDuration)
-                {
-                    //If hammer is on boss' right
-                    if (hammerPosition.x > transform.position.x)
+                    //Turn off gravity since it is not needed
+                    verticalValues = 0;
+                    //If player is on the right
+                    if (playerDirection.x > 0)
                     {
                         horizontalAxisValue = 1;
                     }
-                    else if (hammerPosition.x < transform.position.x)
+                    //If player is on the left
+                    else if (playerDirection.x < 0)
                     {
                         horizontalAxisValue = -1;
                     }
+                    //Otherwise stay put
                     else
                     {
                         horizontalAxisValue = 0;
                     }
-                    //If on ascending part of jump
-                    if (jumpTimer <= (jumpDuration / 2))
+                    CastRaySide();
+                }
+                //If boss is not grounded
+                else
+                {
+                    //Turn on gravity for boss
+                    verticalValues = -1;
+                    //Look for bounds of floor under boss
+                    CastRayDown();
+                }
+
+                //If enemy has reached left bound of floor collider, stop
+                if (transform.root.position.x <= minX + margin)
+                {
+                    //If player is on the right
+                    if (playerDirection.x > 0)
                     {
-                        verticalValues = 1;
+                        horizontalAxisValue = 1;
                     }
-                    //If on descending part of jump
+                    //Otherwise stand on edge of collider and stare at player
                     else
                     {
-                        verticalValues = -1;
+                        horizontalAxisValue = 0;
                     }
-                    jumpTimer += Time.deltaTime;
+                }
+                //If enemy has reached right bound of floor collider, stop
+                else if (transform.root.position.x >= maxX - margin)
+                {
+                    //If player is on the left, move towards player
+                    if (playerDirection.x > 0)
+                    {
+                        horizontalAxisValue = -1;
+                    }
+                    //Otherwise stand on edge of collider and stare at player
+                    else
+                    {
+                        horizontalAxisValue = 0;
+                    }
+                }
+
+                //If hammer was thrown and hammer has landed 
+                if ((bool)hammerThrown.GetStateValue() && hammerOnGround)
+                {
+                    //Boss is not currently jumping up or falling down, jump to hammer
+                    if (!currentlyFallingDown)
+                    {
+                        currentlyJumpingUp = true;
+                        //Jump up for half the duration of full jump
+                        JumpUpStart(jumpDuration / 2);
+                    }                                    
                 }
                 else
                 {
-                    jumpTimer = 0;
+                    //firstTime = true;
                 }
-                //BossJump(jumpDuration, hammerPosition);
             }
-            else
-            {
-                firstTime = true;
-            }
-        }      
+        }
+        
+          
         
         directionState.SetState(new float[] { horizontalAxisValue, verticalValues });        
     }
@@ -194,17 +176,68 @@ public class BossVelocityState : AbstractCharacterVelocityState
         }
     }
     
-    private void JumpStart(float duration)
+    private void JumpUpStart(float duration)
     {
-        StartCoroutine(JumpDuration(duration));
+        //Set values
+        Vector2 hammerPosition = (Vector2)statesManager.GetCharacterStateValue(ConstantStrings.Enemy.HammerBoss.THROWN_HAMMER_POSITION);       
+        //Debug.Log(Mathf.Abs(transform.root.position.x - hammerPosition.x));
+        speedScale.IncreaseSpeedByFactorOfForTime(Mathf.Abs(transform.root.position.x - hammerPosition.x) / jumpDuration, jumpDuration);
+        //If hammer is on boss' right
+        if (hammerPosition.x > transform.position.x)
+        {
+            horizontalAxisValue = 1;
+        }
+        //If on the left
+        else if (hammerPosition.x < transform.position.x)
+        {
+            horizontalAxisValue = -1;
+        }
+        //If at same x value
+        else
+        {
+            horizontalAxisValue = 0;
+        }
+        //Jump up
+        verticalValues = 1;        
+        //Start ascent
+        StartCoroutine(JumpUpDuration(duration));
+    }
+    IEnumerator JumpUpDuration(float duration)
+    {
+        //currentlyJumping = true;
+        yield return new WaitForSeconds(duration);
+        //Second half of jump, falling down
+        currentlyJumpingUp = false;
+        currentlyFallingDown = true;
+        JumpDownStart(duration);
     }
 
-    IEnumerator JumpDuration(float duration)
+    private void JumpDownStart(float duration)
+    {
+        //Turn on gravity for boss and keep same horizontal value
+        verticalValues = -1;
+        //Start descent
+        StartCoroutine(JumpDownDuration(duration));
+    }
+    IEnumerator JumpDownDuration(float duration)
     {
         yield return new WaitForSeconds(duration);
-
-        //inTheAirState.SetState(false);
+        currentlyFallingDown = false;
     }
+
+    //If hammer hits the ground, let boss jump to hammer
+    private void CheckHammerHitGround(object hammerHitGround)
+    {
+        if ((bool)hammerHitGround)
+        {
+            hammerOnGround = true;
+        }
+        else
+        {
+            hammerOnGround = false;
+        }
+    }
+
     /*    
     private void CheckJumpState(object jumpState)
     {
@@ -217,4 +250,6 @@ public class BossVelocityState : AbstractCharacterVelocityState
         }
     }
     */
+
+
 }

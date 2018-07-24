@@ -6,8 +6,6 @@ public class BossCastingBehavior : MonoBehaviour {
     public GameObject attack1;
     public GameObject attack2;
     public GameObject attack3;
-    //public GameObject attack4;
-    //public GameObject attack5;
     
     void Awake()
     {

@@ -74,5 +74,15 @@ public static class ConstantStrings
 
     }
 
+    public static class Enemy
+    {
+        public static class HammerBoss
+        {
+            public static readonly string HAMMER_THROWN = "HammerThrown";
+            public static readonly string HAMMER_HITS_GROUND = "HammerHitsGround";
+            public static readonly string THROWN_HAMMER_POSITION = "ThrownHammerPosition";
+        }
+    }
+
 }
 
