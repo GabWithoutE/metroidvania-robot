@@ -54,12 +54,12 @@ public class HealthContainerDisplay : MonoBehaviour {
 		int healthDiff = currentHealth - newCurrentHealth;
 		if (healthDiff > 0){
 			for (int i = currentHealth; i > newCurrentHealth; i--){
-				healthContainers[currentHealth - 1].GetComponent<UnityEngine.UI.Image>().sprite = healthContainerSprites[0];
+				healthContainers[i - 1].GetComponent<UnityEngine.UI.Image>().sprite = healthContainerSprites[0];
 			}
 		}
 		if (healthDiff < 0) {
 			for (int i = currentHealth; i < newCurrentHealth; i++){
-				healthContainers[currentHealth].GetComponent<UnityEngine.UI.Image>().sprite = healthContainerSprites[1];
+				healthContainers[i].GetComponent<UnityEngine.UI.Image>().sprite = healthContainerSprites[1];
 			}
 		}
 
