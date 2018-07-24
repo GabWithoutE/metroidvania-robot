@@ -3,14 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class TestDealDamageToPlayer : MonoBehaviour {
+	public float damageAmount;
 
-	// Use this for initialization
-	void Start () {
-		transform.root.BroadcastMessage("TakeDamage", 60);
-	}
-	
 	// Update is called once per frame
 	void Update () {
 		
+	}
+
+	private void OnEnable()
+	{
+		transform.root.BroadcastMessage("TakeDamage", damageAmount);
+
 	}
 }
