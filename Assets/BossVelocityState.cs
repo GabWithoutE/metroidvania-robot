@@ -45,88 +45,66 @@ public class BossVelocityState : AbstractCharacterVelocityState
 	
 	// Update is called once per frame
 	void Update () {
-        //float verticalValues = 0;
         bool isGrounded = ((bool[])statesManager.GetCharacterStateValue(ConstantStrings.GROUNDED))[1];
         GameObject player = GameObject.FindGameObjectWithTag("Player");
         playerDirection = player.transform.position - transform.root.position;
-        //Disable all motion when throwing hammer
-
-
-        //If boss is grounded
-        if (isGrounded)
-        {            
+        //Disable all motion when throwing hammer and before hammer hits the ground
+        if((bool)statesManager.GetCharacterStateValue("hammerThrown") && !(bool)statesManager.GetCharacterStateValue("hammerHitsGround"))
+        {
+            //Stand still
+            horizontalAxisValue = 0;
             verticalValues = 0;
-            //If player is on the right
-            if (playerDirection.x > 0)
-            {
-                horizontalAxisValue = 1;
-            }
-            //If player is on the left
-            else if (playerDirection.x < 0)
-            {
-                horizontalAxisValue = -1;
-            }
-            //Otherwise stay
-            else
-            {
-                horizontalAxisValue = 0;
-            }            
-            CastRaySide();
         }
-        //If boss is not grounded
         else
         {
-            //Turn on gravity for boss
-            verticalValues = -1;            
-            CastRayDown();
-        }
-        
-        //If enemy has reached left bound of floor collider, stop
-        if (transform.root.position.x <= minX + margin)
-        {
-            //If player is on the right
-            if(playerDirection.x > 0)
+            //If boss is grounded
+            if (isGrounded)
             {
-                horizontalAxisValue = 1;
-            }
-            else
-            {
-                horizontalAxisValue = 0;
-            }                      
-        }
-        //If enemy has reached right bound of floor collider, stop
-        else if (transform.root.position.x >= maxX - margin)
-        {
-            //If player is on the left
-            if (playerDirection.x > 0)
-            {
-                horizontalAxisValue = -1;
-            }
-            else
-            {
-                horizontalAxisValue = 0;
-            }
-        }
-
-        //If hammer was thrown, jump to hammer
-        if((bool)hammerThrown.GetStateValue())
-        {
-            horizontalAxisValue = 0;
-            Vector2 hammerPosition = (Vector2)statesManager.GetCharacterStateValue("thrownHammerPosition");
-            if(firstTime)
-            {
-                Debug.Log(Mathf.Abs(transform.root.position.x - hammerPosition.x));
-                speedScale.IncreaseJumpByFactorOfForTime(Mathf.Abs(transform.root.position.x - hammerPosition.x), jumpDuration);
-                firstTime = false;
-            }            
-            if (jumpTimer < jumpDuration)
-            {
-                //If hammer is on boss' right
-                if (hammerPosition.x > transform.position.x)
+                jumpTimer = 0;
+                verticalValues = 0;
+                //If player is on the right
+                if (playerDirection.x > 0)
                 {
                     horizontalAxisValue = 1;
                 }
-                else if (hammerPosition.x < transform.position.x)
+                //If player is on the left
+                else if (playerDirection.x < 0)
+                {
+                    horizontalAxisValue = -1;
+                }
+                //Otherwise stay
+                else
+                {
+                    horizontalAxisValue = 0;
+                }
+                CastRaySide();
+            }
+            //If boss is not grounded
+            else
+            {
+                //Turn on gravity for boss
+                verticalValues = -1;
+                CastRayDown();
+            }
+
+            //If enemy has reached left bound of floor collider, stop
+            if (transform.root.position.x <= minX + margin)
+            {
+                //If player is on the right
+                if (playerDirection.x > 0)
+                {
+                    horizontalAxisValue = 1;
+                }
+                else
+                {
+                    horizontalAxisValue = 0;
+                }
+            }
+            //If enemy has reached right bound of floor collider, stop
+            else if (transform.root.position.x >= maxX - margin)
+            {
+                //If player is on the left
+                if (playerDirection.x > 0)
                 {
                     horizontalAxisValue = -1;
                 }
@@ -134,28 +112,57 @@ public class BossVelocityState : AbstractCharacterVelocityState
                 {
                     horizontalAxisValue = 0;
                 }
-                //If on ascending part of jump
-                if (jumpTimer <= (jumpDuration / 2))
+            }
+
+            //If hammer was thrown, jump to hammer
+            if ((bool)hammerThrown.GetStateValue())
+            {
+                horizontalAxisValue = 0;
+                Vector2 hammerPosition = (Vector2)statesManager.GetCharacterStateValue("thrownHammerPosition");
+                if (firstTime)
                 {
-                    verticalValues = 1;
+                    //Debug.Log(Mathf.Abs(transform.root.position.x - hammerPosition.x));
+                    speedScale.IncreaseSpeedByFactorOfForTime(Mathf.Abs(transform.root.position.x - hammerPosition.x) / jumpDuration, jumpDuration);
+                    firstTime = false;
                 }
-                //If on descending part of jump
+                if (jumpTimer < jumpDuration)
+                {
+                    //If hammer is on boss' right
+                    if (hammerPosition.x > transform.position.x)
+                    {
+                        horizontalAxisValue = 1;
+                    }
+                    else if (hammerPosition.x < transform.position.x)
+                    {
+                        horizontalAxisValue = -1;
+                    }
+                    else
+                    {
+                        horizontalAxisValue = 0;
+                    }
+                    //If on ascending part of jump
+                    if (jumpTimer <= (jumpDuration / 2))
+                    {
+                        verticalValues = 1;
+                    }
+                    //If on descending part of jump
+                    else
+                    {
+                        verticalValues = -1;
+                    }
+                    jumpTimer += Time.deltaTime;
+                }
                 else
                 {
-                    verticalValues = -1;
+                    jumpTimer = 0;
                 }
-                jumpTimer += Time.deltaTime;
+                //BossJump(jumpDuration, hammerPosition);
             }
             else
             {
-                jumpTimer = 0;
+                firstTime = true;
             }
-            //BossJump(jumpDuration, hammerPosition);
-        }
-        else
-        {
-            firstTime = true;
-        }
+        }      
         
         directionState.SetState(new float[] { horizontalAxisValue, verticalValues });        
     }
@@ -195,17 +202,18 @@ public class BossVelocityState : AbstractCharacterVelocityState
     IEnumerator JumpDuration(float duration)
     {
         yield return new WaitForSeconds(duration);
+
         //inTheAirState.SetState(false);
     }
-    
-    /*
+    /*    
     private void CheckJumpState(object jumpState)
     {
-        if ((bool)jumpState)
+        if (!(bool)jumpState)
         {
-            firstTime = true;
+            jumpTimer = 0;
+            //firstTime = true;
             //Set isJumping to true if subscription changes to true
-            isJumping = true;      
+            //isJumping = true;      
         }
     }
     */

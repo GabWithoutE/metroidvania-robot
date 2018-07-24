@@ -41,7 +41,7 @@ public class BossHammerTrigger : MonoBehaviour {
         //Get hammer throw prefab
         hammerThrow = bcb.GetAttack(2);
         rgb = GetComponent<Rigidbody2D>();
-        hammerPosition = new Vector2(0, 0.5f);
+        hammerPosition = new Vector2(0, 1.5f);
         groundMask = LayerMask.GetMask("Ground");
     }
     
@@ -69,8 +69,11 @@ public class BossHammerTrigger : MonoBehaviour {
                 GameObject player = GameObject.FindGameObjectWithTag("Player");
                 Vector2 playerFootDirection = CastRayDown(player.transform);
                 playerDirection = player.transform.position - transform.position;
-                Vector2 hammerThrowDirection = new Vector2(playerFootDirection.x, (playerFootDirection.y + playerDirection.y) / 2);
-                psm.SetDirection(hammerThrowDirection);
+                Debug.Log(transform.position);
+                Debug.Log(playerDirection);
+                Vector2 hammerThrowDirection = new Vector2(playerDirection.x, transform.root.GetComponent<BoxCollider2D>().bounds.min.y);
+                Debug.Log(hammerThrowDirection);
+                psm.SetDirection(hammerThrowDirection.normalized);
                 hammerMoving = true;
             }            
         }
@@ -101,7 +104,7 @@ public class BossHammerTrigger : MonoBehaviour {
         {
             if(hammerMoving)
             {
-                Debug.Log("Player hit by hammer");
+                //Debug.Log("Player hit by hammer");
                 Vector2 downVect = new Vector2(0, -1);
                 psm.SetDirection(downVect);
             }            
@@ -113,6 +116,7 @@ public class BossHammerTrigger : MonoBehaviour {
             hammerMoving = false;
             Vector2 tempSetPosition = transform.position;
             thrownHammerPosition.SetState(tempSetPosition);
+            hammerHitsGround.SetState(true);
         }
         //If boss comes within range of hammer
         else if (collision.gameObject.tag == "Enemy")
@@ -124,6 +128,7 @@ public class BossHammerTrigger : MonoBehaviour {
                 if(!hammerMoving)
                 {
                     hammerThrown.SetState(false);
+                    hammerHitsGround.SetState(false);
                 }                
             }
         }

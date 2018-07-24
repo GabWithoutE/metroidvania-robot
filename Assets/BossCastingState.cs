@@ -90,13 +90,11 @@ public class BossCastingState : MonoBehaviour {
             }
             else if (randomNum >= attack1Chance && randomNum < (attack1Chance + attack2Chance))
             {
-                //Debug.Log("2");
                 hammerThrowCastState.SetState(true);
-                hammerThrowCastState.SetState(false);
+                hammerThrowCastState.SetState(false);               
             }
             else if (randomNum >= (attack1Chance + attack2Chance) && randomNum < (attack1Chance + attack2Chance + attack3Chance))
             {
-                //Debug.Log("Jump1");
                 jumpState.SetState(true);
                 jumpState.SetState(false);
             }
