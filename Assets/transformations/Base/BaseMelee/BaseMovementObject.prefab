@@ -52,9 +52,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3390d73adfe674c3a8793b8bf3ec5a8b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  runSpeedScale: 6
-  jumpSpeedScale: 8
-  fallSpeedScale: 8
+  runSpeedScale: 8
+  jumpSpeedScale: 30
+  fallSpeedScale: 30
+  scaleStateValue: []
 --- !u!114 &114662363839362152
 MonoBehaviour:
   m_ObjectHideFlags: 1
