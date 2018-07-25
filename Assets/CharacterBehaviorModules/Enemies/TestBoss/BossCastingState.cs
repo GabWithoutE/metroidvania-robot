@@ -50,12 +50,13 @@ public class BossCastingState : MonoBehaviour {
             {
                 hammerThrowCastState.SetState(true);
                 hammerThrowCastState.SetState(false);               
-            }
+            }            
             else if (randomNum >= (attack1Chance + attack2Chance) && randomNum < (attack1Chance + attack2Chance + attack3Chance))
             {
                 jumpState.SetState(true);
                 jumpState.SetState(false);
             }
+            //Set boss as busy
             busyState.SetState(true);
             BusyStart(busyDuration);
         }        

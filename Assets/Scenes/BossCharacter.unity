@@ -1046,8 +1046,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   busyDuration: 4
   attack1Chance: 0
-  attack2Chance: 1
-  attack3Chance: 0
+  attack2Chance: 0
+  attack3Chance: 1
 --- !u!114 &1785170808
 MonoBehaviour:
   m_ObjectHideFlags: 0
