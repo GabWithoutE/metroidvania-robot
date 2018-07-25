@@ -6,7 +6,7 @@ using UnityEngine;
 public class ProjectileStraightMovement : MonoBehaviour {
 
 	private SpellStats spellStats;
-	public float projectileSpeed;
+	private float projectileSpeed;
 	private Vector2 direction;
 
 

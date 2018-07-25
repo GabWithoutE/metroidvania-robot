@@ -74,5 +74,21 @@ public static class ConstantStrings
 
     }
 
+    public static class Enemy
+    {
+        public static class HammerBoss
+        {
+            public static readonly string HAMMER_THROWN = "HammerThrown";
+            public static readonly string HAMMER_HITS_GROUND = "HammerHitsGround";
+            public static readonly string HAMMER_HIT_PLAYER = "HammerHitPlayer";
+            public static readonly string HAMMER_HIT_ENEMY = "HammerHitEnemy";
+            public static readonly string THROWN_HAMMER_POSITION = "ThrownHammerPosition";
+            public static readonly string MELEE_ATTACK_CAST_STATE = "meleeAttackCastState";
+            public static readonly string HAMMER_THROW_CAST_STATE = "hammerThrowCastState";
+            public static readonly string JUMP_STATE = "jumpState";
+            public static readonly string BUSY_STATE = "busyState";
+        }
+    }
+
 }
 
