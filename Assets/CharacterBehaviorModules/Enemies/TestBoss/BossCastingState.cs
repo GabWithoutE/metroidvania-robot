@@ -13,59 +13,17 @@ public class BossCastingState : MonoBehaviour {
     public float attack2Chance;
     public float attack3Chance;
 
-    public enum BossCastingStates
-    {
-        MeleeState,
-        HammerThrowState,
-        JumpState
-    }
-
     void Awake()
     {
         stateManager = GetComponentInParent<CharacterStatesManager>();
-        meleeAttackCastState = new CharacterState("meleeAttackCastState", false);
-        stateManager.RegisterCharacterState("meleeAttackCastState", meleeAttackCastState);
-        hammerThrowCastState = new CharacterState("hammerThrowCastState", false);
-        stateManager.RegisterCharacterState("hammerThrowCastState", hammerThrowCastState);
-        jumpState = new CharacterState("jumpState", false);
-        stateManager.RegisterCharacterState("jumpState", jumpState);
-        busyState = new CharacterState("busyState", false);
-        stateManager.RegisterCharacterState("busyState", jumpState);
-        /*
-        if (!stateManager.ExistsState("meleeAttackCastState"))
-        {
-            meleeAttackCastState = new CharacterState("meleeAttackCastState", false);
-            stateManager.RegisterCharacterState("meleeAttackCastState", meleeAttackCastState);
-        }
-        else
-        {            
-            meleeAttackCastState =
-                stateManager.GetExistingCharacterState("meleeAttackCastState");
-            meleeAttackCastState.SetState(false);
-        }
-        if (stateManager.ExistsState("hammerThrowCastState"))
-        {
-            hammerThrowCastState =
-                stateManager.GetExistingCharacterState("hammerThrowCastState");
-            hammerThrowCastState.SetState(false);
-        }
-        else
-        {
-            hammerThrowCastState = new CharacterState("hammerThrowCastState", false);
-            stateManager.RegisterCharacterState("hammerThrowCastState", hammerThrowCastState);
-        }
-        if (stateManager.ExistsState("jumpState"))
-        {
-            jumpState =
-                stateManager.GetExistingCharacterState("jumpState");
-            jumpState.SetState(false);
-        }
-        else
-        {
-            jumpState = new CharacterState("jumpState", false);
-            stateManager.RegisterCharacterState("jumpState", jumpState);
-        }
-        */
+        meleeAttackCastState = new CharacterState(ConstantStrings.Enemy.HammerBoss.MELEE_ATTACK_CAST_STATE, false);
+        stateManager.RegisterCharacterState(ConstantStrings.Enemy.HammerBoss.MELEE_ATTACK_CAST_STATE, meleeAttackCastState);
+        hammerThrowCastState = new CharacterState(ConstantStrings.Enemy.HammerBoss.HAMMER_THROW_CAST_STATE, false);
+        stateManager.RegisterCharacterState(ConstantStrings.Enemy.HammerBoss.HAMMER_THROW_CAST_STATE, hammerThrowCastState);
+        jumpState = new CharacterState(ConstantStrings.Enemy.HammerBoss.JUMP_STATE, false);
+        stateManager.RegisterCharacterState(ConstantStrings.Enemy.HammerBoss.JUMP_STATE, jumpState);
+        busyState = new CharacterState(ConstantStrings.Enemy.HammerBoss.BUSY_STATE, false);
+        stateManager.RegisterCharacterState(ConstantStrings.Enemy.HammerBoss.BUSY_STATE, jumpState);
     }
 
     void Start()

@@ -16,13 +16,12 @@ public class BossHammerStateManager : MonoBehaviour {
         statesManager = GetComponentInParent<CharacterStatesManager>();
         hammerThrown = new CharacterState(ConstantStrings.Enemy.HammerBoss.HAMMER_THROWN, false);
         statesManager.RegisterCharacterState(hammerThrown.name, hammerThrown);
-        //hammerThrown = statesManager.GetExistingCharacterState(ConstantStrings.Enemy.HammerBoss.HAMMER_THROWN);
         hammerHitsGround = new CharacterState(ConstantStrings.Enemy.HammerBoss.HAMMER_HITS_GROUND, false);
         statesManager.RegisterCharacterState(hammerHitsGround.name, hammerHitsGround);
         thrownHammerPosition = statesManager.GetExistingCharacterState(ConstantStrings.Enemy.HammerBoss.THROWN_HAMMER_POSITION);
-        hammerHitPlayer = new CharacterState("HammerHitPlayer", false);
+        hammerHitPlayer = new CharacterState(ConstantStrings.Enemy.HammerBoss.HAMMER_HIT_PLAYER, false);
         statesManager.RegisterCharacterState(hammerHitPlayer.name, hammerHitPlayer);
-        hammerHitEnemy = new CharacterState("HammerHitEnemy", false);
+        hammerHitEnemy = new CharacterState(ConstantStrings.Enemy.HammerBoss.HAMMER_HIT_ENEMY, false);
         statesManager.RegisterCharacterState(hammerHitEnemy.name, hammerHitEnemy);
     }
 
@@ -58,22 +57,8 @@ public class BossHammerStateManager : MonoBehaviour {
         {
             hammerHitsGround.SetState(true);
         }
-        /*
-        else if(collision.gameObject.layer == 9)
-        {
-            hammerHitsGround.SetState(true);
-            //hammerHitsGround.SetState(false);
-        }
-        */
         else if(collision.tag == "Enemy")
         {
-            //Only if hammer 
-            //if()
-            //{
-
-            //}
-            //hammerHitsGround.SetState(false);
-            //hammerThrown.SetState(false);
             hammerHitEnemy.SetState(true);
             hammerHitEnemy.SetState(false);
         }

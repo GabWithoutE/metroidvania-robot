@@ -16,14 +16,14 @@ public class BossCastingBehavior : MonoBehaviour {
 
     public GameObject GetAttack(int index)
     {
-        if(index == 1)
+        switch(index)
         {
-            return attack1;
+            case 1:
+                return attack1;
+            case 2:
+                return attack2;
+            default:
+                return attack3;
         }
-        else if(index == 2)
-        {
-            return attack2;
-        }
-        return attack3;
     }
 }

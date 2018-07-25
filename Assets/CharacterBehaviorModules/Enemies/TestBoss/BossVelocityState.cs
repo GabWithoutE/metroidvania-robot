@@ -27,14 +27,11 @@ public class BossVelocityState : AbstractCharacterVelocityState
         base.Awake();
         statesManager = GetComponentInParent(typeof(ICharacterStateManager)) as ICharacterStateManager;
         groundMask = LayerMask.GetMask("Ground");
-        //jumpTimer = jumpDuration;
     }
 
     // Use this for initialization
     void Start () {
         CharacterState.CharacterStateSubscription groundedSubscription = statesManager.GetCharacterStateSubscription(ConstantStrings.GROUNDED);
-        CharacterState.CharacterStateSubscription jumpStateSubscription = statesManager.GetCharacterStateSubscription("jumpState");
-        //jumpStateSubscription.OnStateChanged += CheckJumpState;
         CharacterState.CharacterStateSubscription hammerHitGroundSubscription = statesManager.GetCharacterStateSubscription(ConstantStrings.Enemy.HammerBoss.HAMMER_HITS_GROUND);
         hammerHitGroundSubscription.OnStateChanged += CheckHammerHitGround;
         
@@ -46,7 +43,6 @@ public class BossVelocityState : AbstractCharacterVelocityState
         currentlyJumpingUp = false;
         currentlyFallingDown = false;
         hammerOnGround = false;
-        //firstTime = true;
     }
 	
 	// Update is called once per frame
@@ -137,15 +133,8 @@ public class BossVelocityState : AbstractCharacterVelocityState
                         JumpUpStart(jumpDuration / 2);
                     }                                    
                 }
-                else
-                {
-                    //firstTime = true;
-                }
             }
         }
-        
-          
-        
         directionState.SetState(new float[] { horizontalAxisValue, verticalValues });        
     }
 
@@ -179,8 +168,7 @@ public class BossVelocityState : AbstractCharacterVelocityState
     private void JumpUpStart(float duration)
     {
         //Set values
-        Vector2 hammerPosition = (Vector2)statesManager.GetCharacterStateValue(ConstantStrings.Enemy.HammerBoss.THROWN_HAMMER_POSITION);       
-        //Debug.Log(Mathf.Abs(transform.root.position.x - hammerPosition.x));
+        Vector2 hammerPosition = (Vector2)statesManager.GetCharacterStateValue(ConstantStrings.Enemy.HammerBoss.THROWN_HAMMER_POSITION);
         speedScale.IncreaseSpeedByFactorOfForTime(Mathf.Abs(transform.root.position.x - hammerPosition.x) / jumpDuration, jumpDuration);
         //If hammer is on boss' right
         if (hammerPosition.x > transform.position.x)
@@ -204,7 +192,6 @@ public class BossVelocityState : AbstractCharacterVelocityState
     }
     IEnumerator JumpUpDuration(float duration)
     {
-        //currentlyJumping = true;
         yield return new WaitForSeconds(duration);
         //Second half of jump, falling down
         currentlyJumpingUp = false;
@@ -237,19 +224,4 @@ public class BossVelocityState : AbstractCharacterVelocityState
             hammerOnGround = false;
         }
     }
-
-    /*    
-    private void CheckJumpState(object jumpState)
-    {
-        if (!(bool)jumpState)
-        {
-            jumpTimer = 0;
-            //firstTime = true;
-            //Set isJumping to true if subscription changes to true
-            //isJumping = true;      
-        }
-    }
-    */
-
-
 }

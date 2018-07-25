@@ -12,7 +12,7 @@ public class BossHammerMovement : MonoBehaviour {
     private BossCastingBehavior bcb;
     private SpellStats spellStats;
     private bool hammerMoving;
-    public bool hammerPickUp;
+    private bool hammerPickUp;
     private Vector2 playerDirection;
     private Rigidbody2D rgb;
     private ProjectileStraightMovement psm;
@@ -22,21 +22,17 @@ public class BossHammerMovement : MonoBehaviour {
     {
         statesManager = GetComponentInParent<CharacterStatesManager>();
         bossHammerStateManager = GetComponent<BossHammerStateManager>();
-        //thrownHammerPosition = statesManager.GetExistingCharacterState(ConstantStrings.Enemy.HammerBoss.THROWN_HAMMER_POSITION);        
-        //hammerHitsGround = statesManager.GetExistingCharacterState(ConstantStrings.Enemy.HammerBoss.HAMMER_HITS_GROUND);
     }
 
     // Use this for initialization
     void Start () {
-        CharacterState.CharacterStateSubscription hammerStateSubscription = statesManager.GetCharacterStateSubscription("hammerThrowCastState");
+        CharacterState.CharacterStateSubscription hammerStateSubscription = statesManager.GetCharacterStateSubscription(ConstantStrings.Enemy.HammerBoss.HAMMER_THROW_CAST_STATE);
         hammerStateSubscription.OnStateChanged += CheckHammerState;
-        CharacterState.CharacterStateSubscription hammerHitPlayerSubscription = statesManager.GetCharacterStateSubscription("HammerHitPlayer");
+        CharacterState.CharacterStateSubscription hammerHitPlayerSubscription = statesManager.GetCharacterStateSubscription(ConstantStrings.Enemy.HammerBoss.HAMMER_HIT_PLAYER);
         hammerHitPlayerSubscription.OnStateChanged += CheckHammerHitPlayerState;
         CharacterState.CharacterStateSubscription hammerHitGroundSubscription = statesManager.GetCharacterStateSubscription(ConstantStrings.Enemy.HammerBoss.HAMMER_HITS_GROUND);
         hammerHitGroundSubscription.OnStateChanged += CheckHammerHitGround;
-        //CharacterState.CharacterStateSubscription hammerThrownSubscription = statesManager.GetCharacterStateSubscription(ConstantStrings.Enemy.HammerBoss.HAMMER_THROWN);
-        //hammerThrownSubscription.OnStateChanged += CheckHammerState;
-        CharacterState.CharacterStateSubscription enemyHitHammerSubscription = statesManager.GetCharacterStateSubscription("HammerHitEnemy");
+        CharacterState.CharacterStateSubscription enemyHitHammerSubscription = statesManager.GetCharacterStateSubscription(ConstantStrings.Enemy.HammerBoss.HAMMER_HIT_ENEMY);
         enemyHitHammerSubscription.OnStateChanged += CheckEnemyHitHammerState;
 
         hammerThrown = statesManager.GetExistingCharacterState(ConstantStrings.Enemy.HammerBoss.HAMMER_THROWN);
@@ -48,7 +44,7 @@ public class BossHammerMovement : MonoBehaviour {
         //Get hammer throw prefab
         hammerThrow = bcb.GetAttack(2);
         rgb = GetComponent<Rigidbody2D>();
-        hammerPosition = new Vector2(0, 1.5f);        
+        hammerPosition = new Vector2(0, 1.5f);        //Change this value to set how high boss holds hammer while walking
     }
     
     void Update()
@@ -66,7 +62,6 @@ public class BossHammerMovement : MonoBehaviour {
                 }                
             }            
         }
-        //Debug.Log((bool)hammerThrown.GetStateValue());
     }
 
     //If player is hit by moving hammer, deflect hammer down to ground and player take damage
@@ -105,15 +100,11 @@ public class BossHammerMovement : MonoBehaviour {
             {
                 hammerPickUp = false;
                 bossHammerStateManager.SetState(ConstantStrings.Enemy.HammerBoss.HAMMER_THROWN, true);
-                //hammerThrown.SetState(true);
                 //Find direction player is in
                 GameObject player = GameObject.FindGameObjectWithTag("Player");
                 Vector2 playerFootDirection = CastRayDown(player.transform);
                 playerDirection = player.transform.position - transform.position;
-                //Debug.Log(transform.position);
-                //Debug.Log(playerDirection);
                 Vector2 hammerThrowDirection = new Vector2(playerDirection.x, transform.root.GetComponent<BoxCollider2D>().bounds.min.y);
-                //Debug.Log(hammerThrowDirection);
                 psm.SetDirection(hammerThrowDirection.normalized);
                 hammerMoving = true;
             }            
@@ -130,9 +121,6 @@ public class BossHammerMovement : MonoBehaviour {
             hammerMoving = false;
             Vector2 tempSetPosition = transform.position;
             bossHammerStateManager.SetState(ConstantStrings.Enemy.HammerBoss.THROWN_HAMMER_POSITION, tempSetPosition);
-            //bossHammerStateManager.SetState(ConstantStrings.Enemy.HammerBoss.HAMMER_HITS_GROUND, true);
-            //thrownHammerPosition.SetState(tempSetPosition);
-            //hammerHitsGround.SetState(true);
         }
     }
 

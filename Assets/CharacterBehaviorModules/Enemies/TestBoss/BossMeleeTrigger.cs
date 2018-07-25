@@ -16,7 +16,7 @@ public class BossMeleeTrigger : AbstractMeleeAttackTrigger {
 
     // Use this for initialization
     void Start () {
-        CharacterState.CharacterStateSubscription meleeStateSubscription = statesManager.GetCharacterStateSubscription("meleeAttackCastState");
+        CharacterState.CharacterStateSubscription meleeStateSubscription = statesManager.GetCharacterStateSubscription(ConstantStrings.Enemy.HammerBoss.MELEE_ATTACK_CAST_STATE);
         meleeStateSubscription.OnStateChanged += CheckMeleeState;        
     }
 
