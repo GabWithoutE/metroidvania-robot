@@ -9,6 +9,7 @@ public class BossHammerStateManager : MonoBehaviour {
     private CharacterState hammerHitsGround;
     private CharacterState hammerHitPlayer;
     private CharacterState hammerHitEnemy;
+    private CharacterState hammerPosition;
     LayerMask groundMask;
 
     void Awake()
@@ -23,11 +24,15 @@ public class BossHammerStateManager : MonoBehaviour {
         statesManager.RegisterCharacterState(hammerHitPlayer.name, hammerHitPlayer);
         hammerHitEnemy = new CharacterState(ConstantStrings.Enemy.HammerBoss.HAMMER_HIT_ENEMY, false);
         statesManager.RegisterCharacterState(hammerHitEnemy.name, hammerHitEnemy);
+        Vector2 zeroVect = new Vector2(0, 0);        
+        hammerPosition = new CharacterState(ConstantStrings.Enemy.HammerBoss.HAMMER_POSITION, zeroVect);
+        statesManager.RegisterCharacterState(hammerPosition.name, hammerPosition);
     }
 
     void Start()
     {
         groundMask = LayerMask.GetMask("Ground");
+        //hammerPosition = statesManager.GetExistingCharacterState(ConstantStrings.Enemy.HammerBoss.HAMMER_POSITION);
     }
 
     public void SetState(string stateName, object newState)
@@ -43,6 +48,10 @@ public class BossHammerStateManager : MonoBehaviour {
         else if(stateName == ConstantStrings.Enemy.HammerBoss.THROWN_HAMMER_POSITION)
         {
             thrownHammerPosition.SetState(newState);
+        }
+        else if(stateName == ConstantStrings.Enemy.HammerBoss.HAMMER_POSITION)
+        {
+            hammerPosition.SetState(newState);
         }
     }
     

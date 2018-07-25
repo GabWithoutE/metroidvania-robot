@@ -62,6 +62,12 @@ public class BossHammerMovement : MonoBehaviour {
                 }                
             }            
         }
+        //If hammer is thrown, keep updating character state
+        else
+        {
+            Vector2 truncatedPosition = transform.position;
+            bossHammerStateManager.SetState(ConstantStrings.Enemy.HammerBoss.HAMMER_POSITION, truncatedPosition);
+        }
     }
 
     //If player is hit by moving hammer, deflect hammer down to ground and player take damage

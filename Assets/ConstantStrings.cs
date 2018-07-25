@@ -87,6 +87,7 @@ public static class ConstantStrings
             public static readonly string HAMMER_THROW_CAST_STATE = "hammerThrowCastState";
             public static readonly string JUMP_STATE = "jumpState";
             public static readonly string BUSY_STATE = "busyState";
+            public static readonly string HAMMER_POSITION = "HammerPosition";
         }
     }
 
