@@ -53,8 +53,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   runSpeedScale: 8
-  jumpSpeedScale: 30
-  fallSpeedScale: 30
+  jumpSpeedScale: 22
+  fallSpeedScale: 22
   scaleStateValue: []
 --- !u!114 &114662363839362152
 MonoBehaviour:
