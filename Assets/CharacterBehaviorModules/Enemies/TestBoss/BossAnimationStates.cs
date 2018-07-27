@@ -32,8 +32,37 @@ public class BossAnimationStates : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		
-	}
+        float[] bossVelocity = (float[])stateObserver.GetCharacterStateValue(ConstantStrings.VELOCITY);
+        float bossXVelocity = bossVelocity[0];
+        float bossYVelocity = bossVelocity[1];
+        //If boss is walking
+        if(bossXVelocity != 0)
+        {
+            bossAnimator.SetBool(walkingHash, true);
+        }
+        else
+        {
+            bossAnimator.SetBool(walkingHash, false);
+        }
+        //If boss is jumping
+        if(bossYVelocity > 0)
+        {
+            bossAnimator.SetBool(jumpingHash, true);
+        }
+        else
+        {
+            bossAnimator.SetBool(jumpingHash, false);
+        }
+        //If boss is falling
+        if (bossYVelocity < 0)
+        {
+            bossAnimator.SetBool(fallingHash, true);
+        }
+        else
+        {
+            bossAnimator.SetBool(fallingHash, false);
+        }
+    }
 
     private void OnHammerThrow(object hammerThrowCastState)
     {

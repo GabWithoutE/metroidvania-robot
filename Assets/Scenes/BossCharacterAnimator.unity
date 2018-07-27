@@ -231,6 +231,7 @@ GameObject:
   - component: {fileID: 812390293}
   - component: {fileID: 812390292}
   - component: {fileID: 812390291}
+  - component: {fileID: 812390294}
   m_Layer: 0
   m_Name: EnemyMovementModule
   m_TagString: Enemy
@@ -301,7 +302,7 @@ MonoBehaviour:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 812390289}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 201fb3aa9e97a0a44a0bcfc03dd609d2, type: 3}
   m_Name: 
@@ -311,6 +312,20 @@ MonoBehaviour:
   patrolPauseDuration: 0.1
   patrolTime: 7
   walkTimer: 0
+--- !u!114 &812390294
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 812390289}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f55b54ccaef2c3942b1daab7f9cc7008, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  margin: 0.01
+  jumpDuration: 1
+  jumpTimer: 0
 --- !u!1 &866451818
 GameObject:
   m_ObjectHideFlags: 0
