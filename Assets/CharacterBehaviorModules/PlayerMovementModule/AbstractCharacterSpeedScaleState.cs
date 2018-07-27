@@ -23,8 +23,7 @@ public abstract class AbstractCharacterSpeedScaleState : MonoBehaviour {
     
 
     public float[] scaleStateValue;
-	private bool startJump;
-	private bool startFall;
+
     
     private void Awake()
 	{
@@ -32,8 +31,6 @@ public abstract class AbstractCharacterSpeedScaleState : MonoBehaviour {
 
 		currentJumpSpeedScale = jumpSpeedScale;
 		currentFallSpeedScale = 0;
-		startJump = false;
-		startFall = false;
        
 		if (stateManager.ExistsState(ConstantStrings.SPEED_SCALE)){
 			speedScaleState = stateManager.GetExistingCharacterState(ConstantStrings.SPEED_SCALE);
