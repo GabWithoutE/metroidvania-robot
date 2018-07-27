@@ -60,6 +60,9 @@ public abstract class AbstractCharacterSpeedScaleState : MonoBehaviour {
 			currentJumpSpeedScale = jumpSpeedScale;
 		}
 		if (playerVelocity[1] == -1){
+			//if (((bool[])stateManager.GetCharacterStateValue(ConstantStrings.GROUNDED))[0]){
+			//	currentFallSpeedScale = fallSpeedScale;
+			//}
 			currentFallSpeedScale = currentFallSpeedScale + accelerationRate * Time.deltaTime;
 			currentFallSpeedScale = Mathf.Clamp(currentFallSpeedScale, 0, fallSpeedScale);
 		} else {

@@ -28,6 +28,7 @@ public class PlayerVelocityState : AbstractCharacterVelocityState {
         
 		float verticalValues = 0;
 		bool isGrounded = ((bool[])statesManager.GetCharacterStateValue(ConstantStrings.GROUNDED))[1];
+		bool headHit = ((bool[])statesManager.GetCharacterStateValue(ConstantStrings.GROUNDED))[0];
 
 		if (isGrounded){
 			if (!CrossPlatformInputManager.GetButton(ConstantStrings.UI.Input.INPUT_JUMP)){
@@ -41,6 +42,10 @@ public class PlayerVelocityState : AbstractCharacterVelocityState {
         {
             verticalValues = CrossPlatformInputManager.GetAxisRaw(ConstantStrings.UI.Input.INPUT_JUMP);
             currentJumpTime += Time.deltaTime;
+			if (headHit){
+				currentJumpTime = jumpMaxTime;
+				verticalValues = -1;
+			}
         }
 
 		//if (CrossPlatformInputManager.GetButton(ConstantStrings.UI.Input.INPUT_JUMP) && currentJumpHeight < jumpMaxHeight){

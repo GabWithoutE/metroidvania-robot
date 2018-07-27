@@ -19,6 +19,8 @@ public class CameraPlayerFollowY : MonoBehaviour {
     private ICharacterStateObserver stateObserver;
 	private float playerJumpMoveSpeed;
 	private float playerFallMoveSpeed;
+	private float playerCurrentJumpMoveSpeed;
+	private float playerCurrentFallMoveSpeed;
     
 	public float cameraVerticalOffsetFromPlayerPaddingRatio;
 	private float paddingDistanceBetweenPlayerAndCamera;
@@ -65,7 +67,8 @@ public class CameraPlayerFollowY : MonoBehaviour {
 			playerFallMoveSpeed = ((float[])stateObserver.GetCharacterStateValue(ConstantStrings.SPEED_SCALE))[5];
 			gottenSpeedScales = true;
         }
-
+		playerCurrentJumpMoveSpeed = ((float[])stateObserver.GetCharacterStateValue(ConstantStrings.SPEED_SCALE))[1];
+		playerCurrentFallMoveSpeed = ((float[])stateObserver.GetCharacterStateValue(ConstantStrings.SPEED_SCALE))[2];
 		RaycastHit2D[] directors = CheckForDirector();
 		if(directors.Length > 0){
 			int directed = 0;
@@ -110,6 +113,10 @@ public class CameraPlayerFollowY : MonoBehaviour {
                 UseLockFocusOnAreaStrategy(directorBox);
                 usedStrat = 1;
                 break;
+			case ConstantStrings.CameraDirectionBoxes.STAGE_TOP_LINE:
+				UseStageTopLineStrategy(directorBox);
+				usedStrat = 1;
+				break;
             default:
                 usedStrat = 0;
                 break;
@@ -138,9 +145,10 @@ public class CameraPlayerFollowY : MonoBehaviour {
                     playerReference.transform.position.y, 
                     transform.position.y - paddingDistanceBetweenPlayerAndCamera, 
                     maxVerticalDistanceFromPlayer);
-        speedRatio = Mathf.Clamp(speedRatio, -cameraMaxSpeedScaleToJumpScaleRatio, cameraMaxSpeedScaleToJumpScaleRatio);
-        newCameraPositionY += speedRatio * playerJumpMoveSpeed * Time.fixedDeltaTime; 
+		speedRatio = Mathf.Clamp(speedRatio, -cameraMaxSpeedScaleToJumpScaleRatio, cameraMaxSpeedScaleToJumpScaleRatio);
+		newCameraPositionY += speedRatio * playerCurrentFallMoveSpeed * Time.fixedDeltaTime; 
 	}
+    
 	private void UseDefaultJumpStrategy(){
 		float speedRatio =
                 CalculateRatioCurrentDistanceToMaxDistance(
@@ -148,8 +156,8 @@ public class CameraPlayerFollowY : MonoBehaviour {
                     transform.position.y,
                     paddingDistanceBetweenPlayerAndCamera);
                 
-		speedRatio = Mathf.Clamp(speedRatio, -cameraMaxSpeedScaleToJumpScaleRatio, cameraMaxSpeedScaleToJumpScaleRatio);
-		newCameraPositionY += speedRatio * playerJumpMoveSpeed * Time.fixedDeltaTime;
+		speedRatio = Mathf.Clamp(speedRatio, 0, cameraMaxSpeedScaleToJumpScaleRatio);
+		newCameraPositionY += speedRatio * playerCurrentJumpMoveSpeed * Time.fixedDeltaTime;
 
 	}
 	private void UseDefaultGroundedStrategy(){
@@ -170,17 +178,17 @@ public class CameraPlayerFollowY : MonoBehaviour {
 		float playerYVelocity = ((float[])stateObserver.GetCharacterStateValue(ConstantStrings.VELOCITY))[1];
 		float bottomLineYPosition = directorBox.bounds.min.y;
 		float cameraAlignedToBottomHeight = bottomLineYPosition + cameraDistanceToVerticalEdge;
-		float cameraFollowHeightLimit = cameraAlignedToBottomHeight - paddingDistanceBetweenPlayerAndCamera;
+		//float cameraFollowHeightLimit = cameraAlignedToBottomHeight + paddingDistanceBetweenPlayerAndCamera;
+        
+		//Debug.DrawRay(new Vector3(transform.position.x, cameraFollowHeightLimit, 0), Vector3.right * 3, Color.green);
 
-		Debug.DrawRay(new Vector3(transform.position.x, cameraFollowHeightLimit, 0), Vector3.right * 3, Color.green);
-
-        if (playerYVelocity < 0){
-			UseFallStageBottomeLineStrategy(cameraFollowHeightLimit);         
-		} else if (playerYVelocity > 0) {
-            UseJumpStageBottomeLineStrategy(cameraFollowHeightLimit, cameraAlignedToBottomHeight);         
-        } else {
-			UseGroundedStageBottomeLineStrategy(cameraAlignedToBottomHeight);
-        }
+  //      if (playerYVelocity < 0){
+		//	UseFallStageBottomeLineStrategy(cameraFollowHeightLimit);         
+		//} else if (playerYVelocity > 0) {
+        //    UseJumpStageBottomeLineStrategy(cameraFollowHeightLimit, cameraAlignedToBottomHeight);         
+        //} else {
+		UseGroundedStageBottomeLineStrategy(cameraAlignedToBottomHeight);
+        //}
 	}
 	private void UseGroundedStageBottomeLineStrategy(float cameraAlignedToBottomHeight){
 		float speedRatio =
@@ -192,28 +200,34 @@ public class CameraPlayerFollowY : MonoBehaviour {
         newCameraPositionY += speedRatio * playerJumpMoveSpeed * Time.fixedDeltaTime;
 	}
 	private void UseJumpStageBottomeLineStrategy(float cameraFollowHeightLimit, float cameraAlignedToBottomHeight){
-		if (playerReference.transform.position.y >= cameraFollowHeightLimit)
+		if (transform.position.y < cameraAlignedToBottomHeight)
         {
-            UseDefaultJumpStrategy();
-        }
-        if (transform.position.y < cameraAlignedToBottomHeight)
+			UseGroundedStageBottomeLineStrategy(cameraAlignedToBottomHeight);
+		} else
+		if (playerReference.transform.position.y >= cameraFollowHeightLimit)
         {
 			float speedRatio =
                 CalculateRatioCurrentDistanceToMaxDistance(
-                    playerReference.transform.position.y,
-					transform.position.y,
+					playerReference.transform.position.y,
+					cameraFollowHeightLimit,
                     paddingDistanceBetweenPlayerAndCamera);
-			if (Mathf.Abs(speedRatio) > 1){
-				speedRatio = 1;
-			}
-            speedRatio = Mathf.Clamp(speedRatio, -cameraMaxSpeedScaleToJumpScaleRatio, cameraMaxSpeedScaleToJumpScaleRatio);
-            newCameraPositionY += speedRatio * playerJumpMoveSpeed * Time.fixedDeltaTime;
+			print(speedRatio);
+
+			speedRatio = Mathf.Clamp(speedRatio, -cameraMaxSpeedScaleToJumpScaleRatio, cameraMaxSpeedScaleToJumpScaleRatio);
+			newCameraPositionY += speedRatio * playerCurrentJumpMoveSpeed * Time.fixedDeltaTime;
         }
+
 	}
 	private void UseFallStageBottomeLineStrategy(float cameraFollowHeightLimit){
 		if (playerReference.transform.position.y >= cameraFollowHeightLimit)
         {
-            UseDefaultFallStrategy();
+			float speedRatio =
+                -CalculateRatioCurrentDistanceToMaxDistance(
+                    playerReference.transform.position.y, 
+					cameraFollowHeightLimit, 
+                    maxVerticalDistanceFromPlayer);
+                speedRatio = Mathf.Clamp(speedRatio, -cameraMaxSpeedScaleToJumpScaleRatio, cameraMaxSpeedScaleToJumpScaleRatio);
+                newCameraPositionY += speedRatio * playerCurrentFallMoveSpeed * Time.fixedDeltaTime; 
         }
 	}
 
@@ -229,6 +243,19 @@ public class CameraPlayerFollowY : MonoBehaviour {
         }
 		newCameraPositionY += speedRatio * playerJumpMoveSpeed * Time.fixedDeltaTime;
 	}
+
+	private void UseStageTopLineStrategy(BoxCollider2D directorBox){
+		float topLineYPosition = directorBox.bounds.max.y;
+		float cameraAlignedToTopHeight = topLineYPosition - cameraDistanceToVerticalEdge;
+
+		float speedRatio =
+               CalculateRatioCurrentDistanceToMaxDistance(
+                   cameraAlignedToTopHeight,
+                   transform.position.y,
+                   paddingDistanceBetweenPlayerAndCamera);
+        speedRatio = Mathf.Clamp(speedRatio, -.3f, .3f);
+        newCameraPositionY += speedRatio * playerJumpMoveSpeed * Time.fixedDeltaTime;
+	}
 	/*
      * Calculate distance ratio
      */
@@ -236,4 +263,5 @@ public class CameraPlayerFollowY : MonoBehaviour {
     {
         return (-cameraPosition + referencePosition) / distanceToReference;
     }
+
 }

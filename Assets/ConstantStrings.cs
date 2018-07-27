@@ -41,6 +41,7 @@ public static class ConstantStrings
 		public const string STAGE_EDGE_HORIZONTAL_LEFT = "StageEdgeHorizontalLeft";
 		public const string STAGE_BOTTOM_LINE = "StageBottomLine";
 		public const string LOCK_FOCUS_ON_AREA = "LockFocusOnArea";
+		public const string STAGE_TOP_LINE = "StageTopLine";
 	}
     
 	public static class PlayerAnimatorStates{
