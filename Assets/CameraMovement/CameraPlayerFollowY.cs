@@ -56,7 +56,7 @@ public class CameraPlayerFollowY : MonoBehaviour {
 	private bool gottenSpeedScales;
 	
 	// Update is called once per frame
-	void Update () {
+	void FixedUpdate () {
 		newCameraPositionY = transform.position.y;
 
 		if (!gottenSpeedScales)
@@ -139,7 +139,7 @@ public class CameraPlayerFollowY : MonoBehaviour {
                     transform.position.y - paddingDistanceBetweenPlayerAndCamera, 
                     maxVerticalDistanceFromPlayer);
         speedRatio = Mathf.Clamp(speedRatio, -cameraMaxSpeedScaleToJumpScaleRatio, cameraMaxSpeedScaleToJumpScaleRatio);
-        newCameraPositionY += speedRatio * playerJumpMoveSpeed * Time.deltaTime; 
+        newCameraPositionY += speedRatio * playerJumpMoveSpeed * Time.fixedDeltaTime; 
 	}
 	private void UseDefaultJumpStrategy(){
 		float speedRatio =
@@ -149,7 +149,7 @@ public class CameraPlayerFollowY : MonoBehaviour {
                     paddingDistanceBetweenPlayerAndCamera);
                 
 		speedRatio = Mathf.Clamp(speedRatio, -cameraMaxSpeedScaleToJumpScaleRatio, cameraMaxSpeedScaleToJumpScaleRatio);
-		newCameraPositionY += speedRatio * playerJumpMoveSpeed * Time.deltaTime;
+		newCameraPositionY += speedRatio * playerJumpMoveSpeed * Time.fixedDeltaTime;
 
 	}
 	private void UseDefaultGroundedStrategy(){
@@ -160,7 +160,7 @@ public class CameraPlayerFollowY : MonoBehaviour {
                     paddingDistanceBetweenPlayerAndCamera);
         speedRatio = Mathf.Clamp(speedRatio, -.3f, .3f);
         
-        newCameraPositionY += speedRatio * playerJumpMoveSpeed * Time.deltaTime;
+        newCameraPositionY += speedRatio * playerJumpMoveSpeed * Time.fixedDeltaTime;
 	}
     /*
      * bottom line strategy tracks player using defaultjump and defaultfall when above line
@@ -189,7 +189,7 @@ public class CameraPlayerFollowY : MonoBehaviour {
                    transform.position.y,
                    paddingDistanceBetweenPlayerAndCamera);
         speedRatio = Mathf.Clamp(speedRatio, -.3f, .3f);
-        newCameraPositionY += speedRatio * playerJumpMoveSpeed * Time.deltaTime;
+        newCameraPositionY += speedRatio * playerJumpMoveSpeed * Time.fixedDeltaTime;
 	}
 	private void UseJumpStageBottomeLineStrategy(float cameraFollowHeightLimit, float cameraAlignedToBottomHeight){
 		if (playerReference.transform.position.y >= cameraFollowHeightLimit)
@@ -207,7 +207,7 @@ public class CameraPlayerFollowY : MonoBehaviour {
 				speedRatio = 1;
 			}
             speedRatio = Mathf.Clamp(speedRatio, -cameraMaxSpeedScaleToJumpScaleRatio, cameraMaxSpeedScaleToJumpScaleRatio);
-            newCameraPositionY += speedRatio * playerJumpMoveSpeed * Time.deltaTime;
+            newCameraPositionY += speedRatio * playerJumpMoveSpeed * Time.fixedDeltaTime;
         }
 	}
 	private void UseFallStageBottomeLineStrategy(float cameraFollowHeightLimit){
@@ -227,7 +227,7 @@ public class CameraPlayerFollowY : MonoBehaviour {
         {
 			speedRatio = Mathf.Sign(speedRatio) * cameraMaxSpeedScaleToJumpScaleRatio * 0.3f;
         }
-		newCameraPositionY += speedRatio * playerJumpMoveSpeed * Time.deltaTime;
+		newCameraPositionY += speedRatio * playerJumpMoveSpeed * Time.fixedDeltaTime;
 	}
 	/*
      * Calculate distance ratio

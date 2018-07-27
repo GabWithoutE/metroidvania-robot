@@ -51,7 +51,7 @@ public abstract class AbstractCharacterSpeedScaleState : MonoBehaviour {
 		accelerationRate = decelerationRate;
 	}
 
-	void Update()
+	void FixedUpdate()
 	{
 		float[] playerVelocity = (float[])stateManager.GetCharacterStateValue(ConstantStrings.VELOCITY);
 		if (playerVelocity[1] == 1){

@@ -29,7 +29,7 @@ public class CameraPlayerFollowX : MonoBehaviour {
 	private bool gottenSpeedScale;
 
 	// Update is called once per frame
-	void Update() {
+	void FixedUpdate() {
 		/*
 		 * Wait for speed scale to be instantiated then get the values
 		 */ 
@@ -109,7 +109,7 @@ public class CameraPlayerFollowX : MonoBehaviour {
 		                                                                   transform.position.x, 
 		                                                                   maxHorizontalDistanceFromPlayer);
         speedRatio = Mathf.Clamp(speedRatio, -cameraMaxSpeedScaleToPlayerRunSpeedScaleRatio, cameraMaxSpeedScaleToPlayerRunSpeedScaleRatio);
-        newCameraPositionX += speedRatio * playerHorizontalMoveSpeed * Time.deltaTime;
+        newCameraPositionX += speedRatio * playerHorizontalMoveSpeed * Time.fixedDeltaTime;
     }
 
     /*
@@ -126,7 +126,7 @@ public class CameraPlayerFollowX : MonoBehaviour {
 		                                                                   transform.position.x, 
 		                                                                   maxHorizontalDistanceFromPlayer);
 		speedRatio = Mathf.Clamp(speedRatio, -cameraMaxSpeedScaleToPlayerRunSpeedScaleRatio, cameraMaxSpeedScaleToPlayerRunSpeedScaleRatio);
-		newCameraPositionX += speedRatio * playerHorizontalMoveSpeed * Time.deltaTime;
+		newCameraPositionX += speedRatio * playerHorizontalMoveSpeed * Time.fixedDeltaTime;
 	}
         
 
@@ -141,7 +141,7 @@ public class CameraPlayerFollowX : MonoBehaviour {
 		if (Mathf.Abs(speedRatio) > cameraMaxSpeedScaleToPlayerRunSpeedScaleRatio){
 			speedRatio = Mathf.Sign(speedRatio)*cameraMaxSpeedScaleToPlayerRunSpeedScaleRatio;
 		}
-		newCameraPositionX += speedRatio * playerHorizontalMoveSpeed * Time.deltaTime;
+		newCameraPositionX += speedRatio * playerHorizontalMoveSpeed * Time.fixedDeltaTime;
         
 	}
 
