@@ -620,6 +620,11 @@ Prefab:
       propertyPath: playerReference
       value: 
       objectReference: {fileID: 1064345563}
+    - target: {fileID: 114360280572513586, guid: e6ab35c4f836d419d93a0806fd81bc03,
+        type: 2}
+      propertyPath: maxVerticalDistanceFromPlayer
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e6ab35c4f836d419d93a0806fd81bc03, type: 2}
   m_IsPrefabParent: 0
@@ -1026,11 +1031,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4809158528287752, guid: a654b42a7a08747c2bb534c154ee60a5, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 31.28
       objectReference: {fileID: 0}
     - target: {fileID: 4809158528287752, guid: a654b42a7a08747c2bb534c154ee60a5, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 1
+      value: -6.07
       objectReference: {fileID: 0}
     - target: {fileID: 4809158528287752, guid: a654b42a7a08747c2bb534c154ee60a5, type: 2}
       propertyPath: m_LocalPosition.z
@@ -1471,7 +1476,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1601530224
 Transform:
   m_ObjectHideFlags: 0

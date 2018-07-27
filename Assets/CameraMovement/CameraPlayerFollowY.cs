@@ -130,7 +130,7 @@ public class CameraPlayerFollowY : MonoBehaviour {
 			UseDefaultJumpStrategy();
 		} else {
 			UseDefaultGroundedStrategy();
-		}      
+		}
 	}
 	private void UseDefaultFallStrategy(){
 		float speedRatio =
@@ -138,8 +138,8 @@ public class CameraPlayerFollowY : MonoBehaviour {
                     playerReference.transform.position.y, 
                     transform.position.y - paddingDistanceBetweenPlayerAndCamera, 
                     maxVerticalDistanceFromPlayer);
-            speedRatio = Mathf.Clamp(speedRatio, -cameraMaxSpeedScaleToJumpScaleRatio, cameraMaxSpeedScaleToJumpScaleRatio);
-            newCameraPositionY += speedRatio * playerJumpMoveSpeed * Time.deltaTime; 
+        speedRatio = Mathf.Clamp(speedRatio, -cameraMaxSpeedScaleToJumpScaleRatio, cameraMaxSpeedScaleToJumpScaleRatio);
+        newCameraPositionY += speedRatio * playerJumpMoveSpeed * Time.deltaTime; 
 	}
 	private void UseDefaultJumpStrategy(){
 		float speedRatio =

@@ -61,6 +61,7 @@ public abstract class AbstractCharacterSpeedScaleState : MonoBehaviour {
 		}
 		if (playerVelocity[1] == -1){
 			currentFallSpeedScale = currentFallSpeedScale + accelerationRate * Time.deltaTime;
+			currentFallSpeedScale = Mathf.Clamp(currentFallSpeedScale, 0, fallSpeedScale);
 		} else {
 			currentFallSpeedScale = 0;
 		}
