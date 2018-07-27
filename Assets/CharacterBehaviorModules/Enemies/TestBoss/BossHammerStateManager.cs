@@ -15,8 +15,8 @@ public class BossHammerStateManager : MonoBehaviour {
     void Awake()
     {
         statesManager = GetComponentInParent<CharacterStatesManager>();
-        hammerThrown = new CharacterState(ConstantStrings.Enemy.HammerBoss.HAMMER_THROWN, false);
-        statesManager.RegisterCharacterState(hammerThrown.name, hammerThrown);
+        //hammerThrown = new CharacterState(ConstantStrings.Enemy.HammerBoss.HAMMER_THROWN, false);
+        //statesManager.RegisterCharacterState(hammerThrown.name, hammerThrown);
         hammerHitsGround = new CharacterState(ConstantStrings.Enemy.HammerBoss.HAMMER_HITS_GROUND, false);
         statesManager.RegisterCharacterState(hammerHitsGround.name, hammerHitsGround);
         thrownHammerPosition = statesManager.GetExistingCharacterState(ConstantStrings.Enemy.HammerBoss.THROWN_HAMMER_POSITION);
@@ -33,6 +33,7 @@ public class BossHammerStateManager : MonoBehaviour {
     {
         groundMask = LayerMask.GetMask("Ground");
         //hammerPosition = statesManager.GetExistingCharacterState(ConstantStrings.Enemy.HammerBoss.HAMMER_POSITION);
+        hammerThrown = statesManager.GetExistingCharacterState(ConstantStrings.Enemy.HammerBoss.HAMMER_THROWN);
     }
 
     public void SetState(string stateName, object newState)
