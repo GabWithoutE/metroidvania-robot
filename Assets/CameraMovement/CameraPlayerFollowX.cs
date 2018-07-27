@@ -10,13 +10,14 @@ public class CameraPlayerFollowX : MonoBehaviour {
 
 	public GameObject playerReference;
 	private ICharacterStateObserver stateObserver;
-	private float horizontalMaxMoveSpeed;
+	private float playerHorizontalMoveSpeed;
+	public float cameraMaxSpeedScaleToPlayerRunSpeedScaleRatio;
 
 	private LayerMask cameraDirectionLayerMask;
 
 	public float maxHorizontalDistanceFromPlayer;
 	private float newCameraPositionX;
-
+    
 	private bool useDefaultStrat;
 
 	private void Awake()
@@ -34,7 +35,7 @@ public class CameraPlayerFollowX : MonoBehaviour {
 		 */ 
 		if (!gottenSpeedScale)
 		{
-			horizontalMaxMoveSpeed = ((float[])stateObserver.GetCharacterStateValue(ConstantStrings.SPEED_SCALE))[3];
+			playerHorizontalMoveSpeed = ((float[])stateObserver.GetCharacterStateValue(ConstantStrings.SPEED_SCALE))[3];
 			gottenSpeedScale = true;
 		}
 		newCameraPositionX = transform.position.x;
@@ -52,6 +53,8 @@ public class CameraPlayerFollowX : MonoBehaviour {
              * bool useDefaultStrat is equal to whether or not other strats were used
              */ 
 			useDefaultStrat = directed == 0;
+		} else {
+			useDefaultStrat = true;
 		}
 
         /*
@@ -86,6 +89,10 @@ public class CameraPlayerFollowX : MonoBehaviour {
 				UseStageEdgeHorizontalEdgeStrategy(directorBox, Side.right);
 				usedStrat = 1;
 				break;
+			case ConstantStrings.CameraDirectionBoxes.LOCK_FOCUS_ON_AREA:
+				UseLockFocusOnAreaStrategy(directorBox);
+				usedStrat = 1;
+				break;
 			default:
 				usedStrat = 0;
 				break;
@@ -93,6 +100,21 @@ public class CameraPlayerFollowX : MonoBehaviour {
 		return usedStrat;
 	}
 
+	/*
+    * default strategy when no directors
+    */
+    private void UseDefaultStrategy()
+    {
+        float speedRatio = CalculateSpeedRatioCurrentDistanceToMaxDistance(playerReference.transform.position.x, 
+		                                                                   transform.position.x, 
+		                                                                   maxHorizontalDistanceFromPlayer);
+        speedRatio = Mathf.Clamp(speedRatio, -cameraMaxSpeedScaleToPlayerRunSpeedScaleRatio, cameraMaxSpeedScaleToPlayerRunSpeedScaleRatio);
+        newCameraPositionX += speedRatio * playerHorizontalMoveSpeed * Time.deltaTime;
+    }
+
+    /*
+     * strategy for horizontal edge directors
+     */ 
 	private void UseStageEdgeHorizontalEdgeStrategy(BoxCollider2D directorBox, Side side){
 		float referenceEdge;
 		if(side == Side.left){
@@ -100,29 +122,33 @@ public class CameraPlayerFollowX : MonoBehaviour {
 		} else {
 			referenceEdge = directorBox.bounds.min.x;
 		}
-		float speedRatio = CalculateRatioCurrentDistanceToMaxDistance(referenceEdge, transform.position.x);
-		newCameraPositionX += speedRatio * horizontalMaxMoveSpeed * Time.deltaTime;
-
-		if (side == Side.left){
-			newCameraPositionX = Mathf.Clamp(newCameraPositionX, referenceEdge, float.MaxValue);
-		} else {
-			newCameraPositionX = Mathf.Clamp(newCameraPositionX, float.MinValue, referenceEdge);
-		}
+		float speedRatio = CalculateSpeedRatioCurrentDistanceToMaxDistance(referenceEdge, 
+		                                                                   transform.position.x, 
+		                                                                   maxHorizontalDistanceFromPlayer);
+		speedRatio = Mathf.Clamp(speedRatio, -cameraMaxSpeedScaleToPlayerRunSpeedScaleRatio, cameraMaxSpeedScaleToPlayerRunSpeedScaleRatio);
+		newCameraPositionX += speedRatio * playerHorizontalMoveSpeed * Time.deltaTime;
 	}
         
-	/*
-     * default strategy when no directors
-     */
-    private void UseDefaultStrategy()
-    {
-        float speedRatio = CalculateRatioCurrentDistanceToMaxDistance(playerReference.transform.position.x, transform.position.x);
-        newCameraPositionX += speedRatio * horizontalMaxMoveSpeed * Time.deltaTime;
-    }
+
+    /*
+     * strategy for locked camera area directors
+     */ 
+	private void UseLockFocusOnAreaStrategy(BoxCollider2D directorBox){
+		float lockFocusAreaCenterXPosition = directorBox.transform.position.x;
+		float speedRatio = CalculateSpeedRatioCurrentDistanceToMaxDistance(lockFocusAreaCenterXPosition, 
+		                                                                   transform.position.x, 
+		                                                                   maxHorizontalDistanceFromPlayer);
+		if (Mathf.Abs(speedRatio) > cameraMaxSpeedScaleToPlayerRunSpeedScaleRatio){
+			speedRatio = Mathf.Sign(speedRatio)*cameraMaxSpeedScaleToPlayerRunSpeedScaleRatio;
+		}
+		newCameraPositionX += speedRatio * playerHorizontalMoveSpeed * Time.deltaTime;
+        
+	}
 
     /*
      * Calculate distance ratio
      */ 
-	private float CalculateRatioCurrentDistanceToMaxDistance(float referencePosition, float cameraPosition){
-		return Mathf.Clamp((-cameraPosition + referencePosition) / maxHorizontalDistanceFromPlayer, -1, 1);
+	private float CalculateSpeedRatioCurrentDistanceToMaxDistance(float referencePosition, float cameraPosition, float distanceToReference){
+		return (-cameraPosition + referencePosition) / distanceToReference;
 	}
 }

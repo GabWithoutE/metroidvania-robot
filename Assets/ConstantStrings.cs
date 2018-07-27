@@ -40,7 +40,7 @@ public static class ConstantStrings
 		public const string STAGE_EDGE_HORIZONTAL_RIGHT = "StageEdgeHorizontalRight";
 		public const string STAGE_EDGE_HORIZONTAL_LEFT = "StageEdgeHorizontalLeft";
 		public const string STAGE_BOTTOM_LINE = "StageBottomLine";
-		public const string FOCUS_ON_AREA = "FocusOnArea";
+		public const string LOCK_FOCUS_ON_AREA = "LockFocusOnArea";
 	}
     
 	public static class PlayerAnimatorStates{
