@@ -44,6 +44,10 @@ public class CameraPlayerFollow : MonoBehaviour {
 	private float currentFallingLagDistance;
 
 	private float bottomLineYPosition;
+
+	private bool stillMovingLaggingCamera;
+	private string previousDirector;
+	private RaycastHit2D[] hitCameraDirectors;
     /*
      * TODO:
      * if the player exceeds the vertical offset distance, then do the slight camera vertical pan, then when player lands pan back.
@@ -77,7 +81,7 @@ public class CameraPlayerFollow : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		playerStateObserver.GetCharacterStateSubscription(ConstantStrings.GROUNDED).OnStateChanged += CalculateTopLineOnGrounded;	
+		//playerStateObserver.GetCharacterStateSubscription(ConstantStrings.GROUNDED).OnStateChanged += OnLastTimeGroundedSetCameraDirector;
 	}
 	
 	// Update is called once per frame
@@ -89,7 +93,7 @@ public class CameraPlayerFollow : MonoBehaviour {
 		 * cast raycast and collect all hits
 		 * if director is available, use the director's strategy, if not, use the default strategy
 		 */ 
-		RaycastHit2D[] hitCameraDirectors =
+		hitCameraDirectors =
 			Physics2D.RaycastAll(player.transform.position, Vector2.up, 1, cameraDirectionMask);
 		Debug.DrawRay(player.transform.position, Vector2.up, Color.blue);
 		if (hitCameraDirectors.Length > 0){
@@ -100,8 +104,11 @@ public class CameraPlayerFollow : MonoBehaviour {
 			DefaultCameraDirectionMovement();
 		}
 
+		if(playerYVelocityStateObservation == 0){
+			stillMovingLaggingCamera = true;
+		}
 
-		if (playerYVelocityStateObservation == 0)
+		if (stillMovingLaggingCamera)
         {
 			currentFallingLagDistance = 0;
 		    MoveLaggingCamera();
@@ -110,16 +117,20 @@ public class CameraPlayerFollow : MonoBehaviour {
 	}
 
 	private void MoveLaggingCamera(){
-            if (newCameraPosition.y < desiredCameraYPosition)
-            {
-                newCameraPosition.y += Time.deltaTime * cameraLagSpeed;
-                newCameraPosition.y = Mathf.Clamp(newCameraPosition.y, float.MinValue, desiredCameraYPosition);
-            }
-            else if (newCameraPosition.y > desiredCameraYPosition)
-            {
-                newCameraPosition.y -= Time.deltaTime * cameraLagSpeed;
-                newCameraPosition.y = Mathf.Clamp(newCameraPosition.y, desiredCameraYPosition, float.MaxValue);
-            }
+        if (newCameraPosition.y < desiredCameraYPosition)
+        {
+            newCameraPosition.y += Time.deltaTime * cameraLagSpeed;
+            newCameraPosition.y = Mathf.Clamp(newCameraPosition.y, float.MinValue, desiredCameraYPosition);
+        }
+        else if (newCameraPosition.y > desiredCameraYPosition)
+        {
+            newCameraPosition.y -= Time.deltaTime * cameraLagSpeed;
+            newCameraPosition.y = Mathf.Clamp(newCameraPosition.y, desiredCameraYPosition, float.MaxValue);
+        }
+		if (newCameraPosition.y == desiredCameraYPosition){
+			stillMovingLaggingCamera = false;
+		}
+            
 	}
     
 	private void FollowCameraDirection(GameObject director){
@@ -142,17 +153,17 @@ public class CameraPlayerFollow : MonoBehaviour {
 		}
 	}
 
-	private void CalculateTopLineOnGrounded(object groundedState){
-		bool isGrounded = ((bool[])groundedState)[1];
-		switch(topLineStrategy){
-			case ConstantStrings.CameraDirectionBoxes.STAGE_BOTTOM_LINE:
-				break;
-			default:
-				DefaultCalculateTopLine();
-				break;
-		}
+	//private void CalculateTopLineOnGrounded(object groundedState){
+	//	bool isGrounded = ((bool[])groundedState)[1];
+	//	switch(topLineStrategy){
+	//		case ConstantStrings.CameraDirectionBoxes.STAGE_BOTTOM_LINE:
+	//			break;
+	//		default:
+	//			DefaultCalculateTopLine();
+	//			break;
+	//	}
 
-	}
+	//}
 
 	//private void FromBottomLineCalculateTopLine(){
 	//	/*
@@ -185,18 +196,23 @@ public class CameraPlayerFollow : MonoBehaviour {
 		if (playerYVelocityStateObservation != 0){
 			if (playerYVelocityStateObservation > 0)
 			{   
-				if (newCameraPosition.y == desiredCameraYPosition){
-					if (player.transform.position.y > topLineyPosition)
+				if (!stillMovingLaggingCamera){
+					if (player.transform.position.y > topLineyPosition)                    
                     {
                         newCameraPosition.y = player.transform.position.y + (.5f - cameraVerticalOffsetFromBottomRatio) * cameraHeight;
-                        print(((.5f - cameraVerticalOffsetFromBottomRatio) * cameraHeight));
-
+                        // Issue is what about not still moving laggin camera and not above topLiney.
                     }
-				} else {
-					if(player.transform.position.y >= newCameraPosition.y){
+					//if (previousDirector == ""){
+					//	newCameraPosition.y = player.transform.position.y;
+					//}
+				}else {
+					if (player.transform.position.y >= transform.position.y){
 						newCameraPosition.y = player.transform.position.y + (.5f - cameraVerticalOffsetFromBottomRatio) * cameraHeight;
+
+						stillMovingLaggingCamera = false;
 					}
 				}
+
 
 			} else {
 				if (player.transform.position.y > topLineyPosition)
@@ -209,9 +225,9 @@ public class CameraPlayerFollow : MonoBehaviour {
 					    bottomLineYPosition + (.5f - cameraVerticalOffsetFromBottomRatio) * cameraHeight + fallingLagDistance, float.MaxValue);
                 }
 			}
-		} else {
-			desiredCameraYPosition = bottomLineYPosition + cameraDistanceToVerticalEdge;
-		}
+		}  
+		desiredCameraYPosition = bottomLineYPosition + cameraDistanceToVerticalEdge;
+
     }
 	private void DefaultCameraDirectionMovement(){
 		if (playerYVelocityStateObservation != 0){
@@ -253,5 +269,17 @@ public class CameraPlayerFollow : MonoBehaviour {
 	private void DirectCameraFocusOnAreaMovement(BoxCollider2D directorCollider){
 		
 	}
+
+	//private void OnLastTimeGroundedSetCameraDirector(object groundedState){
+	//	bool isGrounded = ((bool[])groundedState)[0];
+	//	if (isGrounded) {
+	//		if (hitCameraDirectors.Length == 0){
+	//			previousDirector = "";
+	//		} else {
+	//			previousDirector = "anybodyelse";
+	//		}
+	//	}
+	//	print(previousDirector);
+	//}
 
 }

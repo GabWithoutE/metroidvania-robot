@@ -11,37 +11,16 @@ public abstract class AbstractCharacterSpeedScaleState : MonoBehaviour {
 	public float fallSpeedScale = 1;
 
 	private float decelerationRate;
-	//public float percentOfJumpHeightToStartDecelerating;
-	//public float slowestJumpSpeed;
-	//private float startDecelerationHeight;
-	//private float currentJumpHeight;
 	private float currentJumpSpeedScale;
 
 	private float accelerationRate;
-	//public float fallDistanceToStopAccelerating;
 	private float currentFallSpeedScale;
-	//private float currentFallHeight;
 
-
- //   /*
- //    * time to stop acceleration fall (should reach max fall speed by this time)
- //    */ 
-	//public float accelerationEndTime;
- //   /*
- //    * Time to start decelerating jump
- //    */ 
-	//public float decelerationStartTime;
-
-    /*
-     * Amount of time character has to slow down.
-     */ 
-	//private float decelerationTime;
 
 	private float currentJumpStartHeight;
 
 	private float currentFallStartHeight;
-
-	//private float decelerationRate;
+    
 
     public float[] scaleStateValue;
 	private bool startJump;
@@ -50,7 +29,7 @@ public abstract class AbstractCharacterSpeedScaleState : MonoBehaviour {
     private void Awake()
 	{
 		stateManager = GetComponentInParent(typeof(ICharacterStateManager)) as ICharacterStateManager;
-		//currentJumpHeight = 0;
+
 		currentJumpSpeedScale = jumpSpeedScale;
 		currentFallSpeedScale = 0;
 		startJump = false;
@@ -58,18 +37,15 @@ public abstract class AbstractCharacterSpeedScaleState : MonoBehaviour {
        
 		if (stateManager.ExistsState(ConstantStrings.SPEED_SCALE)){
 			speedScaleState = stateManager.GetExistingCharacterState(ConstantStrings.SPEED_SCALE);
-			speedScaleState.SetState(new float[] {runSpeedScale, jumpSpeedScale, currentFallSpeedScale});
+			speedScaleState.SetState(new float[] {runSpeedScale, jumpSpeedScale, currentFallSpeedScale, runSpeedScale, jumpSpeedScale, fallSpeedScale});
 		}else {
-			speedScaleState = new CharacterState(ConstantStrings.SPEED_SCALE, new float[] { runSpeedScale, jumpSpeedScale, currentFallSpeedScale });
+			speedScaleState = new CharacterState(ConstantStrings.SPEED_SCALE, new float[] { runSpeedScale, jumpSpeedScale, currentFallSpeedScale, runSpeedScale, jumpSpeedScale, fallSpeedScale });
 			stateManager.RegisterCharacterState(speedScaleState.name, speedScaleState);
 		}
 	}
 
 	private void Start()
 	{
-		//decelerationTime = 
-		//decelerationRate = jumpSpeedScale / decelerationTime;
-		//startDecelerationHeight = percentOfJumpHeightToStartDecelerating * ((float[])stateManager.GetCharacterStateValue(ConstantStrings.VELOCITY))[2];
 		decelerationRate = jumpSpeedScale / ((float[])stateManager.GetCharacterStateValue(ConstantStrings.VELOCITY))[2];
 		print(decelerationRate);
 		accelerationRate = decelerationRate;
@@ -88,45 +64,8 @@ public abstract class AbstractCharacterSpeedScaleState : MonoBehaviour {
 		} else {
 			currentFallSpeedScale = 0;
 		}
-		speedScaleState.SetState(new float[] { runSpeedScale, currentJumpSpeedScale, currentFallSpeedScale });
-
-		//scaleStateValue = (float[])speedScaleState.GetStateValue();
-		//if (playerVelocity[1] == 1)
-		//{
-		//	if (!startJump)
-		//	{
-		//		startJump = true;
-		//		currentJumpStartHeight = transform.position.y;
-		//	}
-
-		//	//currentJumpHeight = transform.position.y - currentJumpStartHeight;
-		//	//if (currentJumpHeight >= startDecelerationHeight)
-		//	//{
-		//	currentJumpSpeedScale = Mathf.Clamp(currentJumpSpeedScale - decelerationRate * Time.deltaTime, slowestJumpSpeed, jumpSpeedScale);
-		//	//}
-		//}
-		//else
-		//{
-		//	startJump = false;
-		//	currentJumpHeight = 0;
-		//	currentJumpSpeedScale = jumpSpeedScale;
-		//}
-
-		//if (playerVelocity[1] == -1){
-		//	if (!startFall){
-		//		startFall = false;
-		//		currentFallStartHeight = transform.position.y;
-		//	}
-            
-		//	if(currentFallSpeedScale <= fallSpeedScale){
-		//		currentFallSpeedScale += accelerationRate * Time.deltaTime;
-		//		currentFallSpeedScale = Mathf.Clamp(currentFallSpeedScale, 0, fallSpeedScale);
-		//	}         
-		//} else {
-		//	startFall = false;
-		//	currentFallSpeedScale = 0;
-		//}
-		//speedScaleState.SetState(new float[] { runSpeedScale, currentJumpSpeedScale, currentFallSpeedScale });
+		speedScaleState.SetState(new float[] { runSpeedScale, currentJumpSpeedScale, currentFallSpeedScale, runSpeedScale, jumpSpeedScale, fallSpeedScale });
+        
 
     }
     
