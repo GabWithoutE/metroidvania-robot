@@ -16,7 +16,7 @@ public class AbstractCharacterMovementBehavior : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void FixedUpdate () {
 
 		float[] velocity = (float[])stateObserver.GetCharacterStateValue(ConstantStrings.VELOCITY);
 		float[] speedScaleValues = (float[])stateObserver.GetCharacterStateValue(ConstantStrings.SPEED_SCALE);

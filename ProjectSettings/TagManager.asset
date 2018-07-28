@@ -28,7 +28,7 @@ TagManager:
   - Enemy
   - InteractableEnvironment
   - Player
-  - 
+  - CameraDirections
   - 
   - 
   - 

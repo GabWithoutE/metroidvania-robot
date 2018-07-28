@@ -58,7 +58,7 @@ GameObject:
   - component: {fileID: 222765706591071698}
   - component: {fileID: 114021811977575812}
   - component: {fileID: 114783218978977800}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: ChargeBar_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -646,7 +646,7 @@ GameObject:
   - component: {fileID: 224208330346938518}
   - component: {fileID: 222929169282204338}
   - component: {fileID: 114504068368228580}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: ChargeBar_0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -822,7 +822,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1124706263072946}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 1.38, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4204855571011670}
@@ -1355,8 +1355,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c792c95f471644eeda0136b491756b5a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jumpMaxTime: 0.5
-  currentJumpTime: 0
+  jumpMaxHeight: 5
 --- !u!114 &114553105699813086
 MonoBehaviour:
   m_ObjectHideFlags: 1

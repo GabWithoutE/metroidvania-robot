@@ -10,25 +10,64 @@ public abstract class AbstractCharacterSpeedScaleState : MonoBehaviour {
 	public float jumpSpeedScale = 1;
 	public float fallSpeedScale = 1;
 
+	private float decelerationRate;
+	private float currentJumpSpeedScale;
+
+	private float accelerationRate;
+	private float currentFallSpeedScale;
+
+
+	private float currentJumpStartHeight;
+
+	private float currentFallStartHeight;
+    
+
     public float[] scaleStateValue;
 
+    
     private void Awake()
 	{
 		stateManager = GetComponentInParent(typeof(ICharacterStateManager)) as ICharacterStateManager;
 
+		currentJumpSpeedScale = jumpSpeedScale;
+		currentFallSpeedScale = 0;
+       
 		if (stateManager.ExistsState(ConstantStrings.SPEED_SCALE)){
 			speedScaleState = stateManager.GetExistingCharacterState(ConstantStrings.SPEED_SCALE);
-			speedScaleState.SetState(new float[] {runSpeedScale, jumpSpeedScale, fallSpeedScale});
+			speedScaleState.SetState(new float[] {runSpeedScale, jumpSpeedScale, currentFallSpeedScale, runSpeedScale, jumpSpeedScale, fallSpeedScale});
 		}else {
-			speedScaleState = new CharacterState(ConstantStrings.SPEED_SCALE, new float[] { runSpeedScale, jumpSpeedScale, fallSpeedScale });
-
+			speedScaleState = new CharacterState(ConstantStrings.SPEED_SCALE, new float[] { runSpeedScale, jumpSpeedScale, currentFallSpeedScale, runSpeedScale, jumpSpeedScale, fallSpeedScale });
 			stateManager.RegisterCharacterState(speedScaleState.name, speedScaleState);
 		}
 	}
 
-    void Update()
-    {
-        scaleStateValue = (float[])speedScaleState.GetStateValue();
+	private void Start()
+	{
+		decelerationRate = jumpSpeedScale / ((float[])stateManager.GetCharacterStateValue(ConstantStrings.VELOCITY))[2];
+		print(decelerationRate);
+		accelerationRate = decelerationRate;
+	}
+
+	void FixedUpdate()
+	{
+		float[] playerVelocity = (float[])stateManager.GetCharacterStateValue(ConstantStrings.VELOCITY);
+		if (playerVelocity[1] == 1){
+			currentJumpSpeedScale = currentJumpSpeedScale - decelerationRate * Time.deltaTime;
+		} else {
+			currentJumpSpeedScale = jumpSpeedScale;
+		}
+		if (playerVelocity[1] == -1){
+			//if (((bool[])stateManager.GetCharacterStateValue(ConstantStrings.GROUNDED))[0]){
+			//	currentFallSpeedScale = fallSpeedScale;
+			//}
+			currentFallSpeedScale = currentFallSpeedScale + accelerationRate * Time.deltaTime;
+			currentFallSpeedScale = Mathf.Clamp(currentFallSpeedScale, 0, fallSpeedScale);
+		} else {
+			currentFallSpeedScale = 0;
+		}
+		speedScaleState.SetState(new float[] { runSpeedScale, currentJumpSpeedScale, currentFallSpeedScale, runSpeedScale, jumpSpeedScale, fallSpeedScale });
+        
+
     }
     
 	public void IncreaseSpeedByFactorOfForTime(float factor, float time){

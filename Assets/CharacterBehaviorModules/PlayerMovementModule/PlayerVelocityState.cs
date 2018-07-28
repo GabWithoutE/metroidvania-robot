@@ -7,13 +7,17 @@ public class PlayerVelocityState : AbstractCharacterVelocityState {
 
 	public float jumpMaxTime = 1;
 	public float currentJumpTime;
-
+	public float jumpMaxHeight;
+	private float jumpStartHeight;
+	private float currentJumpHeight;
+    
 	private void Awake()
 	{
-		currentJumpTime = jumpMaxTime;
+		//currentJumpTime = jumpMaxTime;
+		currentJumpHeight = jumpMaxHeight;
 		base.Awake();
+		directionState.SetState(new float[] { 0, 0, jumpMaxTime });
 		CharacterState.CharacterStateSubscription groundedSubscription = statesManager.GetCharacterStateSubscription(ConstantStrings.GROUNDED);
-		//groundedSubscription.OnStateChanged += AllowJumpOnGrounded;
 		groundedSubscription.OnStateChanged += StopJumpOnHeadHit;
 	}
 
@@ -24,10 +28,13 @@ public class PlayerVelocityState : AbstractCharacterVelocityState {
         
 		float verticalValues = 0;
 		bool isGrounded = ((bool[])statesManager.GetCharacterStateValue(ConstantStrings.GROUNDED))[1];
+		bool headHit = ((bool[])statesManager.GetCharacterStateValue(ConstantStrings.GROUNDED))[0];
 
 		if (isGrounded){
 			if (!CrossPlatformInputManager.GetButton(ConstantStrings.UI.Input.INPUT_JUMP)){
 				currentJumpTime = 0;
+				//currentJumpHeight = 0;
+				//jumpStartHeight = transform.position.y;
 			}
 			verticalValues = 0;
 		} 
@@ -35,11 +42,21 @@ public class PlayerVelocityState : AbstractCharacterVelocityState {
         {
             verticalValues = CrossPlatformInputManager.GetAxisRaw(ConstantStrings.UI.Input.INPUT_JUMP);
             currentJumpTime += Time.deltaTime;
+			if (headHit){
+				currentJumpTime = jumpMaxTime;
+				verticalValues = -1;
+			}
         }
+
+		//if (CrossPlatformInputManager.GetButton(ConstantStrings.UI.Input.INPUT_JUMP) && currentJumpHeight < jumpMaxHeight){
+		//	verticalValues = CrossPlatformInputManager.GetAxisRaw(ConstantStrings.UI.Input.INPUT_JUMP);
+		//	currentJumpHeight = transform.position.y - jumpStartHeight;
+		//}
 
 		if (!CrossPlatformInputManager.GetButton(ConstantStrings.UI.Input.INPUT_JUMP)){
 			if (!isGrounded)
             {
+				//currentJumpHeight = jumpMaxHeight;
 				currentJumpTime = jumpMaxTime;
                 verticalValues = -1;
             }
@@ -49,8 +66,14 @@ public class PlayerVelocityState : AbstractCharacterVelocityState {
             verticalValues = -1;
         }  
 
+		//if (currentJumpHeight >= jumpMaxHeight && !isGrounded){
+		//	verticalValues = -1;
+		//}
 
-		directionState.SetState(new float[] { horizontalAxisValue, verticalValues });
+
+		directionState.SetState(new float[] { horizontalAxisValue, verticalValues , jumpMaxTime});
+		//directionState.SetState(new float[] { horizontalAxisValue, verticalValues , jumpMaxHeight});
+
 
 	}
     
@@ -60,7 +83,8 @@ public class PlayerVelocityState : AbstractCharacterVelocityState {
 		bool isHitGroundOnHead = ((bool[])groundedState)[0];
 		if (isHitGroundOnHead)
         {
-			currentJumpTime = jumpMaxTime;
+			//currentJumpTime = jumpMaxTime;
+			currentJumpHeight = jumpMaxHeight;
         }
 	}
     
