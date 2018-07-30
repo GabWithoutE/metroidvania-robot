@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Scene1To2 : MonoBehaviour {
+public class SceneOneToTwo : MonoBehaviour {
     private GameObject loadingScreen;
     void Start()
     {
@@ -11,7 +11,8 @@ public class Scene1To2 : MonoBehaviour {
 
     void OnTriggerEnter2D(Collider2D col)
     {
-        if(col != null)
+        Debug.Log("Stepped");
+        if (col != null)
         {
             if (col.gameObject.tag == "Player")
             {

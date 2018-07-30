@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Scene2To1 : MonoBehaviour {
+public class SceneTwoToOne : MonoBehaviour {
     private GameObject loadingScreen;
     void Start()
     {

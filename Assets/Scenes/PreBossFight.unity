@@ -152,6 +152,16 @@ Prefab:
       propertyPath: m_RootOrder
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 114720344747732060, guid: e6ab35c4f836d419d93a0806fd81bc03,
+        type: 2}
+      propertyPath: playerReference
+      value: 
+      objectReference: {fileID: 424124553}
+    - target: {fileID: 114360280572513586, guid: e6ab35c4f836d419d93a0806fd81bc03,
+        type: 2}
+      propertyPath: playerReference
+      value: 
+      objectReference: {fileID: 424124553}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e6ab35c4f836d419d93a0806fd81bc03, type: 2}
   m_IsPrefabParent: 0
@@ -1214,6 +1224,11 @@ TilemapCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
+--- !u!1 &424124553 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1124706263072946, guid: a654b42a7a08747c2bb534c154ee60a5,
+    type: 2}
+  m_PrefabInternal: {fileID: 1459996359}
 --- !u!1 &955626697
 GameObject:
   m_ObjectHideFlags: 0
@@ -1438,7 +1453,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!81 &1430021009
 AudioListener:
   m_ObjectHideFlags: 0
