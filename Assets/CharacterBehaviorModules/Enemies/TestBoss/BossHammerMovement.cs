@@ -16,7 +16,8 @@ public class BossHammerMovement : MonoBehaviour {
     private Vector2 playerDirection;
     private Rigidbody2D rgb;
     private ProjectileStraightMovement psm;
-    private Vector2 hammerPosition;        
+    private Vector2 hammerPosition;
+    public float throwDistance;
 
     void Awake()
     {
@@ -107,10 +108,28 @@ public class BossHammerMovement : MonoBehaviour {
                 hammerPickUp = false;
                 bossHammerStateManager.SetState(ConstantStrings.Enemy.HammerBoss.HAMMER_THROWN, true);
                 //Find direction player is in
-                GameObject player = GameObject.FindGameObjectWithTag("Player");
+                GameObject player = GameObject.FindGameObjectWithTag("Player");                
                 Vector2 playerFootDirection = CastRayDown(player.transform);
                 playerDirection = player.transform.position - transform.position;
-                Vector2 hammerThrowDirection = new Vector2(playerDirection.x, transform.root.GetComponent<BoxCollider2D>().bounds.min.y);
+                Vector2 hammerThrowDirection;
+                //If player is to the left of boss
+                if (playerDirection.x < 0)
+                {
+                    //Throw hammer to the left the distance set in inspector
+                    hammerThrowDirection = new Vector2(-1 * throwDistance, transform.root.GetComponent<BoxCollider2D>().bounds.min.y);
+                }
+                //If player is to the right of boss
+                else if(playerDirection.x > 0)
+                {
+                    //Throw hammer to the right the distance set in inspector
+                    hammerThrowDirection = new Vector2(throwDistance, transform.root.GetComponent<BoxCollider2D>().bounds.min.y);
+                }
+                else
+                {
+                    //Otherwise throw the hammer straight down
+                    hammerThrowDirection = new Vector2(0, transform.root.GetComponent<BoxCollider2D>().bounds.min.y);
+                }
+                //hammerThrowDirection = new Vector2(playerDirection.x, transform.root.GetComponent<BoxCollider2D>().bounds.min.y);
                 psm.SetDirection(hammerThrowDirection.normalized);
                 hammerMoving = true;
             }            
