@@ -13,15 +13,26 @@ using UnityEngine.SceneManagement;
  */ 
 
 public class GlobalGameObject : MonoBehaviour, 
-IMainSceneChanger, IGameSceneLoader, IUILoadingChanger {
+IMainSceneChanger, IGameSceneLoader, IUILoadingChanger, ICameraShaker {
     private SceneLoader sceneLoader;
     private TransitionalUIDisplayer transitionalUIDisplayer;
     public string mainGameScene;
     public string titleScreenScene;
 	public GameObject loadingScreen;
 	public GameObject playerObservant;
-
+	public GameObject camera;
+	public static GlobalGameObject globalGameObjectInstance= null;
+    
     void Awake(){
+		if (globalGameObjectInstance != null)
+        {
+            Destroy(gameObject);
+        }
+        else 
+        {
+			globalGameObjectInstance = this;
+        }
+
         sceneLoader = GetComponentInChildren<SceneLoader>();
         transitionalUIDisplayer = GetComponentInChildren<TransitionalUIDisplayer>();
 	}
@@ -87,6 +98,10 @@ IMainSceneChanger, IGameSceneLoader, IUILoadingChanger {
     public void DisplayUIElement(GameObject UIElement){
         transitionalUIDisplayer.DisplayUIElement(UIElement);
     }
+
+	public void ShakeCameraForSeconds(float seconds){
+		camera.GetComponent<CameraShake>().ShakeForSeconds(seconds);
+	}
 
 
 }

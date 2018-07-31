@@ -3,32 +3,31 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class CameraShake : MonoBehaviour {
-    public float cameraShake;
-    public float duration;
-    private Vector2 originalPosition;
+    private Vector3 
+	originalPosition;
 
     void Start()
     {
-        originalPosition = transform.position;
+  
     }
     
-    public void Shake()
+    public void ShakeForSeconds(float seconds)
     {
-        InvokeRepeating("BeginShake", 0, duration);
-        Invoke("StopShake", 1);
+		originalPosition = transform.localPosition;
+		InvokeRepeating("BeginShake", 0, 0.1f);
+		Invoke("StopShake", seconds);
     }
 
 	void BeginShake()
     {
-        float shakeX = Random.value * cameraShake * 2 - cameraShake;
-        float shakeY = Random.value * cameraShake * 2 - cameraShake;
-        Vector2 shakePosition = new Vector2(shakeX, shakeY);
-        transform.position = shakePosition;
+		Vector3 randomPosition = Random.insideUnitCircle;
+		transform.localPosition = originalPosition 
+			+ new Vector3(randomPosition.x, randomPosition.y, 0) * .3f;
     }
-
+    
     void StopShake()
     {
         CancelInvoke("BeginShake");
-        transform.position = originalPosition;
+		transform.localPosition = originalPosition;
     }
 }

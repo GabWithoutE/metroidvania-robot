@@ -36,6 +36,8 @@ public static class ConstantStrings
 
 	public const string UTILITY_RESOURCE_STATE = "UtilityResourceState";
 
+    public const string RECOIL_STATE = "Recoil";
+
 	public static class CameraDirectionBoxes{
 		public const string STAGE_EDGE_HORIZONTAL_RIGHT = "StageEdgeHorizontalRight";
 		public const string STAGE_EDGE_HORIZONTAL_LEFT = "StageEdgeHorizontalLeft";

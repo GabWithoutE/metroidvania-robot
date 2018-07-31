@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HealthState : MonoBehaviour {
+public class HealthState : MonoBehaviour , IDamageable{
 	public float initMaxHealth;
 	public float initCurrentHealth;
 	public float maxHealth;

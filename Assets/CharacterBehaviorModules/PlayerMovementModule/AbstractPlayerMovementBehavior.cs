@@ -22,7 +22,13 @@ public abstract class AbstractPlayerMovementBehavior : AbstractCharacterMovement
             verticalScaleValue = fallSpeedScaleValue;
         }
 
-        characterRigidbody.position +=
-                              new Vector2(velocity[0] * runSpeedScaleValue, velocity[1] * verticalScaleValue) * Time.deltaTime;
+        if (!((bool[]) stateObserver.GetCharacterStateValue(ConstantStrings.RECOIL_STATE))[0]){
+            movementHandler.AddToXPosition(velocity[0] * runSpeedScaleValue * Time.deltaTime);
+        }
+        if (!((bool[])stateObserver.GetCharacterStateValue(ConstantStrings.RECOIL_STATE))[1]){
+            movementHandler.AddToYPosition(velocity[1] * verticalScaleValue * Time.deltaTime);
+        }
+        //characterRigidbody.position +=
+                              //new Vector2(velocity[0] * runSpeedScaleValue, velocity[1] * verticalScaleValue) * Time.deltaTime;
 	}
 }
