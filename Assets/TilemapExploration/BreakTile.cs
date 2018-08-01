@@ -41,4 +41,9 @@ public class BreakTile : MonoBehaviour {
             timer = 0;
         }
     }
+
+    private void CastRayUp()
+    {
+
+    }
 }
