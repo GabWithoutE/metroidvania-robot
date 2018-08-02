@@ -340,9 +340,10 @@ public class StageManager : MonoBehaviour {
             sceneObjectsEnemy = (sceneObjectLists<EnemyState>)bf.Deserialize(file);
             file.Close();
         }
+        //If file does not exist, create file
         else
         {
-            Debug.Log("Enemy file not found");
+            SaveEnemyToFile();
         }
     }
 
@@ -364,7 +365,7 @@ public class StageManager : MonoBehaviour {
         }
         else
         {
-            Debug.Log("Item file not found");
+            SaveItemToFile();
         }
     }
     /*

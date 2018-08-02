@@ -334,6 +334,7 @@ MonoBehaviour:
   runSpeedScale: 3
   jumpSpeedScale: 0
   fallSpeedScale: 8
+  scaleStateValue: []
 --- !u!114 &114524309021805024
 MonoBehaviour:
   m_ObjectHideFlags: 1

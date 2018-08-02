@@ -8,7 +8,7 @@ using UnityEditor;
 
 public class StageEnemies : MonoBehaviour {
     private StageManager stageManager;
-    public Rigidbody2D enemy;
+    public GameObject enemy;
     void Awake()
     {
         stageManager = GetComponentInParent<StageManager>();
@@ -16,9 +16,11 @@ public class StageEnemies : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-		
-	}
-	
+        //Loads from save file. LoadAll() creates a save file if save file does not exist yet
+        stageManager.LoadAll();
+        //Loop through each enemy in sceneObjectsEnemy in stageManager
+        //If enemy is still alive, placeEnemy at a position
+    }
 
     //Instantiates a weenie enemy at input position
     public void placeEnemy(Vector2 position)

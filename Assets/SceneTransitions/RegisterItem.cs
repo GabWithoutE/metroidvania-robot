@@ -16,12 +16,19 @@ public class RegisterItem : MonoBehaviour {
     // Use this for initialization
     void Start()
     {
+        Vector2 itemPosition;
         //Only register if stage manager does not have it
         if (!stageManager.ContainsItem(gameObject.name))
         {
-            Vector2 itemPosition = transform.position;
+            itemPosition = transform.position;
             ItemState itemState = new ItemState(gameObject.name, itemPosition);
             stageManager.RegisterState(itemState);
         }
+        else
+        {
+            itemPosition = stageManager.GetItemState(gameObject.name).getPosition();
+        }
+        //Place the item
+        transform.position = itemPosition;
     }
 }

@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//Every enemy has these states
+
 public class EnemyState {
     public string name;
     public bool alive;

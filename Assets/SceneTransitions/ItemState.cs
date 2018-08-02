@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//Every item has these states
+
 public class ItemState {
     public string name;
     public bool pickedUp;

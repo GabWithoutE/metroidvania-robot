@@ -15,12 +15,21 @@ public class RegisterEnemy : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+        Vector2 enemyPosition;
         //Only register if stage manager does not have it
-        if(!stageManager.ContainsEnemy(gameObject.name))
+        if (!stageManager.ContainsEnemy(gameObject.name))
         {
-            Vector2 enemyPosition = transform.position;
+            //Place the enemy whereever it was placed in the inspector
+            enemyPosition = transform.position;
             EnemyState enemyState = new EnemyState(gameObject.name, enemyPosition);
             stageManager.RegisterState(enemyState);
-        }        
+        }
+        //If stage manager contains the enemy, place it where the save file says to
+        else
+        {
+            enemyPosition = stageManager.GetEnemyState(gameObject.name).getPosition();
+        }
+        //Place the enemy
+        transform.position = enemyPosition;
 	}
 }
