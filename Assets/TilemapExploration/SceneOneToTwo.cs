@@ -11,7 +11,6 @@ public class SceneOneToTwo : MonoBehaviour {
 
     void OnTriggerEnter2D(Collider2D col)
     {
-        Debug.Log("Stepped");
         if (col != null)
         {
             if (col.gameObject.tag == "Player")

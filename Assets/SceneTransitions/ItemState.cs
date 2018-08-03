@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 
 //Every item has these states
-
+[System.Serializable]
 public class ItemState {
     public string name;
     public bool pickedUp;
+    [SerializeField]
     public Vector2 position;
 
     public ItemState()

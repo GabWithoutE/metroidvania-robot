@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 
 //Every enemy has these states
-
+[System.Serializable]
 public class EnemyState {
     public string name;
     public bool alive;
+    [SerializeField]
     public Vector2 position;
 
     public EnemyState()

@@ -44,7 +44,7 @@ public abstract class AbstractCharacterSpeedScaleState : MonoBehaviour {
 	private void Start()
 	{
 		decelerationRate = jumpSpeedScale / ((float[])stateManager.GetCharacterStateValue(ConstantStrings.VELOCITY))[2];
-		print(decelerationRate);
+		//print(decelerationRate);
 		accelerationRate = decelerationRate;
 	}
 

@@ -63,10 +63,25 @@ public class StageManager : MonoBehaviour {
     //List of item states for each item in scene
     private sceneObjectLists<ItemState> sceneObjectsItem = new sceneObjectLists<ItemState>();
     
-    //private sceneObjectLists<bool> sceneObjectsBool = new sceneObjectLists<bool>();
-    //private sceneObjectLists<float> sceneObjectsFloat = new sceneObjectLists<float>();
-    //private sceneObjectLists<string> sceneObjectsString = new sceneObjectLists<string>();
-    //private sceneObjectLists<Vector2> sceneObjectsPositions = new sceneObjectLists<Vector2>();
+    //If save file does not exist, save a new copy
+    void Start()
+    {
+        //Close all open filestreams pertaining to this scene
+        //CloseStreams();
+        SaveAllToFile();
+    }
+
+    private void CloseStreams()
+    {
+        //Get name of active scene
+        activeSceneName = SceneManager.GetActiveScene().name;
+        string pathName = "SaveData/" + activeSceneName + "enemy.dat";
+        FileStream fs = File.Open(pathName, FileMode.Open);
+        fs.Close();
+        pathName = "SaveData/" + activeSceneName + "item.dat";
+        fs = File.Open(pathName, FileMode.Open);
+        fs.Close();
+    }
 
     public void Reset()
     {
@@ -157,57 +172,9 @@ public class StageManager : MonoBehaviour {
         return tempItemState;
     }
 
-    /*
-    public void Save(string key, bool value)
-    {
-        Save(sceneObjectsBool, key, value);
-    }
-
-    public void Save(string key, string value)
-    {
-        Save(sceneObjectsString, key, value);
-    }
-
-    public void Save(string key, float value)
-    {
-        Save(sceneObjectsFloat, key, value);
-    }
-
-    public void Save(string key, Vector2 value)
-    {
-        Save(sceneObjectsPositions, key, value);
-    }
-
-    //Loads bool list element into value
-    public bool Load(string key, ref bool value)
-    {
-        return Load(sceneObjectsBool, key, ref value);
-    }
-
-    public bool Load(string key, ref float value)
-    {
-        return Load(sceneObjectsFloat, key, ref value);
-    }
-
-    public bool Load(string key, ref string value)
-    {
-        return Load(sceneObjectsString, key, ref value);
-    }
-
-    public bool Load(string key, ref Vector2 value)
-    {
-        return Load(sceneObjectsPositions, key, ref value);
-    }
-    */
     //Saves entire scene data
     public void SaveAllToFile()
     {
-        /*
-        SaveBoolToFile();
-        SaveFloatToFile();
-        SaveStringToFile();
-        SavePositionsToFile();
-        */
         SaveEnemyToFile();
         SaveItemToFile();
     }
@@ -217,13 +184,27 @@ public class StageManager : MonoBehaviour {
         //Get name of active scene
         activeSceneName = SceneManager.GetActiveScene().name;
         string pathName = "SaveData/" + activeSceneName + "enemy.dat";
-        //If file already exists, delete existing file
+        
+        FileStream fs;
+        //If file already exists, just open file
         if (File.Exists(pathName))
         {
-            File.Delete(pathName);
+            fs = new FileStream(pathName, FileMode.Open);
         }
-        //Save data into new file
-        FileStream fs = new FileStream(pathName, FileMode.Create);
+        //Otherwise create file
+        else
+        {
+            fs = new FileStream(pathName, FileMode.Create);
+        }
+        /*
+        using (var file = File.Open(pathName, FileMode.OpenOrCreate))
+        {
+            //Save data into new file        
+            BinaryFormatter bf = new BinaryFormatter();
+            bf.Serialize(file, sceneObjectsEnemy);
+        }
+        */
+        //Save data into new file        
         BinaryFormatter bf = new BinaryFormatter();
         bf.Serialize(fs, sceneObjectsEnemy);
         fs.Close();
@@ -234,83 +215,32 @@ public class StageManager : MonoBehaviour {
         //Get name of active scene
         activeSceneName = SceneManager.GetActiveScene().name;
         string pathName = "SaveData/" + activeSceneName + "item.dat";
-        //If file already exists, delete existing file
+
+        FileStream fs;
+        //If file already exists, just open file
         if (File.Exists(pathName))
         {
-            File.Delete(pathName);
+            fs = new FileStream(pathName, FileMode.Open);
         }
-        //Save data into new file
-        FileStream fs = new FileStream(pathName, FileMode.Create);
+        //Otherwise create file
+        else
+        {
+            fs = new FileStream(pathName, FileMode.Create);
+        }
+        /*
+        using (var file = File.Open(pathName, FileMode.OpenOrCreate))
+        {
+            //Save data into new file        
+            BinaryFormatter bf = new BinaryFormatter();
+            bf.Serialize(file, sceneObjectsEnemy);
+        }
+        */
+        //Save data into new file        
         BinaryFormatter bf = new BinaryFormatter();
         bf.Serialize(fs, sceneObjectsItem);
         fs.Close();
     }
-    /*
-    public void SaveBoolToFile()
-    {
-        //Get name of active scene
-        activeSceneName = SceneManager.GetActiveScene().name;
-        string pathName = "SaveData/" + activeSceneName + "bool.dat";
-        //If file already exists, delete existing file
-        if (File.Exists(pathName))
-        {
-            File.Delete(pathName);
-        }
-        //Save data into new file
-        FileStream fs = new FileStream(pathName, FileMode.Create);
-        BinaryFormatter bf = new BinaryFormatter();
-        bf.Serialize(fs, sceneObjectsBool);
-        fs.Close();
-    }
 
-    public void SaveFloatToFile()
-    {
-        activeSceneName = SceneManager.GetActiveScene().name;
-        string pathName = "SaveData/" + activeSceneName + "float.dat";
-        //If file already exists, delete existing file
-        if (File.Exists(pathName))
-        {
-            File.Delete(pathName);
-        }
-        //Save data into new file
-        FileStream fs = new FileStream(pathName, FileMode.Create);
-        BinaryFormatter bf = new BinaryFormatter();
-        bf.Serialize(fs, sceneObjectsFloat);
-        fs.Close();
-    }
-
-    public void SaveStringToFile()
-    {
-        activeSceneName = SceneManager.GetActiveScene().name;
-        string pathName = "SaveData/" + activeSceneName + "string.dat";
-        //If file already exists, delete existing file
-        if (File.Exists(pathName))
-        {
-            File.Delete(pathName);
-        }
-        //Save data into new file
-        FileStream fs = new FileStream(pathName, FileMode.Create);
-        BinaryFormatter bf = new BinaryFormatter();
-        bf.Serialize(fs, sceneObjectsString);
-        fs.Close();
-    }
-
-    public void SavePositionsToFile()
-    {
-        activeSceneName = SceneManager.GetActiveScene().name;
-        string pathName = "SaveData/" + activeSceneName + "positions.dat";
-        //If file already exists, delete existing file
-        if (File.Exists(pathName))
-        {
-            File.Delete(pathName);
-        }
-        //Save data into new file
-        FileStream fs = new FileStream(pathName, FileMode.Create);
-        BinaryFormatter bf = new BinaryFormatter();
-        bf.Serialize(fs, sceneObjectsPositions);
-        fs.Close();
-    }
-    */
     //Loads entire scene's data
     public void LoadAll()
     {
@@ -368,93 +298,4 @@ public class StageManager : MonoBehaviour {
             SaveItemToFile();
         }
     }
-    /*
-    public void LoadBool()
-    {
-        //Get name of active scene
-        activeSceneName = SceneManager.GetActiveScene().name;
-        string pathName = "SaveData/" + activeSceneName + "bool.dat";
-        //See if file exists already, if it does load data into list
-        if (File.Exists(pathName))
-        {
-            //Clears current data
-            sceneObjectsBool.Clear();
-            //Loads data into list
-            BinaryFormatter bf = new BinaryFormatter();
-            FileStream file = File.Open(pathName, FileMode.Open);
-            sceneObjectsBool = (sceneObjectLists<bool>)bf.Deserialize(file);
-            file.Close();
-        }
-        else
-        {
-            Debug.Log("File not found");
-        }
-    }
-
-    public void LoadFloat()
-    {
-        //Get name of active scene
-        activeSceneName = SceneManager.GetActiveScene().name;
-        string pathName = "SaveData/" + activeSceneName + "float.dat";
-        //See if file exists already, if it does load data into list
-        if (File.Exists(pathName))
-        {
-            //Clears current data
-            sceneObjectsFloat.Clear();
-            //Loads data into list
-            BinaryFormatter bf = new BinaryFormatter();
-            FileStream file = File.Open(pathName, FileMode.Open);
-            sceneObjectsFloat = (sceneObjectLists<float>)bf.Deserialize(file);
-            file.Close();
-        }
-        else
-        {
-            Debug.Log("File not found");
-        }
-    }
-
-    public void LoadString()
-    {
-        //Get name of active scene
-        activeSceneName = SceneManager.GetActiveScene().name;
-        string pathName = "SaveData/" + activeSceneName + "string.dat";
-        //See if file exists already, if it does load data into list
-        if (File.Exists(pathName))
-        {
-            //Clears current data
-            sceneObjectsString.Clear();
-            //Loads data into list
-            BinaryFormatter bf = new BinaryFormatter();
-            FileStream file = File.Open(pathName, FileMode.Open);
-            sceneObjectsString = (sceneObjectLists<string>)bf.Deserialize(file);
-            file.Close();
-        }
-        else
-        {
-            Debug.Log("File not found");
-        }
-    }
-
-    public void LoadPositions()
-    {
-        //Get name of active scene
-        activeSceneName = SceneManager.GetActiveScene().name;
-        string pathName = "SaveData/" + activeSceneName + "positions.dat";
-        //See if file exists already, if it does load data into list
-        if (File.Exists(pathName))
-        {
-            //Clears current data
-            sceneObjectsPositions.Clear();
-            //Loads data into list
-            BinaryFormatter bf = new BinaryFormatter();
-            FileStream file = File.Open(pathName, FileMode.Open);
-            sceneObjectsPositions = (sceneObjectLists<Vector2>)bf.Deserialize(file);
-            file.Close();
-        }
-        else
-        {
-            Debug.Log("File not found");
-        }
-    }
-    */
 }

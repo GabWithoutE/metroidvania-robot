@@ -8,19 +8,21 @@ using UnityEngine;
 public class RegisterEnemy : MonoBehaviour {
     private StageManager stageManager;
 
-    void Awake()
-    {
-        stageManager = GetComponentInParent<StageManager>();    
-    }
-
 	// Use this for initialization
 	void Start () {
+        stageManager = GameObject.FindGameObjectWithTag("SceneManager").GetComponent<StageManager>();
+        if(stageManager == null)
+        {
+            Debug.Log("Stage manager null");
+        }
         Vector2 enemyPosition;
         //Only register if stage manager does not have it
         if (!stageManager.ContainsEnemy(gameObject.name))
         {
             //Place the enemy whereever it was placed in the inspector
             enemyPosition = transform.position;
+            //Debug.Log("Registered position:");
+            //Debug.Log(enemyPosition);
             EnemyState enemyState = new EnemyState(gameObject.name, enemyPosition);
             stageManager.RegisterState(enemyState);
         }

@@ -21,7 +21,6 @@ public abstract class AbstractPlayerMovementBehavior : AbstractCharacterMovement
         {
             verticalScaleValue = fallSpeedScaleValue;
         }
-
         characterRigidbody.position +=
                               new Vector2(velocity[0] * runSpeedScaleValue, velocity[1] * verticalScaleValue) * Time.deltaTime;
 	}

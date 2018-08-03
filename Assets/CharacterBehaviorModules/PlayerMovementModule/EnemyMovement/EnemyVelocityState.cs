@@ -44,7 +44,7 @@ public class EnemyVelocityState : AbstractCharacterVelocityState
         float verticalValues = 0;        
         bool isGrounded = ((bool[])statesManager.GetCharacterStateValue(ConstantStrings.GROUNDED))[1];
         hit = (bool)statesManager.GetCharacterStateValue(ConstantStrings.HIT_STATE);
-        Debug.Log(isGrounded);
+        //Debug.Log(isGrounded);
         //If enemy is standing on the ground, turn off gravity
         if (isGrounded)
         {
