@@ -150,6 +150,9 @@ public class BasePlayerAbilityCastingBehavior : MonoBehaviour {
 	private void SetTriggers(){
 		lightAttackInstanceRightTrigger = lightAttackInstanceRight.GetComponent<LightMeleeAttackTrigger>();
 		lightAttackInstanceLeftTrigger = lightAttackInstanceLeft.GetComponent<LightMeleeAttackTrigger>();
+        lightAttackInstanceLeftTrigger.SetKnockBackDirection(
+            new Vector2 (-lightAttackInstanceLeftTrigger.knockBackStraightDirection.x, 
+                         lightAttackInstanceLeftTrigger.knockBackStraightDirection.y));
 		lightAttackInstanceUpRightTrigger = lightAttackInstanceUpRight.GetComponent<LightMeleeAttackTrigger>();
 		lightAttackInstanceDownRightTrigger = lightAttackInstanceDownRight.GetComponent<LightMeleeAttackTrigger>();
 
