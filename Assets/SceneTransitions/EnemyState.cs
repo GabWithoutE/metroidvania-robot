@@ -6,22 +6,28 @@ using UnityEngine;
 [System.Serializable]
 public class EnemyState {
     public string name;
-    public bool alive;
+    public bool dead;
     [SerializeField]
-    public Vector2 position;
+    public CustomPosition currentPosition;
+    [SerializeField]
+    public CustomPosition startingPosition;
 
     public EnemyState()
     {
         name = "";
-        alive = true;
-        position = new Vector2(-1, -1);
+        dead = true;
+        Vector2 tempPosition = new Vector2(-2, -2);
+        currentPosition = new CustomPosition(tempPosition);
+        startingPosition = new CustomPosition(tempPosition);
     }
 
-    public EnemyState(string nameIn, Vector2 positionIn)
+    public EnemyState(string nameIn, bool deadIn, Vector2 positionIn)
     {
         name = nameIn;
-        alive = true;
-        position = positionIn;
+        dead = deadIn;
+        CustomPosition tempCustomPosition = new CustomPosition(positionIn);
+        currentPosition = tempCustomPosition;
+        startingPosition = tempCustomPosition;
     }
 
     public string getName()
@@ -29,28 +35,33 @@ public class EnemyState {
         return name;
     }
 
-    public bool isAlive()
+    public bool isDead()
     {
-        return alive;
+        return dead;
     }
 
-    public Vector2 getPosition()
+    public CustomPosition getCurrentPosition()
     {
-        return position;
+        return currentPosition;
     }
-
+    
+    public CustomPosition getStartingPosition()
+    {
+        return startingPosition;
+    }
+    
     public void setName(string nameIn)
     {
         name = nameIn;
     }
 
-    public void setAlive(bool aliveIn)
+    public void setDead(bool deadIn)
     {
-        alive = aliveIn;
+        dead = deadIn;
     }
 
-    public void setPosition(Vector2 positionIn)
+    public void setCurrentPosition(Vector2 positionIn)
     {
-        position = positionIn;
+        currentPosition.setPosition(positionIn);
     }
 }

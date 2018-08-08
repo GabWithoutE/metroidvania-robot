@@ -8,14 +8,13 @@ using UnityEngine;
 public class RegisterItem : MonoBehaviour {
     private StageManager stageManager;
 
-    void Awake()
-    {
-        stageManager = GetComponentInParent<StageManager>();
-    }
-
     // Use this for initialization
     void Start()
     {
+        stageManager = GameObject.FindGameObjectWithTag("SceneManager").GetComponent<StageManager>();
+        //Adds itself to list of items if not already on the list
+        stageManager.RegisterItem(transform.root.gameObject);
+        /*
         Vector2 itemPosition;
         //Only register if stage manager does not have it
         if (!stageManager.ContainsItem(gameObject.name))
@@ -26,9 +25,10 @@ public class RegisterItem : MonoBehaviour {
         }
         else
         {
-            itemPosition = stageManager.GetItemState(gameObject.name).getPosition();
+            itemPosition = stageManager.GetItemState(gameObject.name).getPosition().getVect2();
         }
         //Place the item
         transform.position = itemPosition;
+        */
     }
 }

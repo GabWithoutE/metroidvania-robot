@@ -6,32 +6,24 @@ using UnityEngine;
 //enemy in scene's StageManager
 
 public class RegisterEnemy : MonoBehaviour {
-    private StageManager stageManager;
+    private IStageManager stageManager;
+    private ICharacterStateManager stateManager;
+
+    void Awake()
+    {
+        stateManager = GetComponentInParent<CharacterStatesManager>();
+        //Register original position to character state manager
+        Vector2 tempPosition = transform.root.position;
+        CharacterState originalPosition = new CharacterState("OriginalPosition", tempPosition);
+        stateManager.RegisterCharacterState("OriginalPosition", originalPosition);
+        //Debug.Log(stateManager.GetCharacterStateValue("OriginalPosition"));
+    }
 
 	// Use this for initialization
 	void Start () {
-        stageManager = GameObject.FindGameObjectWithTag("SceneManager").GetComponent<StageManager>();
-        if(stageManager == null)
-        {
-            Debug.Log("Stage manager null");
-        }
-        Vector2 enemyPosition;
-        //Only register if stage manager does not have it
-        if (!stageManager.ContainsEnemy(gameObject.name))
-        {
-            //Place the enemy whereever it was placed in the inspector
-            enemyPosition = transform.position;
-            //Debug.Log("Registered position:");
-            //Debug.Log(enemyPosition);
-            EnemyState enemyState = new EnemyState(gameObject.name, enemyPosition);
-            stageManager.RegisterState(enemyState);
-        }
-        //If stage manager contains the enemy, place it where the save file says to
-        else
-        {
-            enemyPosition = stageManager.GetEnemyState(gameObject.name).getPosition();
-        }
-        //Place the enemy
-        transform.position = enemyPosition;
+        stageManager = GameObject.FindGameObjectWithTag("SceneManager").GetComponent<StageManager>();        
+        //Adds itself to list of enemies if not already on the list
+        GameObject go = transform.root.gameObject;
+        stageManager.RegisterEnemy(ref go);        
 	}
 }

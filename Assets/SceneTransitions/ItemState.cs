@@ -8,20 +8,22 @@ public class ItemState {
     public string name;
     public bool pickedUp;
     [SerializeField]
-    public Vector2 position;
+    //public Vector2 position;
+    public CustomPosition position;
 
     public ItemState()
     {
         name = "";
         pickedUp = false;
-        position = new Vector2(-1, -1);
+        Vector2 tempPosition = new Vector2(-1, -1);
+        position = new CustomPosition(tempPosition);
     }
 
     public ItemState(string nameIn, Vector2 positionIn)
     {
         name = nameIn;
         pickedUp = false;
-        position = positionIn;
+        position.setPosition(positionIn);
     }
 
     public string getName()
@@ -34,7 +36,7 @@ public class ItemState {
         return pickedUp;
     }
 
-    public Vector2 getPosition()
+    public CustomPosition getPosition()
     {
         return position;
     }
@@ -51,6 +53,6 @@ public class ItemState {
 
     public void setPosition(Vector2 positionIn)
     {
-        position = positionIn;
+        position.setPosition(positionIn);
     }
 }
