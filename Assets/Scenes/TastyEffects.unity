@@ -2587,11 +2587,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 2
       objectReference: {fileID: 0}
-    - target: {fileID: 114360280572513586, guid: e6ab35c4f836d419d93a0806fd81bc03,
-        type: 2}
-      propertyPath: playerReference
-      value: 
-      objectReference: {fileID: 1064345563}
     - target: {fileID: 114720344747732060, guid: e6ab35c4f836d419d93a0806fd81bc03,
         type: 2}
       propertyPath: playerReference
@@ -2599,29 +2594,9 @@ Prefab:
       objectReference: {fileID: 1064345563}
     - target: {fileID: 114360280572513586, guid: e6ab35c4f836d419d93a0806fd81bc03,
         type: 2}
-      propertyPath: maxVerticalDistanceFromPlayer
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114360280572513586, guid: e6ab35c4f836d419d93a0806fd81bc03,
-        type: 2}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114720344747732060, guid: e6ab35c4f836d419d93a0806fd81bc03,
-        type: 2}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114360280572513586, guid: e6ab35c4f836d419d93a0806fd81bc03,
-        type: 2}
-      propertyPath: cameraVerticalOffsetFromPlayerPaddingRatio
-      value: 0.45
-      objectReference: {fileID: 0}
-    - target: {fileID: 114643845828108388, guid: e6ab35c4f836d419d93a0806fd81bc03,
-        type: 2}
-      propertyPath: camera
+      propertyPath: playerReference
       value: 
-      objectReference: {fileID: 1726111808}
+      objectReference: {fileID: 1064345563}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e6ab35c4f836d419d93a0806fd81bc03, type: 2}
   m_IsPrefabAsset: 0
@@ -4915,22 +4890,6 @@ Transform:
   m_Father: {fileID: 1009169264}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1726111808 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1246576811766436, guid: e6ab35c4f836d419d93a0806fd81bc03,
-    type: 2}
-  m_PrefabInternal: {fileID: 862317371}
---- !u!114 &1726111809
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1726111808}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3ce15ee78f09f6948a6fae53e9af2d41, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1754506111
 GameObject:
   m_ObjectHideFlags: 0
