@@ -5,12 +5,15 @@ using UnityEngine;
 public class HeavyAttackTrigger : AbstractMeleeAttackTrigger {
 	private Vector2 colliderOriginalSize;
 	private HeavyMeleeAbilityStats heavyMeleeAbilityStats;
-	private float maxXScaleDiff;
+    private ICharacterStateManager stateManager;
+    private float maxXScaleDiff;
 	private float maxYScaleDiff;
 	private float maxDamageScale;
 	private float currentDamageScale = 1;
 	private float maxChargeTime;
 	private float currentChargeTime = 0;
+    private FlyingKickMovePlayer flyingKick;
+    private float kickDistance;
     
 	// Use this for initialization
 	private void Awake () {
@@ -22,7 +25,14 @@ public class HeavyAttackTrigger : AbstractMeleeAttackTrigger {
 		maxDamageScale = heavyMeleeAbilityStats.GetDamageMaxScaleFactor();
 		maxXScaleDiff = heavyMeleeAbilityStats.GetXMaxScaleFactor() - 1;
 		maxYScaleDiff = heavyMeleeAbilityStats.GetYMaxScaleFactor() - 1;
+        kickDistance = 1f;
 	}
+
+    void Start()
+    {
+        stateManager = GetComponentInParent(typeof(ICharacterStateManager)) as ICharacterStateManager;
+        flyingKick = GetComponent<FlyingKickMovePlayer>();
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -32,7 +42,12 @@ public class HeavyAttackTrigger : AbstractMeleeAttackTrigger {
 	public override void TriggerAttack(){
 		// Casts and persists for duration then change the scale values back
 		base.EnableCollider();
-		StartCoroutine(DisableColliderAfterDuration(heavyMeleeAbilityStats.GetAbilityDuration()));
+        StartCoroutine(DisableColliderAfterDuration(heavyMeleeAbilityStats.GetAbilityDuration()));
+        //If player is in the air, do a flying kick
+        if (!((bool[])stateManager.GetCharacterStateValue(ConstantStrings.GROUNDED))[1])
+        {
+            flyingKick.FlyingKickDistance(kickDistance);
+        }		
 	}
 
 	private void OnTriggerEnter2D(Collider2D collision)
