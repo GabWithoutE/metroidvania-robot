@@ -9,7 +9,7 @@ public class FlyingKickMovePlayer : MonoBehaviour {
     private HeavyMeleeAbilityStats heavyMeleeAbilityStats;
     private CharacterState directionState;
     private float currentKickDistance;
-    private float kickDistance;
+    public float kickDistance;
     public float kickSpeed;
 
     void Awake()
@@ -26,14 +26,6 @@ public class FlyingKickMovePlayer : MonoBehaviour {
         stateManager = GetComponentInParent(typeof(ICharacterStateManager)) as ICharacterStateManager;
         directionState = stateManager.GetExistingCharacterState(ConstantStrings.DIRECTION);
         currentKickDistance = 0;
-        /*
-        while(currentKickDuration < kickDuration)
-        {
-            characterMovementHandler.AddToXPosition(((float[])directionState.GetStateValue())[0] * kickSpeed * Time.deltaTime);
-            characterMovementHandler.AddToYPosition(((float[])directionState.GetStateValue())[1] * kickSpeed * Time.deltaTime);
-            currentKickDuration += Time.deltaTime;
-        }    
-        */
     }
 
     public void FlyingKickDistance(float distance)
@@ -42,7 +34,6 @@ public class FlyingKickMovePlayer : MonoBehaviour {
         {
             characterMovementHandler.AddToXPosition
                 (((float[])directionState.GetStateValue())[0] * kickSpeed * Time.deltaTime);
-            characterMovementHandler.AddToYPosition(((float[])directionState.GetStateValue())[1] * kickSpeed * Time.deltaTime);
             currentKickDistance += kickSpeed * Time.deltaTime;
         }
         currentKickDistance = 0;

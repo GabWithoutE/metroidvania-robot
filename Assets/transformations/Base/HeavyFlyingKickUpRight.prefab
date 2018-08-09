@@ -24,7 +24,7 @@ GameObject:
   - component: {fileID: 114569034297638892}
   - component: {fileID: 61549087827831078}
   m_Layer: 0
-  m_Name: HeavyFlyingKick
+  m_Name: HeavyFlyingKickUpRight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -55,7 +55,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: 1.6}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -66,7 +66,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.6, y: 1.5}
   m_EdgeRadius: 0
 --- !u!114 &114569034297638892
 MonoBehaviour:
@@ -79,8 +79,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11d53a950de074c418925b92bba5d63e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  kickDuration: 1
-  kickSpeed: 1
+  kickDistance: 2
+  kickSpeed: 0.001
 --- !u!114 &114643565827930018
 MonoBehaviour:
   m_ObjectHideFlags: 1

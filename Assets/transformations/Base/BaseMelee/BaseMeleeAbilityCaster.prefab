@@ -89,9 +89,9 @@ MonoBehaviour:
     type: 2}
   heavyAttackHorizontalRight: {fileID: 1962169618981544, guid: b103048a9c6138447a50797f99e06930,
     type: 2}
-  heavyAttackUpRight: {fileID: 1962169618981544, guid: b103048a9c6138447a50797f99e06930,
+  heavyAttackUpRight: {fileID: 1962169618981544, guid: 4f8c64ccfc3a8194c97ccdddf50ca7a7,
     type: 2}
-  heavyAttackDownRight: {fileID: 1962169618981544, guid: b103048a9c6138447a50797f99e06930,
+  heavyAttackDownRight: {fileID: 1962169618981544, guid: 81ee0e288f5e86547b97e66e0abb9e3f,
     type: 2}
   utilityAbility: {fileID: 1497370931035874, guid: 061ff70d8db1f45d5bdd751cb328fbb4,
     type: 2}

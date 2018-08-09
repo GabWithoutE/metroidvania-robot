@@ -46,6 +46,7 @@ public class HeavyAttackTrigger : AbstractMeleeAttackTrigger {
         //If player is in the air, do a flying kick
         if (!((bool[])stateManager.GetCharacterStateValue(ConstantStrings.GROUNDED))[1])
         {
+            //Debug.Log("Not Grounded");
             flyingKick.FlyingKickDistance(kickDistance);
         }		
 	}
