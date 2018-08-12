@@ -17,9 +17,14 @@ public class PlayerVelocityState : AbstractCharacterVelocityState {
 		currentJumpHeight = jumpMaxHeight;
 		base.Awake();
 		directionState.SetState(new float[] { 0, 0, jumpMaxTime });
-		CharacterState.CharacterStateSubscription groundedSubscription = statesManager.GetCharacterStateSubscription(ConstantStrings.GROUNDED);
-		groundedSubscription.OnStateChanged += StopJumpOnHeadHit;
+		
 	}
+
+    void Start()
+    {
+        CharacterState.CharacterStateSubscription groundedSubscription = statesManager.GetCharacterStateSubscription(ConstantStrings.GROUNDED);
+        groundedSubscription.OnStateChanged += StopJumpOnHeadHit;
+    }
 
 	// Update is called once per frame
 	void Update () {
@@ -29,47 +34,54 @@ public class PlayerVelocityState : AbstractCharacterVelocityState {
 		float verticalValues = 0;
 		bool isGrounded = ((bool[])statesManager.GetCharacterStateValue(ConstantStrings.GROUNDED))[1];
 		bool headHit = ((bool[])statesManager.GetCharacterStateValue(ConstantStrings.GROUNDED))[0];
-
-		if (isGrounded){
-			if (!CrossPlatformInputManager.GetButton(ConstantStrings.UI.Input.INPUT_JUMP)){
-				currentJumpTime = 0;
-				//currentJumpHeight = 0;
-				//jumpStartHeight = transform.position.y;
-			}
-			verticalValues = 0;
-		} 
-		if (CrossPlatformInputManager.GetButton(ConstantStrings.UI.Input.INPUT_JUMP) && currentJumpTime < jumpMaxTime)
+        if(!(bool)statesManager.GetCharacterStateValue(ConstantStrings.MAGNET_STATE))
         {
-            verticalValues = CrossPlatformInputManager.GetAxisRaw(ConstantStrings.UI.Input.INPUT_JUMP);
-            currentJumpTime += Time.deltaTime;
-			if (headHit){
-				currentJumpTime = jumpMaxTime;
-				verticalValues = -1;
-			}
-        }
-
-		//if (CrossPlatformInputManager.GetButton(ConstantStrings.UI.Input.INPUT_JUMP) && currentJumpHeight < jumpMaxHeight){
-		//	verticalValues = CrossPlatformInputManager.GetAxisRaw(ConstantStrings.UI.Input.INPUT_JUMP);
-		//	currentJumpHeight = transform.position.y - jumpStartHeight;
-		//}
-
-		if (!CrossPlatformInputManager.GetButton(ConstantStrings.UI.Input.INPUT_JUMP)){
-			if (!isGrounded)
+            if (isGrounded)
             {
-				//currentJumpHeight = jumpMaxHeight;
-				currentJumpTime = jumpMaxTime;
+                if (!CrossPlatformInputManager.GetButton(ConstantStrings.UI.Input.INPUT_JUMP))
+                {
+                    currentJumpTime = 0;
+                    //currentJumpHeight = 0;
+                    //jumpStartHeight = transform.position.y;
+                }
+                verticalValues = 0;
+            }
+            if (CrossPlatformInputManager.GetButton(ConstantStrings.UI.Input.INPUT_JUMP) && currentJumpTime < jumpMaxTime)
+            {
+                verticalValues = CrossPlatformInputManager.GetAxisRaw(ConstantStrings.UI.Input.INPUT_JUMP);
+                currentJumpTime += Time.deltaTime;
+                if (headHit)
+                {
+                    currentJumpTime = jumpMaxTime;
+                    verticalValues = -1;
+                }
+            }
+
+            //if (CrossPlatformInputManager.GetButton(ConstantStrings.UI.Input.INPUT_JUMP) && currentJumpHeight < jumpMaxHeight){
+            //	verticalValues = CrossPlatformInputManager.GetAxisRaw(ConstantStrings.UI.Input.INPUT_JUMP);
+            //	currentJumpHeight = transform.position.y - jumpStartHeight;
+            //}
+
+            if (!CrossPlatformInputManager.GetButton(ConstantStrings.UI.Input.INPUT_JUMP))
+            {
+                if (!isGrounded)
+                {
+                    //currentJumpHeight = jumpMaxHeight;
+                    currentJumpTime = jumpMaxTime;
+                    verticalValues = -1;
+                }
+            }
+
+            if (currentJumpTime >= jumpMaxTime && !isGrounded)
+            {
                 verticalValues = -1;
             }
-		}      
-
-		if(currentJumpTime >= jumpMaxTime && !isGrounded){
-            verticalValues = -1;
-        }  
+        }
+		 
 
 		//if (currentJumpHeight >= jumpMaxHeight && !isGrounded){
 		//	verticalValues = -1;
 		//}
-
 
 		directionState.SetState(new float[] { horizontalAxisValue, verticalValues , jumpMaxTime});
 		//directionState.SetState(new float[] { horizontalAxisValue, verticalValues , jumpMaxHeight});
