@@ -5,16 +5,25 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/CollectShield.unity
     guid: 44e7205aaf86d6c4a9b1eb0b8ceee248
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/MagnetAfterCollectShield.unity
     guid: 31e0778e782196d43b87790c6130c349
   - enabled: 1
     path: Assets/Scenes/PersistentScene.unity
     guid: 1b305c997c573fa4280186e8f282d8ee
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/FadeAroundPlayer.unity
     guid: 6f74a204013d48a45ac4b9a780eae840
+  - enabled: 1
+    path: Assets/Scenes/Area3.unity
+    guid: 4847823b99ee9f44db333e8d7438ed17
+  - enabled: 1
+    path: Assets/Scenes/Area4.unity
+    guid: 97ac570feaba1f74aa243d34a58f6551
+  - enabled: 1
+    path: Assets/Scenes/Area5.unity
+    guid: 8e5fbc2f93e64aa4396dfd7acc09de71
   m_configObjects: {}
