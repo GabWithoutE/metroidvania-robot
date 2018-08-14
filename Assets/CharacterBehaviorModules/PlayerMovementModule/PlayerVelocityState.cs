@@ -17,9 +17,14 @@ public class PlayerVelocityState : AbstractCharacterVelocityState {
 		currentJumpHeight = jumpMaxHeight;
 		base.Awake();
 		directionState.SetState(new float[] { 0, 0, jumpMaxTime });
-		CharacterState.CharacterStateSubscription groundedSubscription = statesManager.GetCharacterStateSubscription(ConstantStrings.GROUNDED);
-		groundedSubscription.OnStateChanged += StopJumpOnHeadHit;
+		
 	}
+
+    void Start()
+    {
+        CharacterState.CharacterStateSubscription groundedSubscription = statesManager.GetCharacterStateSubscription(ConstantStrings.GROUNDED);
+        groundedSubscription.OnStateChanged += StopJumpOnHeadHit;
+    }
 
 	// Update is called once per frame
 	void Update () {

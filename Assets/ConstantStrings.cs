@@ -97,6 +97,7 @@ public static class ConstantStrings
             public const string JUMP_STATE = "jumpState";
             public const string BUSY_STATE = "busyState";
         }
+        public const string STUN_STATE = "stunState";
     }
 
 }
