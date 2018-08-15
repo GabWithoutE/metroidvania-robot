@@ -28,6 +28,7 @@ public class MoveTowardsMagnet : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+        //Moves character upwards if magnet state is true
 		if((bool)stateManager.GetCharacterStateValue(ConstantStrings.MAGNET_STATE))
         {
             characterMovementHandler.AddToYPosition(magnetAttractSpeed * Time.deltaTime);

@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//Turns the magnet on and off.
+
 public class MagnetController : MonoBehaviour {
     private BoxCollider2D col;
 
