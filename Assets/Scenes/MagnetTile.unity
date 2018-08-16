@@ -441,7 +441,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.28, y: 1.28}
+    oldSize: {x: 20, y: 20}
     newSize: {x: 1.28, y: 1.28}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -3127,6 +3127,14 @@ Prefab:
       propertyPath: m_RootOrder
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 4994823659183222, guid: e4aed92e2e2089148b8a6903959bd9a3, type: 2}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4994823659183222, guid: e4aed92e2e2089148b8a6903959bd9a3, type: 2}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e4aed92e2e2089148b8a6903959bd9a3, type: 2}
   m_IsPrefabAsset: 0
@@ -3373,6 +3381,22 @@ Prefab:
         type: 2}
       propertyPath: m_Offset.y
       value: -2.56
+      objectReference: {fileID: 0}
+    - target: {fileID: 212042660121239632, guid: 92cef80257a379647b4b6f58135ca4fe,
+        type: 2}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 7e8eef4580e74e84c91558d713e850e5,
+        type: 3}
+    - target: {fileID: 61103175741583434, guid: 92cef80257a379647b4b6f58135ca4fe,
+        type: 2}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 61103175741583434, guid: 92cef80257a379647b4b6f58135ca4fe,
+        type: 2}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 20
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 114931876325392024, guid: 92cef80257a379647b4b6f58135ca4fe, type: 2}
