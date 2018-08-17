@@ -8,15 +8,15 @@ Prefab:
     m_TransformParent: {fileID: 0}
     m_Modifications: []
     m_RemovedComponents: []
-  m_ParentPrefab: {fileID: 0}
+  m_SourcePrefab: {fileID: 0}
   m_RootGameObject: {fileID: 1819085694898456}
-  m_IsPrefabParent: 1
+  m_IsPrefabAsset: 1
 --- !u!1 &1819085694898456
 GameObject:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 5
+  serializedVersion: 6
   m_Component:
   - component: {fileID: 4894092747241708}
   - component: {fileID: 114411393177331446}
@@ -24,6 +24,7 @@ GameObject:
   - component: {fileID: 114803074999316852}
   - component: {fileID: 58757347444745116}
   - component: {fileID: 212558793704927558}
+  - component: {fileID: 114259105472819380}
   m_Layer: 0
   m_Name: GeneratorStunGrenade
   m_TagString: Untagged
@@ -34,7 +35,7 @@ GameObject:
 --- !u!4 &4894092747241708
 Transform:
   m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1819085694898456}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
@@ -47,7 +48,7 @@ Transform:
 --- !u!58 &58757347444745116
 CircleCollider2D:
   m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1819085694898456}
   m_Enabled: 1
@@ -58,11 +59,22 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 2
+--- !u!114 &114259105472819380
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1819085694898456}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 149a260e355b3dc4dbc6a9b4ff37318c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114411393177331446
 MonoBehaviour:
   m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1819085694898456}
   m_Enabled: 1
@@ -71,10 +83,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   utilityStunGrenadeExplosion: {fileID: 0}
+  explosionRange: 2
 --- !u!114 &114604022752793508
 MonoBehaviour:
   m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1819085694898456}
   m_Enabled: 1
@@ -85,7 +98,7 @@ MonoBehaviour:
 --- !u!114 &114803074999316852
 MonoBehaviour:
   m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1819085694898456}
   m_Enabled: 1
@@ -102,7 +115,7 @@ MonoBehaviour:
 --- !u!212 &212558793704927558
 SpriteRenderer:
   m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1819085694898456}
   m_Enabled: 1
@@ -144,3 +157,4 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
+  m_SpriteSortPoint: 0

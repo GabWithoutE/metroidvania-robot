@@ -9,7 +9,9 @@ public class EnemyVelocityState : AbstractCharacterVelocityState
     private float tempHorizontal;
     public float freezeDuration;
     private bool hit = false;
+    private bool stunned = false;
     private CharacterState hitState;
+    private CharacterState stunState;
     private object prevHealth;
     private float minX;
     private float maxX;
@@ -27,6 +29,8 @@ public class EnemyVelocityState : AbstractCharacterVelocityState
         statesManager = GetComponentInParent<ICharacterStateManager>();
         hitState = new CharacterState(ConstantStrings.HIT_STATE, hit);
         statesManager.RegisterCharacterState(hitState.name, hitState);
+        stunState = new CharacterState(ConstantStrings.Enemy.STUN_STATE, false);
+        statesManager.RegisterCharacterState(stunState.name, stunState);
         groundMask = LayerMask.GetMask("Ground");
     }
 	// Use this for initialization
@@ -35,6 +39,8 @@ public class EnemyVelocityState : AbstractCharacterVelocityState
         prevHealth = statesManager.GetCharacterStateValue(ConstantStrings.CURRENT_HEALTH);
         CharacterState.CharacterStateSubscription healthStateSubscription = statesManager.GetCharacterStateSubscription(ConstantStrings.CURRENT_HEALTH);
         healthStateSubscription.OnStateChanged += CheckHit;
+        CharacterState.CharacterStateSubscription stunStateSubscription = statesManager.GetCharacterStateSubscription(ConstantStrings.Enemy.STUN_STATE);
+        stunStateSubscription.OnStateChanged += CheckStun;
         horizontalAxisValue = 1;
         walkTimer = 0;
     }
@@ -44,7 +50,7 @@ public class EnemyVelocityState : AbstractCharacterVelocityState
         float verticalValues = 0;        
         bool isGrounded = ((bool[])statesManager.GetCharacterStateValue(ConstantStrings.GROUNDED))[1];
         hit = (bool)statesManager.GetCharacterStateValue(ConstantStrings.HIT_STATE);
-        Debug.Log(isGrounded);
+        //Debug.Log(isGrounded);
         //If enemy is standing on the ground, turn off gravity
         if (isGrounded)
         {
@@ -70,6 +76,7 @@ public class EnemyVelocityState : AbstractCharacterVelocityState
         if (hit)
         {
             FreezeStart(freezeDuration);
+            hitState.SetState(false);
         }
         //Only add to timer if enemy isn't resting
         if (horizontalAxisValue != 0)
@@ -81,6 +88,12 @@ public class EnemyVelocityState : AbstractCharacterVelocityState
         {
             FreezeStart(patrolPauseDuration);
             walkTimer = 0;
+        }
+        //If enemy was hit by stun grenade, freeze for 3 seconds
+        if(stunned)
+        {
+            FreezeStart(3);
+            stunned = false;
         }
         directionState.SetState(new float[] { horizontalAxisValue, verticalValues });        
     }
@@ -95,12 +108,19 @@ public class EnemyVelocityState : AbstractCharacterVelocityState
         }
     }
 
+    private void CheckStun(object stunState)
+    {
+        if((bool)stunState)
+        {
+            stunned = true;
+        }
+    }
+
     private void FreezeStart(float duration)
     {
         tempHorizontal = horizontalAxisValue;
         horizontalAxisValue = 0;
         StartCoroutine(FreezeDuration(duration));
-        hitState.SetState(false);
     }
 
     IEnumerator FreezeDuration(float duration)
