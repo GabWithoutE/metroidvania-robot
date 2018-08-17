@@ -38,6 +38,8 @@ public static class ConstantStrings
 
     public const string RECOIL_STATE = "Recoil";
 
+    public const string MAGNET_STATE = "Magnet";
+
 	public static class CameraDirectionBoxes{
 		public const string STAGE_EDGE_HORIZONTAL_RIGHT = "StageEdgeHorizontalRight";
 		public const string STAGE_EDGE_HORIZONTAL_LEFT = "StageEdgeHorizontalLeft";
