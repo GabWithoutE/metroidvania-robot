@@ -6,21 +6,27 @@ using UnityEngine;
 
 public class MagnetController : MonoBehaviour {
     private BoxCollider2D col;
+    public Sprite switchedOn;
+    public Sprite switchedOff;
 
     void Start()
     {
         col = GetComponent<BoxCollider2D>();
-        col.enabled = true;
+        //Default to switched on
+        TurnOnMagnet();
+        //TurnOffMagnet();
     }
 
     public void TurnOnMagnet()
     {
         col.enabled = true;
+        gameObject.GetComponent<SpriteRenderer>().sprite = switchedOn;
     }
 
     public void TurnOffMagnet()
     {
         col.enabled = false;
+        gameObject.GetComponent<SpriteRenderer>().sprite = switchedOff;
     }
 
     public bool GetMagnetState()
