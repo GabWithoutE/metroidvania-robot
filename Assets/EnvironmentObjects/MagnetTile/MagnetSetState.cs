@@ -20,8 +20,8 @@ public class MagnetSetState : MonoBehaviour {
             magnetState = new CharacterState(ConstantStrings.MAGNET_STATE, false);
             stateManager.RegisterCharacterState(magnetState.name, magnetState);
         }
-        GameObject globalGameObject = GameObject.FindGameObjectWithTag("GlobalGameObject");
-        inventoryController = globalGameObject.GetComponentInChildren<InventoryController>();
+        GameObject inventoryGameObject = GameObject.FindGameObjectWithTag("Inventory");
+        inventoryController = inventoryGameObject.GetComponentInChildren<InventoryController>();
     }
 
     void OnTriggerEnter2D(Collider2D col)

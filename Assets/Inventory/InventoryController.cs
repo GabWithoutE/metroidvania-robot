@@ -8,7 +8,7 @@ public class InventoryController : MonoBehaviour {
     void Awake()
     {
         //inventory = new List<GameObject>();
-        inventory = GetComponentInParent<Inventory>();
+        inventory = GetComponent<Inventory>();
     }
 
     public void AddItem(Item item)
