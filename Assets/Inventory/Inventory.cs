@@ -1,9 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.Serialization.Formatters.Binary;
+using System.IO;
 using UnityEngine;
 using UnityEngine.UI;
 public class Inventory : MonoBehaviour
 {
+    private string inventoryFilePathName = "SaveData/Inventory.dat";
     //public Image[] itemImages = new Image[numItemSlots];
     private List<Item> inventory;
     //public Item[] items = new Item[numItemSlots];
@@ -61,6 +64,13 @@ public class Inventory : MonoBehaviour
     //Saves inventory as .dat file
     public void SaveInventory()
     {
-
+        FileStream fs;
+        fs = new FileStream(inventoryFilePathName, FileMode.OpenOrCreate);
+        //Save data into new file        
+        BinaryFormatter bf = new BinaryFormatter();
+        bf.Serialize(fs, inventory);
+        fs.Close();
     }
+
+    //Load save file into inventory
 }
