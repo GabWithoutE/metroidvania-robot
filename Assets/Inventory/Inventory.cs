@@ -1,34 +1,66 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 using UnityEngine.UI;
 public class Inventory : MonoBehaviour
 {
-    public Image[] itemImages = new Image[numItemSlots];
-    public Item[] items = new Item[numItemSlots];
-    public const int numItemSlots = 4;
-    public void AddItem(Item itemToAdd)
+    //public Image[] itemImages = new Image[numItemSlots];
+    private List<Item> inventory;
+    //public Item[] items = new Item[numItemSlots];
+    //public const int numItemSlots = 4;
+
+    void Awake()
     {
-        for (int i = 0; i < items.Length; i++)
+        inventory = new List<Item>();
+    }
+
+    //If there are already instances of the item that is to be added, add amount to quantity instead
+    public void AddItem(Item item)
+    {
+        int itemIndex = FindItemIndexByName(item.getName());
+        //If item exists, add to quantity
+        if (itemIndex != -1)
         {
-            if (items[i] == null)
-            {
-                items[i] = itemToAdd;
-                itemImages[i].sprite = itemToAdd.sprite;
-                itemImages[i].enabled = true;
-                return;
-            }
+            inventory[itemIndex].AddQuantity(item.getQuantity());
+        }
+        else
+        {
+            inventory.Add(item);
+        }        
+    }
+
+    //Remove from quantity of item until quantity equals 0, then remove the item type from inventory
+    public void RemoveItem(Item item)
+    {
+        int itemIndex = FindItemIndexByName(item.getName());
+        //If there is one quantity left, remove item completely from inventory
+        if(inventory[itemIndex].getQuantity() == 1)
+        {
+            inventory.Remove(item);
+        }
+        //Otherwise just remove one
+        else
+        {
+            inventory[itemIndex].RemoveQuantity(1);
         }
     }
-    public void RemoveItem(Item itemToRemove)
+
+    //Returns index of GameObject item with input name in inventory. If not found, return -1
+    public int FindItemIndexByName(string itemName)
     {
-        for (int i = 0; i < items.Length; i++)
+        for (int i = 0; i < inventory.Count; ++i)
         {
-            if (items[i] == itemToRemove)
+            if (inventory[i].name == itemName)
             {
-                items[i] = null;
-                itemImages[i].sprite = null;
-                itemImages[i].enabled = false;
-                return;
+                return i;
             }
         }
+        return -1;
+    }
+
+    //Saves inventory as .dat file
+    public void SaveInventory()
+    {
+
     }
 }

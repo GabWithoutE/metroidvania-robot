@@ -29,7 +29,7 @@ public class MagnetSetState : MonoBehaviour {
         if(col.gameObject.tag == "Player")
         {
             //If player does not have an aluminum shield, set to true
-            if(inventoryController.FindItemByName("AluminumShield") == -1)
+            if(inventoryController.FindItemIndexByName("AluminumShield") == -1)
             {
                 magnetState.SetState(true);
             }            

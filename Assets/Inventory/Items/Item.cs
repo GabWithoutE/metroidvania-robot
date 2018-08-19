@@ -1,11 +1,34 @@
 ﻿using UnityEngine;
 
-// This simple script represents Items that can be picked
-// up in the game.  The inventory system is done using
-// this script instead of just sprites to ensure that items
-// are extensible.
 [System.Serializable]
 public class Item
 {
-    public Sprite sprite;
+    public string name;     //Name of item
+    public int quantity;    //Amount of this item
+
+    public Item(string nameIn)
+    {
+        name = nameIn;
+        quantity = 1;   //Defaults to creating one item
+    }
+
+    public string getName()
+    {
+        return name;
+    }
+
+    public int getQuantity()
+    {
+        return quantity;
+    }
+
+    public void AddQuantity(int amount)
+    {
+        quantity += amount;
+    }
+
+    public void RemoveQuantity(int amount)
+    {
+        quantity -= amount;
+    }
 }

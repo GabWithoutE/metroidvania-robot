@@ -23,7 +23,7 @@ GameObject:
   - component: {fileID: 114539622184772682}
   - component: {fileID: 212473625148391688}
   m_Layer: 0
-  m_Name: AluminumShieldInteractable
+  m_Name: AluminumShield
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -78,7 +78,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f19cb1cd0222639459e3b8209533d5fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  item: {fileID: 11400000, guid: 8c8eae3dc75d26a44894db683bad0d2c, type: 2}
 --- !u!212 &212473625148391688
 SpriteRenderer:
   m_ObjectHideFlags: 1

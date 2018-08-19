@@ -5,7 +5,6 @@ using UnityEngine;
 public class PickUpAndDestroy : MonoBehaviour {
     //private InventoryController inventoryController;
     private Inventory inventory;
-    public Item item;
 
     void Start()
     {
@@ -19,6 +18,10 @@ public class PickUpAndDestroy : MonoBehaviour {
     {
         if(col.gameObject.tag == "Player")
         {
+            //Create item object to add to inventory
+            Item tempItem = new Item(gameObject.name);
+            Debug.Log(gameObject.name);
+            inventory.AddItem(tempItem);
             gameObject.SetActive(false);
         }
     }
