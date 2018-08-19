@@ -73,4 +73,24 @@ public class Inventory : MonoBehaviour
     }
 
     //Load save file into inventory
+    public void LoadInventory()
+    {
+        //See if file exists already, if it does load data into list
+        if (File.Exists(inventoryFilePathName))
+        {
+            //Clears current data
+            inventory.Clear();
+            //Loads data into list
+            BinaryFormatter bf = new BinaryFormatter();
+            FileStream file = File.Open(inventoryFilePathName, FileMode.Open);
+            inventory = (List<Item>)bf.Deserialize(file);
+            file.Close();
+            Debug.Log("Loaded inventory");
+        }
+    }
+
+    void Update()
+    {
+        SaveInventory();
+    }
 }
