@@ -15,6 +15,7 @@ TagManager:
   - ExitTile
   - MapDmg
   - Ground
+  - Inventory
   layers:
   - Default
   - TransparentFX

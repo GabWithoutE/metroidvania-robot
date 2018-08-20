@@ -19,9 +19,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4994823659183222}
-  - component: {fileID: 212047846128858392}
   - component: {fileID: 61740859690935836}
   - component: {fileID: 114539622184772682}
+  - component: {fileID: 212473625148391688}
   m_Layer: 0
   m_Name: AluminumShield
   m_TagString: Untagged
@@ -78,7 +78,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f19cb1cd0222639459e3b8209533d5fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!212 &212047846128858392
+--- !u!212 &212473625148391688
 SpriteRenderer:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
