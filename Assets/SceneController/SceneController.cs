@@ -57,6 +57,7 @@ public class SceneController : MonoBehaviour {
     private IEnumerator Fade(float finalAlpha)
     {
         isFading = true;
+        faderCanvasGroup.blocksRaycasts = true;
         float fadeSpeed = Mathf.Abs(faderCanvasGroup.alpha - finalAlpha) / fadeDuration;
 
         //While current alpha != approx final alpha, change alpha
@@ -67,5 +68,6 @@ public class SceneController : MonoBehaviour {
         }
 
         isFading = false;
+        faderCanvasGroup.blocksRaycasts = false;
     }
 }

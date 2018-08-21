@@ -3,34 +3,26 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class InventoryController : MonoBehaviour {
-    private List<GameObject> inventory;
+    private Inventory inventory;
 
     void Awake()
     {
-        inventory = new List<GameObject>();
+        inventory = GetComponent<Inventory>();
     }
 
-    public void AddItem(GameObject item)
+    public void AddItem(Item item)
     {
-        inventory.Add(item);
+        inventory.AddItem(item);
     }
 
-    //Returns index of GameObject item in inventory
-    public int FindItemIndex(GameObject item)
+    public void RemoveItem(Item item)
     {
-        return inventory.IndexOf(item);
+        inventory.RemoveItem(item);
     }
 
     //Returns index of GameObject item with input name in inventory. If not found, return -1
-    public int FindItemByName(string name)
+    public int FindItemIndexByName(string name)
     {
-        for(int i = 0; i < inventory.Count; ++i)
-        {
-            if(inventory[i].name == name)
-            {
-                return i;
-            }
-        }
-        return -1;
+        return inventory.FindItemIndexByName(name);
     }
 }

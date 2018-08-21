@@ -10,7 +10,8 @@ public class ExitTileActivate : MonoBehaviour {
     void Start()
     {
         loadingScreen = GameObject.Find("Loading Screen");
-        sceneController = GetComponentInParent<SceneController>();
+        GameObject sceneControllerGameObject = GameObject.FindGameObjectWithTag("SceneController");
+        sceneController = sceneControllerGameObject.GetComponent<SceneController>();
     }
 
     void OnTriggerEnter2D(Collider2D col)
