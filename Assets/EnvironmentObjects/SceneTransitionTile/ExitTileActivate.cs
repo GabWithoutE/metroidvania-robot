@@ -4,9 +4,13 @@ using UnityEngine;
 
 public class ExitTileActivate : MonoBehaviour {
     private GameObject loadingScreen;
+    public string destinationSceneName;
+    private SceneController sceneController;
+
     void Start()
     {
         loadingScreen = GameObject.Find("Loading Screen");
+        sceneController = GetComponentInParent<SceneController>();
     }
 
     void OnTriggerEnter2D(Collider2D col)
@@ -15,11 +19,7 @@ public class ExitTileActivate : MonoBehaviour {
         {
             if (col.gameObject.tag == "Player")
             {
-                //GetComponent<GlobalGameObject>().LoadGameScene("BossFight");
-                GameObject globalObject = GameObject.Find("GlobalGameObject") as GameObject;
-                //globalObject.GetComponentInChildren<GlobalGameObject>().DisplayUIElement(loadingScreen);
-                globalObject.GetComponentInChildren<GlobalGameObject>().LoadGameScene("BossFight").allowSceneActivation = true;
-                
+                sceneController.FadeAndLoadScene(destinationSceneName);
             }
         }        
     }    
