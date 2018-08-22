@@ -5,7 +5,7 @@ using UnityEngine;
 public class MagnetSetState : MonoBehaviour {
     private ICharacterStateManager stateManager;
     private CharacterState magnetState;
-    private Inventory inventory;
+    private IInventory inventory;
 
     // Use this for initialization
     void Start () {
@@ -21,7 +21,7 @@ public class MagnetSetState : MonoBehaviour {
             stateManager.RegisterCharacterState(magnetState.name, magnetState);
         }        
         GameObject inventoryGameObject = GameObject.FindGameObjectWithTag("Inventory");
-        inventory = inventoryGameObject.GetComponentInChildren<Inventory>();
+        inventory = inventoryGameObject.GetComponentInChildren<IInventory>();
     }
 
     void OnTriggerEnter2D(Collider2D col)

@@ -4,7 +4,7 @@ using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
 using UnityEngine;
 using UnityEngine.UI;
-public class Inventory : MonoBehaviour
+public class Inventory : MonoBehaviour, IInventory
 {
     private string inventoryFilePathName = "SaveData/Inventory.dat";
     private List<Item> inventory;
@@ -66,6 +66,17 @@ public class Inventory : MonoBehaviour
             }
         }
         return -1;
+    }
+
+    //Returns quantity of GameObject item with input name in inventory. If not found, return 0
+    public int GetItemQuantity(string itemName)
+    {
+        int itemIndex = FindItemIndexByName(itemName);
+        if (itemIndex != -1)
+        {
+            return inventory[itemIndex].getQuantity();
+        }
+        return 0;
     }
 
     //Saves inventory as .dat file
