@@ -10,8 +10,9 @@ public class PlayerVelocityState : AbstractCharacterVelocityState {
 	public float jumpMaxHeight;
 	private float jumpStartHeight;
 	private float currentJumpHeight;
-    
-	private void Awake()
+    private CharacterState magnetState;
+
+    private void Awake()
 	{
 		//currentJumpTime = jumpMaxTime;
 		currentJumpHeight = jumpMaxHeight;
@@ -24,6 +25,16 @@ public class PlayerVelocityState : AbstractCharacterVelocityState {
     {
         CharacterState.CharacterStateSubscription groundedSubscription = statesManager.GetCharacterStateSubscription(ConstantStrings.GROUNDED);
         groundedSubscription.OnStateChanged += StopJumpOnHeadHit;
+        //Create magnet state if it doesn't exist
+        if (statesManager.ExistsState(ConstantStrings.MAGNET_STATE))
+        {
+            magnetState = statesManager.GetExistingCharacterState(ConstantStrings.MAGNET_STATE);
+        }
+        else
+        {
+            magnetState = new CharacterState(ConstantStrings.MAGNET_STATE, false);
+            statesManager.RegisterCharacterState(magnetState.name, magnetState);
+        }
     }
 
 	// Update is called once per frame

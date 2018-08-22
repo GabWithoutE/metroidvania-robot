@@ -33,12 +33,14 @@ public class CameraPlayerFollowY : MonoBehaviour {
 
 	private void Awake()
 	{
-		stateObserver = playerReference.GetComponent(typeof(ICharacterStateObserver)) as ICharacterStateObserver;
+        GameObject desktopPlayer = GameObject.FindGameObjectWithTag("Player");
+        playerReference = desktopPlayer;
+        stateObserver = playerReference.GetComponent(typeof(ICharacterStateObserver)) as ICharacterStateObserver;
         cameraDirectionLayerMask = LayerMask.GetMask("CameraDirections");
-		SetScreenDistances();
-	}
+		SetScreenDistances();        
+    }
 
-	private void SetScreenDistances()
+    private void SetScreenDistances()
     {
         cameraViewportPosition = new Vector3(0.5f, 0.5f, transform.position.z);
         cameraViewportTopRightCornerPosition = new Vector3(0f, 0f, transform.position.z);

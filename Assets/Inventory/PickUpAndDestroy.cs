@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PickUpAndDestroy : MonoBehaviour {
-    private InventoryController inventoryController;
+    private IInventory inventory;
 
     void Start()
     {
-        GameObject globalGameObject = GameObject.FindGameObjectWithTag("GlobalGameObject");
-        inventoryController = globalGameObject.GetComponentInChildren<InventoryController>();
+        GameObject inventoryGameObject = GameObject.FindGameObjectWithTag("Inventory");
+        inventory = inventoryGameObject.GetComponentInChildren<IInventory>();
     }
 
     //Adds this gameobject to inventory and disables this gameobject when player collides into it
@@ -16,7 +16,9 @@ public class PickUpAndDestroy : MonoBehaviour {
     {
         if(col.gameObject.tag == "Player")
         {
-            inventoryController.AddItem(gameObject);
+            //Create item object to add to inventory
+            Item tempItem = new Item(gameObject.name);
+            inventory.AddItem(tempItem);
             gameObject.SetActive(false);
         }
     }

@@ -42,8 +42,11 @@ public class ShakeCameraOnFallFarEnough : MonoBehaviour {
 		if (isGrounded && currentFallTime >= fallTime){
 			currentFallTime = 0;
 			startedFalling = false;
-			ICameraShaker cameraShaker = (ICameraShaker)GlobalGameObject.globalGameObjectInstance;
-			cameraShaker.ShakeCameraForSeconds(shakeTime);
+            GameObject camera = GameObject.FindGameObjectWithTag("MainCamera");
+            CameraShake cameraShake = camera.GetComponent<CameraShake>();
+            cameraShake.ShakeForSeconds(shakeTime);
+			//ICameraShaker cameraShaker = (ICameraShaker)GlobalGameObject.globalGameObjectInstance;
+			//cameraShaker.ShakeCameraForSeconds(shakeTime);
 		}
 		if (isGrounded){
 			currentFallTime = 0;

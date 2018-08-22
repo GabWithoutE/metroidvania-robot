@@ -22,9 +22,11 @@ public class CameraPlayerFollowX : MonoBehaviour {
 
 	private void Awake()
 	{
-		stateObserver = playerReference.GetComponent(typeof(ICharacterStateObserver)) as ICharacterStateObserver;
-		cameraDirectionLayerMask = LayerMask.GetMask("CameraDirections");
-	}
+        GameObject desktopPlayer = GameObject.FindGameObjectWithTag("Player");
+        playerReference = desktopPlayer;
+        stateObserver = playerReference.GetComponent(typeof(ICharacterStateObserver)) as ICharacterStateObserver;
+		cameraDirectionLayerMask = LayerMask.GetMask("CameraDirections");        
+    }
    
 	private bool gottenSpeedScale;
 
