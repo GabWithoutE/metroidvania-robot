@@ -18,7 +18,6 @@ public class PickUpAndDestroy : MonoBehaviour {
         {
             //Create item object to add to inventory
             Item tempItem = new Item(gameObject.name);
-            Debug.Log(gameObject.name);
             inventory.AddItem(tempItem);
             gameObject.SetActive(false);
         }

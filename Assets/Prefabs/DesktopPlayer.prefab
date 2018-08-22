@@ -238,6 +238,7 @@ GameObject:
   - component: {fileID: 114379079033166550}
   - component: {fileID: 114053699646329602}
   - component: {fileID: 114855620940720138}
+  - component: {fileID: 114241346063271534}
   m_Layer: 12
   m_Name: PlayerMovementModule
   m_TagString: Untagged
@@ -1314,6 +1315,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9fe925b08ae9f4286bb06f486944eac4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114241346063271534
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1290282799811132}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fcea870294251fe4caeae05004408b56, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  magnetAttractSpeed: 5
 --- !u!114 &114241881349876014
 MonoBehaviour:
   m_ObjectHideFlags: 1

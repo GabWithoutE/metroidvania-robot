@@ -8,9 +8,9 @@ public class SceneController : MonoBehaviour {
     public event Action BeforeSceneUnload;      //Anything that needs to happen before leaving scene subscribes to this
     public event Action AfterSceneLoad;         //Anything that needs to happen after entering scene subscribes to this
     private bool isFading;                      //Flag to determine if scene is fading
-    public float fadeDuration = 1f;
+    public float fadeDuration = 1f;             //Duration of load screen fade
     public CanvasGroup faderCanvasGroup;
-    public string startingSceneName;
+    public string startingSceneName;            //Name of first scene to be loaded
 
     private IEnumerator Start()
     {
@@ -32,7 +32,7 @@ public class SceneController : MonoBehaviour {
         yield return StartCoroutine(Fade(1f));      //Fade to black
         if(BeforeSceneUnload != null)
         {
-            BeforeSceneUnload();
+            BeforeSceneUnload();    //Settle anything that needs to be done before scene unload
         }
 
         yield return SceneManager.UnloadSceneAsync(SceneManager.GetActiveScene().buildIndex);
@@ -41,7 +41,7 @@ public class SceneController : MonoBehaviour {
 
         if(AfterSceneLoad != null)
         {
-            AfterSceneLoad();
+            AfterSceneLoad();       //Settle anything that needs to be done after a scene loads
         }
 
         yield return StartCoroutine(Fade(0f));      //Fade to new scene
@@ -49,7 +49,7 @@ public class SceneController : MonoBehaviour {
 
     private IEnumerator LoadSceneAndSetActive(string sceneName)
     {
-        yield return SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Additive);
+        yield return SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Additive);    //Additive scene load to load scene on top of persistent scene
         Scene newlyLoadedScene = SceneManager.GetSceneAt(SceneManager.sceneCount - 1);
         SceneManager.SetActiveScene(newlyLoadedScene);
     }

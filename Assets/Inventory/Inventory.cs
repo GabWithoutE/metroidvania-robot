@@ -7,10 +7,7 @@ using UnityEngine.UI;
 public class Inventory : MonoBehaviour
 {
     private string inventoryFilePathName = "SaveData/Inventory.dat";
-    //public Image[] itemImages = new Image[numItemSlots];
     private List<Item> inventory;
-    //public Item[] items = new Item[numItemSlots];
-    //public const int numItemSlots = 4;
     private SceneController sceneController;
 
     void Awake()
@@ -23,8 +20,8 @@ public class Inventory : MonoBehaviour
         GameObject sceneControllerGameObject = GameObject.FindGameObjectWithTag("SceneController");
         sceneController = sceneControllerGameObject.GetComponent<SceneController>();
         //Subscribe to before and after scene unload/load
-        sceneController.AfterSceneLoad += LoadInventory;
-        sceneController.BeforeSceneUnload += SaveInventory;
+        sceneController.AfterSceneLoad += LoadInventory;    //After scene loads, load inventory
+        sceneController.BeforeSceneUnload += SaveInventory; //Before leaving scene, save inventory
     }
 
     //If there are already instances of the item that is to be added, add amount to quantity instead
@@ -95,7 +92,7 @@ public class Inventory : MonoBehaviour
             FileStream file = File.Open(inventoryFilePathName, FileMode.Open);
             inventory = (List<Item>)bf.Deserialize(file);
             file.Close();
-            Debug.Log("Loaded inventory");
+            //Debug.Log("Loaded inventory");
         }
     }
 }
