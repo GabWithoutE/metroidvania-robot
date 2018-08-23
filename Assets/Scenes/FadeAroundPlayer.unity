@@ -166,9 +166,35 @@ Prefab:
       propertyPath: player
       value: 
       objectReference: {fileID: 1371351148}
+    - target: {fileID: 114600789716906662, guid: 71b216c36228307409cd21b7b886b86c,
+        type: 2}
+      propertyPath: defaultScale
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 114600789716906662, guid: 71b216c36228307409cd21b7b886b86c,
+        type: 2}
+      propertyPath: minScale
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 71b216c36228307409cd21b7b886b86c, type: 2}
   m_IsPrefabAsset: 0
+--- !u!1 &1134563643 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1929591401536594, guid: 42da1e7cfa6a38b43b69ddf558eeae5a,
+    type: 2}
+  m_PrefabInternal: {fileID: 1920176841}
+--- !u!114 &1134563647
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1134563643}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b7da2adee6e384349a82e9d61ad575b0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1339980085
 GameObject:
   m_ObjectHideFlags: 0
@@ -509,6 +535,16 @@ Prefab:
       propertyPath: player
       value: 
       objectReference: {fileID: 1371351148}
+    - target: {fileID: 114600789716906662, guid: 71b216c36228307409cd21b7b886b86c,
+        type: 2}
+      propertyPath: defaultScale
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 114600789716906662, guid: 71b216c36228307409cd21b7b886b86c,
+        type: 2}
+      propertyPath: minScale
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 71b216c36228307409cd21b7b886b86c, type: 2}
   m_IsPrefabAsset: 0
@@ -613,6 +649,66 @@ Prefab:
         type: 2}
       propertyPath: m_Pivot.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114441063870125986, guid: 42da1e7cfa6a38b43b69ddf558eeae5a,
+        type: 2}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 677bae1b3d878df4cb71d91b557bf137,
+        type: 3}
+    - target: {fileID: 225499464371478828, guid: 42da1e7cfa6a38b43b69ddf558eeae5a,
+        type: 2}
+      propertyPath: m_Alpha
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 224088815871123826, guid: 42da1e7cfa6a38b43b69ddf558eeae5a,
+        type: 2}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -0.03
+      objectReference: {fileID: 0}
+    - target: {fileID: 114656266393240348, guid: 42da1e7cfa6a38b43b69ddf558eeae5a,
+        type: 2}
+      propertyPath: m_ScaleFactor
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114656266393240348, guid: 42da1e7cfa6a38b43b69ddf558eeae5a,
+        type: 2}
+      propertyPath: m_UiScaleMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224402492269463442, guid: 42da1e7cfa6a38b43b69ddf558eeae5a,
+        type: 2}
+      propertyPath: m_LocalScale.x
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 224402492269463442, guid: 42da1e7cfa6a38b43b69ddf558eeae5a,
+        type: 2}
+      propertyPath: m_LocalScale.y
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 114441063870125986, guid: 42da1e7cfa6a38b43b69ddf558eeae5a,
+        type: 2}
+      propertyPath: m_Type
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224402492269463442, guid: 42da1e7cfa6a38b43b69ddf558eeae5a,
+        type: 2}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114441063870125986, guid: 42da1e7cfa6a38b43b69ddf558eeae5a,
+        type: 2}
+      propertyPath: m_PreserveAspect
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114441063870125986, guid: 42da1e7cfa6a38b43b69ddf558eeae5a,
+        type: 2}
+      propertyPath: m_FillAmount
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1929591401536594, guid: 42da1e7cfa6a38b43b69ddf558eeae5a, type: 2}
+      propertyPath: m_Name
+      value: ShadowAroundPlayer
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 42da1e7cfa6a38b43b69ddf558eeae5a, type: 2}

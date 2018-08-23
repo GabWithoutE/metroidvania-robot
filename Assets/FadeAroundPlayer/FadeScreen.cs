@@ -3,25 +3,30 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class FadeScreen : MonoBehaviour {
-    private float fadeDuration;
     public CanvasGroup faderCanvasGroup;
-    private bool startFading = false;
-    public GameObject player;
-    private BoxCollider2D boxCollider;
+    private bool startFading = false;       //Boolean to figure out when player enteres area to fade screen
+    public GameObject player;               //Reference to player
+    private BoxCollider2D boxCollider;      //Collider to detect when player is in area to fade screen
+    private ChangeImageScale changeImageScale;  //Used to change the scale of the image
+    public float defaultScale;  //Default scale of the image
+    public float minScale;  //The minimum scale the image can have before the edge of the image becomes visible to player.
+
 
     void Start()
     {
-        faderCanvasGroup.alpha = 0f;
-        fadeDuration = 0.1f;
         boxCollider = GetComponent<BoxCollider2D>();
-        Debug.Log(boxCollider.bounds.extents);
+        changeImageScale = faderCanvasGroup.GetComponentInChildren<ChangeImageScale>();
+        changeImageScale.ChangeScale(defaultScale);   //Default image scale
+        faderCanvasGroup.alpha = 1f;                    //Have image at full alpha always
     }
 
     //Calculates how much to fade image by and maps that value to a value between 0 and 1
     private float CalculateFadeAmount()
     {
+        //Calculates distance from player to center of boxcollider
         float distancePlayerToCenter = Mathf.Abs(boxCollider.transform.position.x - player.transform.position.x);
-        return 1 - (distancePlayerToCenter / boxCollider.bounds.extents.x);        
+        //Clamps value between minimum scale and default scale
+        return Mathf.Clamp(((distancePlayerToCenter / boxCollider.bounds.extents.x)) * defaultScale, minScale, defaultScale);        
     }
 
     void Update()
@@ -29,7 +34,7 @@ public class FadeScreen : MonoBehaviour {
         //If player hits the collider, calculate how much to fade by
         if(startFading)
         {
-            faderCanvasGroup.alpha = CalculateFadeAmount();
+            changeImageScale.ChangeScale(CalculateFadeAmount());
         }
     }
 
