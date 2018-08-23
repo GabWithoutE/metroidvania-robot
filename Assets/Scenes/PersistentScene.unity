@@ -276,7 +276,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fadeDuration: 1
   faderCanvasGroup: {fileID: 208129835}
-  startingSceneName: CollectShield
+  startingSceneName: FadeAroundPlayer
 --- !u!1 &1839987226
 GameObject:
   m_ObjectHideFlags: 0

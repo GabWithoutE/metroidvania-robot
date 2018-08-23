@@ -5,18 +5,6 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
-    path: Assets/Scenes/SampleScene.unity
-    guid: 99c9720ab356a0642a771bea13969a05
-  - enabled: 0
-    path: Assets/Scenes/BossFight.unity
-    guid: 8a471f231598e764783caafbb169c5f4
-  - enabled: 0
-    path: Assets/Scenes/PreBossFight.unity
-    guid: d0e23ce448843c947ba246b03d3d6bdd
-  - enabled: 0
-    path: Assets/Scenes/TastyEffects.unity
-    guid: a423f8f3b0edb42da8a99f197ccc45e8
   - enabled: 1
     path: Assets/Scenes/CollectShield.unity
     guid: 44e7205aaf86d6c4a9b1eb0b8ceee248
@@ -26,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/PersistentScene.unity
     guid: 1b305c997c573fa4280186e8f282d8ee
+  - enabled: 1
+    path: Assets/Scenes/FadeAroundPlayer.unity
+    guid: 6f74a204013d48a45ac4b9a780eae840
   m_configObjects: {}
