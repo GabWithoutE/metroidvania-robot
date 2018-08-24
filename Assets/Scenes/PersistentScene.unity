@@ -163,7 +163,7 @@ Prefab:
     - target: {fileID: 224523597496396896, guid: aab43665a7e38447292b7a2ecd9e56ec,
         type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: -2.4358826
+      value: -2.435913
       objectReference: {fileID: 0}
     - target: {fileID: 224523597496396896, guid: aab43665a7e38447292b7a2ecd9e56ec,
         type: 2}
@@ -234,6 +234,56 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 224523597496396896, guid: aab43665a7e38447292b7a2ecd9e56ec,
     type: 2}
   m_PrefabInternal: {fileID: 208129833}
+--- !u!1 &625642118
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 625642120}
+  - component: {fileID: 625642119}
+  m_Layer: 0
+  m_Name: EquippedSetManager
+  m_TagString: EquippedSetManager
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &625642119
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 625642118}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f851a90f13612a4f8585b6ecdfd582e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentSet: 0
+  lightItem:
+    name: 
+    quantity: 0
+  heavyItem:
+    name: 
+    quantity: 0
+  utilityItem:
+    name: 
+    quantity: 0
+--- !u!4 &625642120
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 625642118}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1703148277
 GameObject:
   m_ObjectHideFlags: 0
@@ -257,7 +307,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1703148277}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.4358947, y: 3.369347, z: 0.104991585}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -276,7 +326,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fadeDuration: 1
   faderCanvasGroup: {fileID: 208129835}
-  startingSceneName: FadeAroundPlayer
+  startingSceneName: CollectShield
 --- !u!1 &1839987226
 GameObject:
   m_ObjectHideFlags: 0
@@ -405,7 +455,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2047761219}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.09565416, y: 1.769469, z: 0.13259214}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
