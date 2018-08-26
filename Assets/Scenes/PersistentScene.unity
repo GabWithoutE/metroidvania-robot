@@ -265,12 +265,15 @@ MonoBehaviour:
   lightItem:
     name: 
     quantity: 0
+    itemType: 0
   heavyItem:
     name: 
     quantity: 0
+    itemType: 0
   utilityItem:
     name: 
     quantity: 0
+    itemType: 0
 --- !u!4 &625642120
 Transform:
   m_ObjectHideFlags: 0

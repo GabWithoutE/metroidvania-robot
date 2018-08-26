@@ -77,7 +77,7 @@ public class EquippedSetManager : MonoBehaviour, IEquippedSetManager
         BinaryFormatter bf = new BinaryFormatter();
         bf.Serialize(fs, equippedInventory);
         fs.Close();
-        Debug.Log("Saved inventory");
+        //Debug.Log("Saved inventory");
     }
 
     public void LoadEquippedInventory()
@@ -95,7 +95,7 @@ public class EquippedSetManager : MonoBehaviour, IEquippedSetManager
             //equippedInventory = (List<EquippedSet>)bf.Deserialize(file);
             equippedInventory = (EquippedSet[])bf.Deserialize(file);
             file.Close();
-            Debug.Log("Loaded inventory");
+            //Debug.Log("Loaded inventory");
         }
     }
 

@@ -22,6 +22,12 @@ public class Inventory : MonoBehaviour, IInventory
         //Subscribe to before and after scene unload/load
         sceneController.AfterSceneLoad += LoadInventory;    //After scene loads, load inventory
         sceneController.BeforeSceneUnload += SaveInventory; //Before leaving scene, save inventory
+
+        //If there is an inventory save file, load from that
+        if(File.Exists(inventoryFilePathName))
+        {
+            LoadInventory();
+        }
     }
 
     //If there are already instances of the item that is to be added, add amount to quantity instead
@@ -88,6 +94,7 @@ public class Inventory : MonoBehaviour, IInventory
         BinaryFormatter bf = new BinaryFormatter();
         bf.Serialize(fs, inventory);
         fs.Close();
+        //Debug.Log("Saved inventory");
     }
 
     //Load save file into inventory
