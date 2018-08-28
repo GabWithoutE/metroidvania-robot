@@ -9,8 +9,8 @@ public enum ItemType
 }
 
 //Everything saved in the inventory will be instances of this class. This class stores the relevant
-//information of the items needed for game mechanics. Sprites are not serializable so they cannot
-//be included here.
+//information of the items needed for game mechanics. Make sure all member variables are serializable.
+//Sprites are not serializable so they cannot be included here. 
 
 [System.Serializable]
 public class Item
