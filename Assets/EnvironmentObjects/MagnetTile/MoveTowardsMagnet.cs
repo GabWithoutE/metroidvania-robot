@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//Attach this script to player. Will make the player move upwards if magnet state is true
+
 public class MoveTowardsMagnet : MonoBehaviour {
     private Rigidbody2D characterRigidBody;
     private IMovementHandler characterMovementHandler;

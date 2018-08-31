@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 212047846128858392}
   - component: {fileID: 61740859690935836}
   - component: {fileID: 114539622184772682}
+  - component: {fileID: 114582544653903414}
   m_Layer: 0
   m_Name: AluminumShield
   m_TagString: Untagged
@@ -78,6 +79,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f19cb1cd0222639459e3b8209533d5fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114582544653903414
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1653238701188298}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7155bdc81567e7246a64ac1ca975b6cf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: 3
 --- !u!212 &212047846128858392
 SpriteRenderer:
   m_ObjectHideFlags: 1

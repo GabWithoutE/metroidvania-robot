@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//Attach this script to exit tiles. Type in name of scene to go to when player collides with *this* in destinationSceneName
+
 public class ExitTileActivate : MonoBehaviour {
     private GameObject loadingScreen;
     public string destinationSceneName;

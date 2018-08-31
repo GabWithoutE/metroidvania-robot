@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//Sets player state when player walks under magnet without an aluminum shield
+
 public class MagnetSetState : MonoBehaviour {
     private ICharacterStateManager stateManager;
     private CharacterState magnetState;

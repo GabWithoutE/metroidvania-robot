@@ -11,12 +11,15 @@ public class SceneController : MonoBehaviour {
     public float fadeDuration = 1f;             //Duration of load screen fade
     public CanvasGroup faderCanvasGroup;
     public string startingSceneName;            //Name of first scene to be loaded
+    private ICharacterStateManager stateManager;    //Player's state manager
+    private CharacterState disableMoveState;        //State to disable player movement while screen is fading
 
     private IEnumerator Start()
-    {
+    {        
         faderCanvasGroup.alpha = 1f;
         yield return StartCoroutine(LoadSceneAndSetActive(startingSceneName));
-        StartCoroutine(Fade(0f));
+        yield return StartCoroutine(Fade(0f));
+        EnablePlayerMovement();
     }
 
     public void FadeAndLoadScene(string sceneName)
@@ -29,6 +32,7 @@ public class SceneController : MonoBehaviour {
 
     private IEnumerator FadeAndSwitchScenes(string sceneName)
     {
+        DisablePlayerMovement();
         yield return StartCoroutine(Fade(1f));      //Fade to black
         if(BeforeSceneUnload != null)
         {
@@ -45,6 +49,7 @@ public class SceneController : MonoBehaviour {
         }
 
         yield return StartCoroutine(Fade(0f));      //Fade to new scene
+        EnablePlayerMovement();
     }
 
     private IEnumerator LoadSceneAndSetActive(string sceneName)
@@ -55,7 +60,7 @@ public class SceneController : MonoBehaviour {
     }
 
     private IEnumerator Fade(float finalAlpha)
-    {
+    {        
         isFading = true;
         faderCanvasGroup.blocksRaycasts = true;
         float fadeSpeed = Mathf.Abs(faderCanvasGroup.alpha - finalAlpha) / fadeDuration;
@@ -69,5 +74,23 @@ public class SceneController : MonoBehaviour {
 
         isFading = false;
         faderCanvasGroup.blocksRaycasts = false;
+    }
+
+    private void DisablePlayerMovement()
+    {
+        //Gets reference to player's state manager if doesn't exist already. Need to get the reference each time a new
+        //scene is loaded        
+        stateManager = GameObject.FindGameObjectWithTag("Player").GetComponent<ICharacterStateManager>();
+        disableMoveState = stateManager.GetExistingCharacterState(ConstantStrings.DISABLE_MOVE_STATE);        
+        disableMoveState.SetState(true);
+    }
+
+    private void EnablePlayerMovement()
+    {
+        //Gets reference to player's state manager if doesn't exist already. Need to get the reference each time a new
+        //scene is loaded        
+        stateManager = GameObject.FindGameObjectWithTag("Player").GetComponent<ICharacterStateManager>();
+        disableMoveState = stateManager.GetExistingCharacterState(ConstantStrings.DISABLE_MOVE_STATE);
+        disableMoveState.SetState(false);
     }
 }
