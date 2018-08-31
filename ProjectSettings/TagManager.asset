@@ -18,6 +18,7 @@ TagManager:
   - SceneController
   - Inventory
   - EquippedSetManager
+  - Minimap
   layers:
   - Default
   - TransparentFX

@@ -15,7 +15,8 @@ public class SceneController : MonoBehaviour {
     private CharacterState disableMoveState;        //State to disable player movement while screen is fading
 
     private IEnumerator Start()
-    {        
+    {
+        AfterSceneLoad += UnhideMinimapSectionWhenVisit;
         faderCanvasGroup.alpha = 1f;
         yield return StartCoroutine(LoadSceneAndSetActive(startingSceneName));
         yield return StartCoroutine(Fade(0f));
@@ -92,5 +93,16 @@ public class SceneController : MonoBehaviour {
         stateManager = GameObject.FindGameObjectWithTag("Player").GetComponent<ICharacterStateManager>();
         disableMoveState = stateManager.GetExistingCharacterState(ConstantStrings.DISABLE_MOVE_STATE);
         disableMoveState.SetState(false);
+    }
+
+    private void UnhideMinimapSectionWhenVisit()
+    {
+        //Find minimap gameobject
+        GameObject minimap = GameObject.FindGameObjectWithTag("Minimap");
+        //Finds minimap section corresponding to the newly loaded scene
+        GameObject minimapSection = minimap.transform.Find(SceneManager.GetActiveScene().name).gameObject;
+        UnhideMinimapSection unhideminimapSection = minimapSection.GetComponent<UnhideMinimapSection>();
+        //Set minimap section as visited
+        unhideminimapSection.SetVisited(true);
     }
 }
