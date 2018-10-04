@@ -13,6 +13,7 @@ public interface ISynchronizableEnvironmentPiece {
 	void BeginAction();
 	/* 
 	 * Returns the time it takes for a cycle of the environment piece's action to occur
+	 	in Frames
 	 */
 	float ActionCycleTime();
 }

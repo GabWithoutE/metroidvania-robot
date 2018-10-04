@@ -11,24 +11,46 @@ using UnityEngine;
  * 
  */ 
 
-public class MagnetHammerControl : MonoBehaviour, ISynchronizableEnvironmentPiece {
+public class MagnetHammerControl : AbstractSynchronizableEnvironmentPiece{
+	public bool Ready = true;
+
+	// Trigger multiple magnet effects at the same time (store them here)
+	private IMagnetHammerEffectAnimationTriggers[] effectAnimationTriggerInterfaces;
+	private IMagnetHammerMachineryAnimationTriggers machineryAnimationTriggerInterface;
 
 	/*
-	 * Make the magnet hammer drop and go through it's cycle
+	 * Begin the hammer drop cycle
 	 */
-	public void BeginAction(){
-
+	public override void BeginAction(){
+		UnlockHammer();
 	}
-	/*
-	 * Return the Action Cycle time in GameTime (based on frames, not real time)
-	 */
-	public float ActionCycleTime(){
+
+
+	public override float ActionCycleTime(){
 		return 0;
 	}
 
-	// Use this for initialization
+	private void UnlockHammer(){
+		machineryAnimationTriggerInterface.TriggerUnlockMachinery();
+	}
+
+	void Awake(){
+		effectAnimationTriggerInterfaces = 
+			GetComponentsInChildren(typeof(IMagnetHammerEffectAnimationTriggers)) as
+			IMagnetHammerEffectAnimationTriggers[];
+		machineryAnimationTriggerInterface =
+			GetComponentInChildren(typeof(IMagnetHammerMachineryAnimationTriggers)) as
+			IMagnetHammerMachineryAnimationTriggers;
+	}
+
+	/**
+	 * if no synchronizationController is assigned, it means this is a standalone
+	 *	piece that has no synchronization.
+	 */
 	void Start () {
-			
+		if (synchronizationController == null){
+			BeginAction();
+		}
 	}
 	
 	// Update is called once per frame
