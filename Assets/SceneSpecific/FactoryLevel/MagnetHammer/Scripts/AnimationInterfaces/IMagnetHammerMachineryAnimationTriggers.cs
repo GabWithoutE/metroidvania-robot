@@ -6,5 +6,7 @@ public interface IMagnetHammerMachineryAnimationTriggers {
     void TriggerUnlockMachinery();
     void TriggerRaiseMagnet();
     void TriggerMagnetLockin();
-    void TriggerReset();
+    void TriggerReset();	
+    MagnetHammerMachineAnimationController.AnimationCatchupSubscription GetAnimationCatchupSubscription();
 }
+
