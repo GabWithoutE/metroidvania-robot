@@ -34,7 +34,7 @@ public class MagnetHammerMachineAnimationController : MonoBehaviour, IMagnetHamm
 
 	public void OnAnimationCaughtupEvent(){
 		if (onAnimationCaughtUp == null){
-			print ("boob");
+			// print ("boob");
 		}else {
 			onAnimationCaughtUp();
 		}

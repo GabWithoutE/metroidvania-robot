@@ -16,11 +16,15 @@ public class HammerFallController : MonoBehaviour, IHammerFallData, IBeginObstac
 	
 	public EditorMovementPath hammerPath;
 	public int currentWaypointIndex = 0;
+	private float currentWaypointRestingTime;
+	private float restingTimeCounter;
+
 	/*
 	 * For enabling the start of the hammer's movement 
 	 */
 	private bool performObstacleAction;
 	private bool waitForAnimation = true;
+	private bool hammerResting = false;
 	
 	/*
 	 * Public accessors
@@ -78,6 +82,14 @@ public class HammerFallController : MonoBehaviour, IHammerFallData, IBeginObstac
 		transform.position = Vector3.MoveTowards(transform.position, currentWaypointTransform.position,
 			Time.fixedDeltaTime * currentWaypointDirectives.MovementSpeed);
 		if (distance <= 0){
+			if(restingTimeCounter >0){
+				if(restingTimeCounter == currentWaypointRestingTime){
+					hammerResting = true;
+					TriggerAnimationsBasedOnWayPoint();
+				}
+				restingTimeCounter -= Time.fixedDeltaTime;
+				return;
+			}
 			if (currentWaypointDirectives.WaypointType == WaypointType.End){
 				currentWaypointIndex = 0;
 				GetWaypointData();
@@ -104,18 +116,29 @@ public class HammerFallController : MonoBehaviour, IHammerFallData, IBeginObstac
 	private void GetWaypointData(){
 		currentWaypointTransform = hammerPath.pathWaypointTransforms[currentWaypointIndex];
 		currentWaypointDirectives = currentWaypointTransform.GetComponent<WayPointDirectives>();
+		currentWaypointRestingTime = currentWaypointDirectives.WaypointRestDuration;
+		restingTimeCounter = currentWaypointRestingTime;
 	}
 
+	// TODO: Use grounding time as a block for the animations
 	private void TriggerAnimationsBasedOnWayPoint(){
 		switch (currentWaypointIndex){
 			case 0:
+				animationController.Effect_TriggerReset();
 				break;
 			case 1:
 				animationController.Mach_TriggerUnlockMachinery();
 				break;
 			case 2:
+				if(hammerResting){
+					animationController.Effect_TriggerMagnetGrounded_NoEffect();
+				} else {
+					animationController.Effect_TriggerDropping();
+				}
 				break;
 			case 3:
+				hammerResting = false;
+				animationController.Effect_TriggerRaisingMagnet();
 				animationController.Mach_TriggerMagnetUp();
 				break;
 			case 4:

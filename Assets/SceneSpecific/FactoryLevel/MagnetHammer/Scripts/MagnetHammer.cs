@@ -22,14 +22,14 @@ public class MagnetHammer : AbstractSynchronizableEnvironmentPiece {
 
 	void Awake(){
 		effectAnimationTriggerInterfaces = 
-			GetComponentsInChildren(typeof(IMagnetHammerEffectAnimationTriggers)) as
-			IMagnetHammerEffectAnimationTriggers[];
+			GetComponentsInChildren<IMagnetHammerEffectAnimationTriggers>();
+		print (effectAnimationTriggerInterfaces.Length);
+		print(effectAnimationTriggerInterfaces);
 		machineryAnimationTriggerInterface =
 			GetComponentInChildren(typeof(IMagnetHammerMachineryAnimationTriggers)) as
 			IMagnetHammerMachineryAnimationTriggers;
 		hammerFallController =
 			GetComponentInChildren<HammerFallController>();
-		
 		animationController = new MagnetHammerAnimationController(effectAnimationTriggerInterfaces, machineryAnimationTriggerInterface);
 	}
 
@@ -58,6 +58,7 @@ public class MagnetHammer : AbstractSynchronizableEnvironmentPiece {
 	// Begin the hammer drop cycle
 	public override void BeginAction(){
 		UnlockHammer();
+		Ready = false;
 	}
 
 	public override float ActionCycleTime(){
