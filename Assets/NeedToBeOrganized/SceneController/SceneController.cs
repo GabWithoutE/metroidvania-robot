@@ -100,9 +100,15 @@ public class SceneController : MonoBehaviour {
         //Find minimap gameobject
         GameObject minimap = GameObject.FindGameObjectWithTag("Minimap");
         //Finds minimap section corresponding to the newly loaded scene
-        GameObject minimapSection = minimap.transform.Find(SceneManager.GetActiveScene().name).gameObject;
-        UnhideMinimapSection unhideminimapSection = minimapSection.GetComponent<UnhideMinimapSection>();
-        //Set minimap section as visited
-        unhideminimapSection.SetVisited(true);
+        try {
+            GameObject minimapSection = minimap.transform.Find(SceneManager.GetActiveScene().name).gameObject;
+            UnhideMinimapSection unhideminimapSection = minimapSection.GetComponent<UnhideMinimapSection>();
+            //Set minimap section as visited
+            unhideminimapSection.SetVisited(true);
+        } catch(Exception e){
+            Debug.LogException(e, this);
+        }
+  
+
     }
 }

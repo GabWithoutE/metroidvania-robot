@@ -26,4 +26,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Area5.unity
     guid: 43efcd999b2df0d4bbe5339a12cc1741
+  - enabled: 1
+    path: Assets/Scenes/TastyEffects 2.unity
+    guid: a0901777f66304da38e488760d10c848
   m_configObjects: {}

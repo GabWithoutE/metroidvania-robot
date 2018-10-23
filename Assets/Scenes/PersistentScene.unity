@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311992, g: 0.38074034, b: 0.35872713, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311947, g: 0.38074005, b: 0.35872722, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -168,7 +168,7 @@ Prefab:
     - target: {fileID: 224523597496396896, guid: aab43665a7e38447292b7a2ecd9e56ec,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: -3.3693542
+      value: -3.3693848
       objectReference: {fileID: 0}
     - target: {fileID: 224523597496396896, guid: aab43665a7e38447292b7a2ecd9e56ec,
         type: 2}
@@ -536,7 +536,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fadeDuration: 1
   faderCanvasGroup: {fileID: 208129835}
-  startingSceneName: Area3
+  startingSceneName: MagnetAfterCollectShield
 --- !u!1 &1819132525
 GameObject:
   m_ObjectHideFlags: 0
@@ -584,7 +584,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -2.4358826, y: -3.3693237}
+  m_AnchoredPosition: {x: -2.435913, y: -3.3693237}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1839987226
