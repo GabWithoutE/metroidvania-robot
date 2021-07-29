@@ -1,8 +1,6 @@
 # unity-decoupling-plug-play-prefab-functionality
 This was a previous project I worked on a couple of years ago (2017-2018), that is now dead. It contains a few ideas I tried to solve some issues I ran into developing in Unity. I just kind of felt like revisiting this, as I'm working on another game now, to see what I can take from it.
 
-## This README is In-Progress, as I need to take time to reread what I had here, this is mostly just written based on what I remember
-
 ## Problems I Tried to Solve
 ### Prefab Coupling
 *Problem and Solution*
